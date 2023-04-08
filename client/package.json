@@ -1,6 +1,7 @@
 {
   "name": "socialite",
   "private": true,
+  "author": "Munyaneza Ishimwe Peace",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
