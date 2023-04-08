@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.signup{
+    animation-name: rollDown;
+    animation-duration: .5s;
+}
+@keyframes rollDown {
+    from { top: -50%;}
+    to { top: 0rem;}   
+}
+
+@media (min-width: 1024px) {
+    @keyframes rollDown {
+        from { top: -50%;}
+        to { top: 9rem;}   
+    }
+}
