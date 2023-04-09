@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import LoginImage from "../assets/Images/logo.1.png";
-import Close from "./icons";
+import Close from "../components/icons";
 
 const Authentication = () => {
   const [loginData, setLoginData] = useState({ email: "", password: "" });

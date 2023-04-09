@@ -17,3 +17,7 @@
         to { top: 9rem;}   
     }
 }
+
+body::-webkit-scrollbar{
+    display: none;
+}
