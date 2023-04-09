@@ -1,12 +1,12 @@
 import React from 'react'
 import { BrowserRouter as Router , Routes  , Route} from 'react-router-dom'
-import Login from './components/authentication'
+import Authentication from './components/authentication'
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Authentication />} />
       </Routes>
     </Router>
   )

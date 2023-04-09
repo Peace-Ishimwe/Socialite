@@ -1,116 +1,222 @@
-import React, { useState } from 'react'
-import LoginImage from '../assets/Images/logo.1.png'
-import Close from './icons'
+import React, { useState } from "react";
+import LoginImage from "../assets/Images/logo.1.png";
+import Close from "./icons";
 
-const Login = () => {
-  const [loginData , setLoginData] = useState({email: "" , password: "" })
+const Authentication = () => {
+  const [loginData, setLoginData] = useState({ email: "", password: "" });
   const loginSubmitData = (event) => {
-    setLoginData(prevLoginData => {
-      return{
-        ...prevLoginData , 
-        [event.target.name]: event.target.value
-      }
-    })
-  }
+    setLoginData((prevLoginData) => {
+      return {
+        ...prevLoginData,
+        [event.target.name]: event.target.value,
+      };
+    });
+  };
 
-  const [signupData , setSignupData] = useState(
-    { firstName: "" , lastName: "" , email: "", password: "" , gender: "" ,  telephone: ""}
-  )
+  const [signupData, setSignupData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    gender: "",
+    telephone: Number,
+  });
   const signupSubmitData = (event) => {
-    setSignupData(prevSignupData => {
-      return{
-        ...prevSignupData , 
-        [event.target.name]: event.target.value
-      }
-    })
-  }
+    setSignupData((prevSignupData) => {
+      return {
+        ...prevSignupData,
+        [event.target.name]: event.target.value,
+      };
+    });
+  };
 
-  const [signupToggle , setSignupToggle] = useState(false)
+  console.log(signupData);
+
+  const [signupToggle, setSignupToggle] = useState(false);
+  const [opacity , setOpacity] = useState('');
   const showSignup = () => {
-    setSignupToggle(true)
-  }
+    setSignupToggle(true);
+    setOpacity('opacity-20')
+  };
   const hideSignup = () => {
-    setSignupToggle(false)
-  }
+    setSignupToggle(false);
+    setOpacity('')
+  };
 
   return (
     <div className="authentication relative">
-
       {/* The login page and the login form */}
 
-      <div className="lg:flex max-w-5xl min-h-screen mx-auto p-6 py-10">
-        <div className="flex flex-col items-center lg: lg:flex-row lg:space-x-10">
+      {/* { signupToggle == false &&  */}
+      <div className={opacity}>
+        <div className="lg:flex max-w-5xl min-h-screen mx-auto p-6 py-10">
+          <div className="flex flex-col items-center lg: lg:flex-row lg:space-x-10">
             <div className="lg:mb-12 flex-1 lg:text-left text-center">
-                <img src={LoginImage} alt="socialite image" className="lg:mx-0 lg:w-52 mx-auto w-40"/>
-                <p className="font-medium lg:mx-0 md:text-2xl mt-6 mx-auto sm:w-3/4 text-xl"> Connect with friends and the world around you on Socialite.</p>
+              <img
+                src={LoginImage}
+                alt="socialite image"
+                className="lg:mx-0 lg:w-52 mx-auto w-40"
+              />
+              <p className="font-medium lg:mx-0 md:text-2xl mt-6 mx-auto sm:w-3/4 text-xl">
+                {" "}
+                Connect with friends and the world around you on Socialite.
+              </p>
             </div>
             <div className="lg:mt-0 lg:w-96 md:w-1/2 sm:w-2/3 mt-10 w-full">
-                <form className="p-6 space-y-4 relative bg-white shadow-lg rounded-lg"> 
-                    <input type="email" name='email' onChange={loginSubmitData} placeholder="Email or Phone Number" className="p-2 w-full outline-none border-2 rounded-md"/>
-                    <input type="password" name='password'onChange={loginSubmitData}  placeholder="Password" className="p-2 w-full outline-none border-2 rounded-md"/>
-                    <button type="submit" className="bg-blue-600 font-semibold p-3 rounded-md text-center text-white w-full">
-                        Log In
-                    </button>
-                    <a href="#" className="text-blue-500 text-center block"> Forgot Password? </a>
-                    <hr className="pb-3.5"/>
-                    <div className="flex">
-                        <a  onClick={showSignup} href="#register" className="bg-green-600 hover:bg-green-500 hover:text-white font-semibold py-3 px-5 rounded-md text-center text-white mx-auto">
-                            Create New Account
-                        </a>
-                    </div>
-                </form>
+              <form className="p-6 space-y-4 relative bg-white shadow-lg rounded-lg">
+                <input
+                  type="email"
+                  name="email"
+                  onChange={loginSubmitData}
+                  placeholder="Email or Phone Number"
+                  className="p-2 w-full outline-none border-2 rounded-md"
+                />
+                <input
+                  type="password"
+                  name="password"
+                  onChange={loginSubmitData}
+                  placeholder="Password"
+                  className="p-2 w-full outline-none border-2 rounded-md"
+                />
+                <button
+                  type="submit"
+                  className="bg-blue-600 font-semibold p-3 rounded-md text-center text-white w-full"
+                >
+                  Log In
+                </button>
+                <a href="#" className="text-blue-500 text-center block">
+                  {" "}
+                  Forgot Password?{" "}
+                </a>
+                <hr className="pb-3.5" />
+                <div className="flex">
+                  <a
+                    onClick={showSignup}
+                    href="#register"
+                    className="bg-green-600 hover:bg-green-500 hover:text-white font-semibold py-3 px-5 rounded-md text-center text-white mx-auto"
+                  >
+                    Create New Account
+                  </a>
+                </div>
+              </form>
 
-                <div className="mt-8 text-center text-sm"> <a href="#" className="font-semibold hover:underline"> Create a Page </a> for a celebrity, band or business </div>
+              <div className="mt-8 text-center text-sm">
+                {" "}
+                <a href="#" className="font-semibold hover:underline">
+                  {" "}
+                  Create a Page{" "}
+                </a>{" "}
+                for a celebrity, band or business{" "}
+              </div>
             </div>
+          </div>
         </div>
       </div>
+      {/* } */}
 
       {/* The signup  / register form of socialite */}
-      { signupToggle &&
-      <div id="register" className='absolute w-fit lg:top-36 top-0 lg:left-1/2 transform -translate-x-1/2 signup'>
-        <div className="rounded-xl shadow-2xl p-4 lg:w-12/12 bg-white">
-            <div  onClick={hideSignup} className="p-3 bg-gray-100 rounded-full m-3 float-right hover:bg-red-300 transition-all duration-1000" ><Close /></div>
+
+      {signupToggle && (
+        <div
+          id="register"
+          className="absolute lg:w-8/12 xl:w-6/12 min-[860px]:w-10/12 lg:top-36 top-0 min-[860px]:left-1/2 min-[860px]:transform min-[860px]:-translate-x-1/2 signup"
+        >
+          <div className="rounded-xl shadow-2xl p-4 lg:w-12/12 bg-white">
+            <div
+              onClick={hideSignup}
+              className="p-3 bg-gray-100 rounded-full m-3 float-right hover:bg-red-300 transition-all duration-1000"
+            >
+              <Close />
+            </div>
             <div className="border-b px-7 py-5">
-                <div className="lg:text-2xl text-xl font-semibold mb-1"> Sign Up</div>
-                <div className="text-base text-gray-600"> It's quick and easy.</div>
+              <div className="lg:text-2xl text-xl font-semibold mb-1">
+                {" "}
+                Sign Up
+              </div>
+              <div className="text-base text-gray-600">
+                {" "}
+                It's quick and easy.
+              </div>
             </div>
             <form className="p-7 space-y-5">
-                <div className="grid lg:grid-cols-2 gap-5">
-                    <input type="text" placeholder="Your Name" name='firstName' onChange={signupSubmitData} className="p-2 w-full outline-none border-2 rounded-md" />
-                    <input type="text" placeholder="Last  Name" name='lastName' onChange={signupSubmitData} className="p-2 w-full outline-none border-2 rounded-md" />
-                </div>
-                <input type="email" placeholder="Info@example.com" name='email' onChange={signupSubmitData} className="p-2 w-full outline-none border-2 rounded-md" />
-                <input type="password" placeholder="Password" name='password' onChange={signupSubmitData} className="p-2 w-full outline-none border-2 rounded-md" />
-                
-                <div className="grid lg:grid-cols-2 gap-3">
-                    <div>
-                        <label className="mb-0"> Gender </label>
-                        <select onChange={signupSubmitData} name='gender' className="selectpicker mt-2 p-[0.70rem] w-full outline-none border-2 rounded-md">
-                            <option value="male" >Male</option>
-                            <option value="female" >Female</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label className="mb-2"> Phone: optional  </label>
-                        <input type="text" name='telephone' onChange={signupSubmitData} placeholder="+250 785 304 805" className="mt-2 p-2 w-full outline-none border-2 rounded-md" />
-                    </div>
-                </div>
-                <p className="text-xs text-gray-400 pt-3">By clicking Sign Up, you agree to our
-                    <a href="#" className="text-blue-500">Terms</a>, 
-                    <a href="#">Data Policy</a> and 
-                    <a href="#">Cookies Policy</a>. 
-                     You may receive SMS Notifications from us and can opt out any time.
-                </p>
-                <div className="flex">
-                    <button type="submit" className="bg-blue-600 font-semibold mx-auto px-10 py-3 rounded-md text-center text-white">
-                        Get Started
-                    </button>
-                </div>
-            </form>
-        </div>
-      </div>}
-    </div>
-  )
-}
+              <div className="grid lg:grid-cols-2 gap-5">
+                <input
+                  type="text"
+                  placeholder="Your Name"
+                  name="firstName"
+                  onChange={signupSubmitData}
+                  className="p-2 w-full outline-none border-2 rounded-md"
+                />
+                <input
+                  type="text"
+                  placeholder="Last  Name"
+                  name="lastName"
+                  onChange={signupSubmitData}
+                  className="p-2 w-full outline-none border-2 rounded-md"
+                />
+              </div>
+              <input
+                type="email"
+                placeholder="Info@example.com"
+                name="email"
+                onChange={signupSubmitData}
+                className="p-2 w-full outline-none border-2 rounded-md"
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                name="password"
+                onChange={signupSubmitData}
+                className="p-2 w-full outline-none border-2 rounded-md"
+              />
 
-export default Login
+              <div className="grid lg:grid-cols-2 gap-3">
+                <div>
+                  <label className="mb-0"> Gender </label>
+                  <select
+                    onChange={signupSubmitData}
+                    name="gender"
+                    className="selectpicker mt-2 p-[0.70rem] w-full outline-none border-2 rounded-md"
+                  >
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="not-say">Not say</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="mb-2"> Phone: optional </label>
+                  <input
+                    type="tel"
+                    name="telephone"
+                    onChange={signupSubmitData}
+                    placeholder="+250 785 304 805"
+                    className="mt-2 p-2 w-full outline-none border-2 rounded-md"
+                  />
+                </div>
+              </div>
+              <p className="text-xs text-gray-400 pt-3">
+                By clicking Sign Up, you agree to our
+                <a href="#" className="text-blue-500">
+                  Terms
+                </a>
+                ,<a href="#">Data Policy</a> and
+                <a href="#">Cookies Policy</a>. You may receive SMS
+                Notifications from us and can opt out any time.
+              </p>
+              <div className="flex">
+                <button
+                  type="submit"
+                  className="bg-blue-600 font-semibold mx-auto px-10 py-3 rounded-md text-center text-white"
+                >
+                  Get Started
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Authentication;
