@@ -40,7 +40,7 @@ const Contact = () => {
               <div>
                 <div className="checkbox flex items-center gap-1">
                   <input className="w-4 h-4" type="checkbox" id="chekcbox2" />
-                  <label for="chekcbox2">
+                  <label htmlFor="chekcbox2">
                     <span className="checkbox-icon"></span>{" "}
                     <span className="font-medium text-gray-400">
                       I agree to the Terms &amp; Conditions

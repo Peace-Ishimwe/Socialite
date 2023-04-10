@@ -13,13 +13,14 @@ const Home = () => {
     navigate("/authenticate");
   };
   return (
-    <>
-      <div className="private">
+    <div className="h-[100vh] w-full bg-white flex justify-center items-center">
+      <div className="text-3xl  text-blue-500 font-semibold">
         <h1>Super Secret Page</h1>
-        <button onClick={logOut}>Log out</button>
+        <button className="text-white text-xl bg-red-500 py-2 px-5 rounded-md mt-5 ml-16" onClick={logOut}>Log out</button>
+        <p></p>
       </div>
       <ToastContainer />
-    </>
+    </div>
   );
 }
 

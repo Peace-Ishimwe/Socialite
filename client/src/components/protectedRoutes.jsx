@@ -1,12 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 export const protectRoute = () => {
+    const generateData = (data) =>
+    toast(`Hi ${data.user} 😄`, {
+      position: "top-right",
+    });
     const navigate = useNavigate();
     const [cookies, setCookie, removeCookie] = useCookies([]);
+    const [data , setData] = useState()
     useEffect(() => {
         const verifyUser = async () => {
          if (!cookies.jwt) {
@@ -22,8 +27,9 @@ export const protectRoute = () => {
            if (!data.status) {
              removeCookie("jwt");
              navigate("/authenticate");
-           } else
-             toast(`Hi ${data.user} 🦄`);
+           }else{
+            generateData(data);
+           }
          }
        };
        verifyUser();
