@@ -12,28 +12,28 @@ const userSchema = new mongoose.Schema(
     },
     firstName: {
       type: String,
-      required: true,
+      required: [true , 'Provide your first name'],
       maxlength: 255,
       minlength: 3,
     },
     lastName: {
       type: String,
-      required: true,
+      required: [true , 'Provide your last name'],
       maxlength: 255,
       minlength: 3,
     },
     email: {
       type: String,
-      required: true,
-      unique: true,
+      required: [true , 'Provide your email'],
+      unique: [true]
     },
     password: {
       type: String,
-      required: true,
+      required: [true , 'Provide your password'],
     },
     gender: {
         type: String,
-        required: true,
+        required: [true , 'Provide your gender'],
     },
     telephone: {
         type: String,

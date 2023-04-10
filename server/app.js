@@ -4,6 +4,10 @@ const app = express();
 
 // ------------ Middlewares --------------
 import cookieParser from 'cookie-parser'
+import cors from 'cors' 
+import morgan from "morgan"
+app.use(morgan('tiny'))
+app.use(cors())
 app.use(cookieParser())
 app.use(express.json());
 
