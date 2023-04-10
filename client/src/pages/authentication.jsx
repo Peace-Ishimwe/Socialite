@@ -1,8 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import { ToastContainer, toast } from "react-toastify";
 import LoginImage from "../assets/Images/logo.1.png";
-import Close from "../components/icons";
+import {Close } from "../components/icons";
 
 const Authentication = () => {
+  //  redirect options using useNavigate hook
+  const history  = useNavigate()
+  // handling the errors
+  const [cookies] = useCookies(["cookie-name"]);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (cookies.jwt) {
+      navigate("/");
+    }
+  }, [cookies, navigate]);
+
+  const generateError= (error) =>
+  toast.error(error, {
+    position: "top-right",
+  });
+
+
+  // Intergration with login to the server
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const loginSubmitData = (event) => {
     setLoginData((prevLoginData) => {
@@ -13,14 +35,33 @@ const Authentication = () => {
     });
   };
 
-  const [signupData, setSignupData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    gender: "",
-    telephone: Number,
-  });
+  const handleSubmitLogin = async (event) => {
+    event.preventDefault();
+    try {
+      const { data } = await axios.post(
+        "http://localhost:5000/login",
+        {
+          ...loginData,
+        },
+        { withCredentials: true }
+      );
+      if (data) {
+        if (data.errors) {
+          const { email, password } = data.errors;
+          console.log(email, password);
+          if (email) generateError(email);
+          else if (password) generateError(password);
+        } else {
+          navigate("/");
+        }
+      }
+    } catch (ex) {
+      console.log(ex);
+    }
+  };
+
+  // Intergration with signup to the server
+  const [signupData, setSignupData] = useState({ firstName: "", lastName: "", email: "", password: "", gender: "", telephone: "" });
   const signupSubmitData = (event) => {
     setSignupData((prevSignupData) => {
       return {
@@ -30,7 +71,30 @@ const Authentication = () => {
     });
   };
 
-  console.log(signupData);
+  const handleSubmitSignup = async (event) => {
+    event.preventDefault();
+    try {
+      const { data } = await axios.post(
+        "http://localhost:5000/register",
+        {
+          ...signupData,
+        },
+        { withCredentials: true }
+      );
+      if (data) {
+        if (data.errors) {
+          const { email, password } = data.errors;
+          if (email) generateError(email);
+          else if (password) generateError(password);
+        } else {
+          navigate("/");
+        }
+      }
+    } catch (ex) {
+      console.log(ex);
+    }
+  };
+
 
   const [signupToggle, setSignupToggle] = useState(false);
   const [opacity , setOpacity] = useState('');
@@ -46,8 +110,7 @@ const Authentication = () => {
   return (
     <div className="authentication relative">
       {/* The login page and the login form */}
-
-      {/* { signupToggle == false &&  */}
+      <ToastContainer />
       <div className={opacity}>
         <div className="lg:flex max-w-5xl min-h-screen mx-auto p-6 py-10">
           <div className="flex flex-col items-center lg: lg:flex-row lg:space-x-10">
@@ -63,13 +126,14 @@ const Authentication = () => {
               </p>
             </div>
             <div className="lg:mt-0 lg:w-96 md:w-1/2 sm:w-2/3 mt-10 w-full">
-              <form className="p-6 space-y-4 relative bg-white shadow-lg rounded-lg">
+              <form className="p-6 space-y-4 relative bg-white shadow-lg rounded-lg" onSubmit={handleSubmitLogin}>
                 <input
                   type="email"
                   name="email"
                   onChange={loginSubmitData}
                   placeholder="Email or Phone Number"
                   className="p-2 w-full outline-none border-2 rounded-md"
+                  required
                 />
                 <input
                   type="password"
@@ -77,6 +141,7 @@ const Authentication = () => {
                   onChange={loginSubmitData}
                   placeholder="Password"
                   className="p-2 w-full outline-none border-2 rounded-md"
+                  required
                 />
                 <button
                   type="submit"
@@ -99,7 +164,6 @@ const Authentication = () => {
                   </a>
                 </div>
               </form>
-
               <div className="mt-8 text-center text-sm">
                 {" "}
                 <a href="#" className="font-semibold hover:underline">
@@ -112,7 +176,6 @@ const Authentication = () => {
           </div>
         </div>
       </div>
-      {/* } */}
 
       {/* The signup  / register form of socialite */}
 
@@ -138,7 +201,7 @@ const Authentication = () => {
                 It's quick and easy.
               </div>
             </div>
-            <form className="p-7 space-y-5">
+            <form className="p-7 space-y-5" onSubmit={handleSubmitSignup}>
               <div className="grid lg:grid-cols-2 gap-5">
                 <input
                   type="text"
@@ -146,6 +209,7 @@ const Authentication = () => {
                   name="firstName"
                   onChange={signupSubmitData}
                   className="p-2 w-full outline-none border-2 rounded-md"
+                  required
                 />
                 <input
                   type="text"
@@ -153,6 +217,7 @@ const Authentication = () => {
                   name="lastName"
                   onChange={signupSubmitData}
                   className="p-2 w-full outline-none border-2 rounded-md"
+                  required
                 />
               </div>
               <input
@@ -161,6 +226,7 @@ const Authentication = () => {
                 name="email"
                 onChange={signupSubmitData}
                 className="p-2 w-full outline-none border-2 rounded-md"
+                required
               />
               <input
                 type="password"
@@ -168,19 +234,24 @@ const Authentication = () => {
                 name="password"
                 onChange={signupSubmitData}
                 className="p-2 w-full outline-none border-2 rounded-md"
+                minLength={6}
+                required
               />
 
               <div className="grid lg:grid-cols-2 gap-3">
                 <div>
-                  <label className="mb-0"> Gender </label>
+                  <label className="mb-0" htmlFor="gender"> Gender </label>
                   <select
                     onChange={signupSubmitData}
                     name="gender"
+                    id="gender"
                     className="selectpicker mt-2 p-[0.70rem] w-full outline-none border-2 rounded-md"
+                    required 
                   >
+                    <option value="">--Select--</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
-                    <option value="not-say">Not say</option>
+                    <option value="other">Other</option>
                   </select>
                 </div>
                 <div>

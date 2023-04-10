@@ -1,30 +1,32 @@
 import React from "react";
+import { protectRoute } from "../components/protectedRoutes";
 
 const Privacy = () => {
+  protectRoute()
   return (
-    <div class="bg-gradient-to-tr from-blue-400  h-56 items-center justify-center lg:h-80 relative pt-12 to-blue-300 via-blue-400 w-full">
+    <div className="bg-gradient-to-tr from-blue-400  h-56 items-center justify-center lg:h-80 relative pt-12 to-blue-300 via-blue-400 w-full">
         <p className="text-white text-3xl font-semibold text-center pb-8">Privacy Policy</p>
-      <div class="main_content">
-        <div class="mcontainer">
-          <div class="bg-white max-w-4xl mx-auto md:p-10 p-6 relative rounded-md shadow">
-            <div class="md:space-y-6 space-y-4 text-gray-400 md:text-lg">
-              <div class="md:leading-8 leading-7"> Updated July 09, 2021</div>
-              <div class="font-semibold md:text-2xl text-xl text-gray-700">
+      <div className="main_content">
+        <div className="mcontainer">
+          <div className="bg-white max-w-4xl mx-auto md:p-10 p-6 relative rounded-md shadow">
+            <div className="md:space-y-6 space-y-4 text-gray-400 md:text-lg">
+              <div className="md:leading-8 leading-7"> Updated July 09, 2021</div>
+              <div className="font-semibold md:text-2xl text-xl text-gray-700">
                 {" "}
                 Privacy Policy{" "}
               </div>
-              <div class="md:leading-8 leading-7"> Version 2.1, Revision 4</div>
+              <div className="md:leading-8 leading-7"> Version 2.1, Revision 4</div>
 
-              <div class="font-semibold md:text-2xl text-2xl text-gray-700 md:pt-12 pt-10">
+              <div className="font-semibold md:text-2xl text-2xl text-gray-700 md:pt-12 pt-10">
                 {" "}
                 Using our services{" "}
               </div>
-              <div class="md:leading-8 leading-7">
+              <div className="md:leading-8 leading-7">
                 {" "}
                 You must follow any policies made available to you within the
                 Services.
               </div>
-              <div class="md:leading-8 leading-7">
+              <div className="md:leading-8 leading-7">
                 {" "}
                 Don't misuse our Services. For example, don't interfere with our
                 Services or try to access them using a method other than the
@@ -35,7 +37,7 @@ const Privacy = () => {
                 terms or policies or if we are investigating suspected
                 misconduct.{" "}
               </div>
-              <div class="md:leading-8 leading-7">
+              <div className="md:leading-8 leading-7">
                 {" "}
                 Using our Services does not give you ownership of any
                 intellectual property rights in our Services or the content you
@@ -46,17 +48,17 @@ const Privacy = () => {
                 any legal notices displayed in or along with our Services.{" "}
               </div>
 
-              <div class="font-semibold md:text-2xl text-2xl text-gray-700">
+              <div className="font-semibold md:text-2xl text-2xl text-gray-700">
                 Your content in our services
               </div>
-              <div class="md:leading-8 leading-7">
+              <div className="md:leading-8 leading-7">
                 {" "}
                 Some of our Services allow you to upload, submit, store, send or
                 receive content. You retain ownership of any intellectual
                 property rights that you hold in that content. In short, what
                 belongs to you stays yours.
               </div>
-              <div class="md:leading-8 leading-7">
+              <div className="md:leading-8 leading-7">
                 {" "}
                 When you upload, submit, store, send or receive content to or
                 through our Services, you give Front (and those we work with) a
@@ -75,11 +77,11 @@ const Privacy = () => {
                 the scope of our use of the content submitted in those Services.
               </div>
 
-              <div class="font-semibold md:text-2xl text-xl text-gray-700">
+              <div className="font-semibold md:text-2xl text-xl text-gray-700">
                 {" "}
                 Pay Attention{" "}
               </div>
-              <div class="md:leading-8 leading-7">
+              <div className="md:leading-8 leading-7">
                 {" "}
                 Our Services are very diverse, so sometimes additional terms or
                 product requirements (including age requirements) may apply.
