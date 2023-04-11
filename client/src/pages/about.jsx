@@ -1,19 +1,23 @@
-import React from "react";
-import bgImage from "../assets/Images/group-cover-1.jpg";
+import React, { useState } from "react";
+import Theme from "../components/theme/theme";
 
 const About = () => {
+  Theme()
+
+  const theme =  localStorage.theme
+  let background = ""
+  theme === 'light' ? background = "bg-[url('/Images/group-cover-1.jpg')]" : background = ""
+
   return (
     <div className="main_content">
       <div
-        className="w-full lg:h-80 h-52 pb-10 bg-cover flex justify-center items-center relative"
-        style={{ backgroundImage: `url(${bgImage})` }}
-      >
-        <div className="text-center max-w-xl mx-auto z-10 relative">
-          <div className="lg:text-4xl text-2xl text text-white font-semibold mb-3">
+        className={`w-full lg:h-80 h-52 pb-10 bg-cover ${background} dark:bg-mainDark flex justify-center items-center relative`}>
+        <div className="text-center max-w-xl mx-auto z-10 relative text-white">
+          <div className="lg:text-4xl text-2xl text  font-semibold mb-3">
             {" "}
             About Socialite
           </div>
-          <div className="text-white text-lg font-medium text-opacity-90">
+          <div className=" text-lg font-medium text-opacity-90">
             {" "}
             Socialite Is a template for developers who want to start their next
             social web application UI
@@ -23,10 +27,10 @@ const About = () => {
           {" "}
         </div>
       </div>
-      <div className="mcontainer">
-        <div className="-mt-16 bg-white max-w-3xl mx-auto p-10 relative rounded-md shadow">
-          <div className="md:space-y-6 space-y-5 text-gray-400 md:text-base">
-            <div className="font-semibold md:text-2xl text-lg text-gray-700">
+      <div className="mcontainer dark:bg-mainDark">
+        <div className="-mt-16 bg-white dark:bg-majorDark max-w-3xl mx-auto p-10 relative rounded-md ">
+          <div className="md:space-y-6 space-y-5 text-gray-400 dark:text-gray-200 md:text-base">
+            <div className="font-semibold md:text-2xl text-lg text-gray-700 dark:text-white">
               Socialite platform
             </div>
             <div className="md:leading-8">
@@ -41,7 +45,7 @@ const About = () => {
               opportunities, Socialite is the perfect place for you.
             </div>
 
-            <div className="font-semibold md:text-xl text-lg text-gray-700">
+            <div className="font-semibold md:text-xl text-lg text-gray-700 dark:text-white">
               {" "}
               Your best choice is here{" "}
             </div>

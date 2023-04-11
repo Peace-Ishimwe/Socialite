@@ -1,23 +1,37 @@
 import React from "react";
 import { protectRoute } from "../components/protectedRoutes";
+import Theme from "../components/theme/theme";
 
 const Privacy = () => {
-  protectRoute()
+  Theme();
+  const theme = localStorage.theme;
+  let background = "";
+  theme === "light" ? (background = "bg-gradient-to-tr") : (background = "");
   return (
-    <div className="bg-gradient-to-tr from-blue-400  h-56 items-center justify-center lg:h-80 relative pt-12 to-blue-300 via-blue-400 w-full">
-        <p className="text-white text-3xl font-semibold text-center pb-8">Privacy Policy</p>
+    <div
+      className={`${background} from-blue-400 dark:bg-mainDark  dark:h-fit h-56 items-center justify-center lg:h-80 relative pt-12 to-blue-300 via-blue-400 w-full`}
+    >
+      <p className="text-white text-3xl font-semibold text-center pb-8">
+        Privacy Policy
+      </p>
       <div className="main_content">
         <div className="mcontainer">
-          <div className="bg-white max-w-4xl mx-auto md:p-10 p-6 relative rounded-md shadow">
-            <div className="md:space-y-6 space-y-4 text-gray-400 md:text-lg">
-              <div className="md:leading-8 leading-7"> Updated July 09, 2021</div>
-              <div className="font-semibold md:text-2xl text-xl text-gray-700">
+          <div className="bg-white dark:bg-subMajorDark max-w-4xl mx-auto md:p-10 p-6 relative rounded-md shadow">
+            <div className="md:space-y-6 space-y-4 text-gray-400 md:text-lg dark:text-white">
+              <div className="md:leading-8 leading-7">
+                {" "}
+                Updated July 09, 2021
+              </div>
+              <div className="font-semibold md:text-2xl text-xl text-gray-700 dark:text-gray-300">
                 {" "}
                 Privacy Policy{" "}
               </div>
-              <div className="md:leading-8 leading-7"> Version 2.1, Revision 4</div>
+              <div className="md:leading-8 leading-7">
+                {" "}
+                Version 2.1, Revision 4
+              </div>
 
-              <div className="font-semibold md:text-2xl text-2xl text-gray-700 md:pt-12 pt-10">
+              <div className="font-semibold md:text-2xl text-2xl text-gray-700 md:pt-12 pt-10 dark:text-gray-300">
                 {" "}
                 Using our services{" "}
               </div>
@@ -48,7 +62,7 @@ const Privacy = () => {
                 any legal notices displayed in or along with our Services.{" "}
               </div>
 
-              <div className="font-semibold md:text-2xl text-2xl text-gray-700">
+              <div className="font-semibold md:text-2xl text-2xl text-gray-700 dark:text-gray-300">
                 Your content in our services
               </div>
               <div className="md:leading-8 leading-7">
@@ -77,7 +91,7 @@ const Privacy = () => {
                 the scope of our use of the content submitted in those Services.
               </div>
 
-              <div className="font-semibold md:text-2xl text-xl text-gray-700">
+              <div className="font-semibold md:text-2xl text-xl text-gray-700 dark:text-gray-300">
                 {" "}
                 Pay Attention{" "}
               </div>

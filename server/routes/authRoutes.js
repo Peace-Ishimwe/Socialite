@@ -4,8 +4,8 @@ import { Router } from "express";
 
 const router = new Router();
 
-router.post("/", checkUser); 
-router.post("/register", register);
-router.post("/login", login);
+router.post("/v1/api", checkUser); 
+router.post("/v1/api/register", register);
+router.post("/v1/api/login", login);
 
 export default router;

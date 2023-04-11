@@ -5,10 +5,6 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 export const protectRoute = () => {
-    const generateData = (data) =>
-    toast(`Hi ${data.user} 😄`, {
-      position: "top-right",
-    });
     const navigate = useNavigate();
     const [cookies, setCookie, removeCookie] = useCookies([]);
     const [data , setData] = useState()
@@ -18,7 +14,7 @@ export const protectRoute = () => {
            navigate("/authenticate");
          } else {
            const { data } = await axios.post(
-             "http://localhost:5000",
+             "http://localhost:5000/v1/api",
              {},
              {
                withCredentials: true,
@@ -27,8 +23,6 @@ export const protectRoute = () => {
            if (!data.status) {
              removeCookie("jwt");
              navigate("/authenticate");
-           }else{
-            generateData(data);
            }
          }
        };

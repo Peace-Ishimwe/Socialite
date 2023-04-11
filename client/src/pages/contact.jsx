@@ -1,9 +1,15 @@
 import React from "react";
+import Theme from "../components/theme/theme";
 
 const Contact = () => {
+ 
+  Theme()
+  const theme = localStorage.theme;
+  let background = "";
+  theme === "light" ? (background = "bg-gradient-to-tr") : (background = "");
   return (
-    <div className="main_content">
-      <div className="bg-gradient-to-tr flex from-blue-400 h-52 items-center justify-center lg:h-80 pb-10 relative to-blue-300 via-blue-400 w-full">
+    <div className="main_content dark:bg-subMainDark md:h-[100vh]">
+      <div className={`${background} dark:bg-mainDark flex from-blue-400  h-52 items-center justify-center lg:h-80 pb-10 relative to-blue-300 via-blue-400 w-full`}>
         <div className="text-center max-w-xl mx-auto z-10 relative px-5">
           <div className="lg:text-4xl text-2xl text-white font-semibold mb-3">
             {" "}
@@ -17,7 +23,7 @@ const Contact = () => {
         </div>
       </div>
       <div className="mcontainer">
-        <div className="-mt-16 bg-white max-w-2xl mx-auto p-10 relative rounded-md shadow">
+        <div className="-mt-16 bg-white dark:bg-subMajorDark max-w-2xl mx-auto p-10 relative rounded-md shadow">
           <div className="grid md:grid-cols-2 md:gap-y-7 md:gap-x-6 gap-6">
             <input type="text" placeholder="Your Name" className="with-border p-2 w-full outline-none border-2 rounded-md" />
             <input

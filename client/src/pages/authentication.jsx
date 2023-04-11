@@ -5,6 +5,7 @@ import { useCookies } from "react-cookie";
 import { ToastContainer, toast } from "react-toastify";
 import LoginImage from "../assets/Images/logo.1.png";
 import {Close } from "../components/icons";
+import Theme from "../components/theme/theme";
 
 const Authentication = () => {
   //  redirect options using useNavigate hook
@@ -39,7 +40,7 @@ const Authentication = () => {
     event.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/login",
+        "http://localhost:5000/v1/api/login",
         {
           ...loginData,
         },
@@ -75,7 +76,7 @@ const Authentication = () => {
     event.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/register",
+        "http://localhost:5000/v1/api/register",
         {
           ...signupData,
         },
@@ -107,8 +108,11 @@ const Authentication = () => {
     setOpacity('')
   };
 
+  // thme management in the authentication
+  Theme()
+
   return (
-    <div className="authentication relative">
+    <div className="authentication relative dark:bg-mainDark dark:text-white">
       {/* The login page and the login form */}
       <ToastContainer />
       <div className={opacity}>
@@ -126,13 +130,13 @@ const Authentication = () => {
               </p>
             </div>
             <div className="lg:mt-0 lg:w-96 md:w-1/2 sm:w-2/3 mt-10 w-full">
-              <form className="p-6 space-y-4 relative bg-white shadow-lg rounded-lg" onSubmit={handleSubmitLogin}>
+              <form className="p-6 space-y-4 relative bg-white dark:bg-subMajorDark shadow-lg rounded-lg" onSubmit={handleSubmitLogin}>
                 <input
                   type="email"
                   name="email"
                   onChange={loginSubmitData}
                   placeholder="Email or Phone Number"
-                  className="p-2 w-full outline-none border-2 rounded-md"
+                  className="p-2 w-full outline-none border-2 rounded-md dark:text-gray-900"
                   required
                 />
                 <input
@@ -140,7 +144,7 @@ const Authentication = () => {
                   name="password"
                   onChange={loginSubmitData}
                   placeholder="Password"
-                  className="p-2 w-full outline-none border-2 rounded-md"
+                  className="p-2 w-full outline-none border-2 rounded-md dark:text-gray-900"
                   required
                 />
                 <button
@@ -184,7 +188,7 @@ const Authentication = () => {
           id="register"
           className="absolute lg:w-8/12 xl:w-6/12 min-[860px]:w-10/12 lg:top-36 top-0 min-[860px]:left-1/2 min-[860px]:transform min-[860px]:-translate-x-1/2 signup"
         >
-          <div className="rounded-xl shadow-2xl p-4 lg:w-12/12 bg-white">
+          <div className="rounded-xl shadow-2xl p-4 lg:w-12/12 bg-white dark:bg-subMajorDark">
             <div
               onClick={hideSignup}
               className="p-3 bg-gray-100 rounded-full m-3 float-right hover:bg-red-300 transition-all duration-1000"
@@ -196,7 +200,7 @@ const Authentication = () => {
                 {" "}
                 Sign Up
               </div>
-              <div className="text-base text-gray-600">
+              <div className="text-base text-gray-600 dark:text-gray-300">
                 {" "}
                 It's quick and easy.
               </div>
@@ -208,7 +212,7 @@ const Authentication = () => {
                   placeholder="Your Name"
                   name="firstName"
                   onChange={signupSubmitData}
-                  className="p-2 w-full outline-none border-2 rounded-md"
+                  className="p-2 w-full outline-none border-2 rounded-md dark:text-gray-900"
                   required
                 />
                 <input
@@ -216,7 +220,7 @@ const Authentication = () => {
                   placeholder="Last  Name"
                   name="lastName"
                   onChange={signupSubmitData}
-                  className="p-2 w-full outline-none border-2 rounded-md"
+                  className="p-2 w-full outline-none border-2 rounded-md dark:text-gray-900"
                   required
                 />
               </div>
@@ -225,7 +229,7 @@ const Authentication = () => {
                 placeholder="Info@example.com"
                 name="email"
                 onChange={signupSubmitData}
-                className="p-2 w-full outline-none border-2 rounded-md"
+                className="p-2 w-full outline-none border-2 rounded-md dark:text-gray-900"
                 required
               />
               <input
@@ -233,7 +237,7 @@ const Authentication = () => {
                 placeholder="Password"
                 name="password"
                 onChange={signupSubmitData}
-                className="p-2 w-full outline-none border-2 rounded-md"
+                className="p-2 w-full outline-none border-2 rounded-md dark:text-gray-900"
                 minLength={6}
                 required
               />
@@ -245,7 +249,7 @@ const Authentication = () => {
                     onChange={signupSubmitData}
                     name="gender"
                     id="gender"
-                    className="selectpicker mt-2 p-[0.70rem] w-full outline-none border-2 rounded-md"
+                    className="selectpicker  mt-2 p-[0.70rem] w-full outline-none border-2 rounded-md dark:text-gray-900"
                     required 
                   >
                     <option value="">--Select--</option>
@@ -261,19 +265,20 @@ const Authentication = () => {
                     name="telephone"
                     onChange={signupSubmitData}
                     placeholder="+250 785 304 805"
-                    className="mt-2 p-2 w-full outline-none border-2 rounded-md"
+                    className="mt-2 p-2 w-full outline-none border-2 rounded-md dark:text-gray-900"
                   />
                 </div>
               </div>
-              <p className="text-xs text-gray-400 pt-3">
+              <p className="text-[.85em] text-gray-400 dark:text-gray-200 pt-3">
                 By clicking Sign Up, you agree to our
-                <a href="#" className="text-blue-500">
+                <a href="/privacy-policy" className="text-blue-500">
                   Terms
                 </a>
-                ,<a href="#">Data Policy</a> and
-                <a href="#">Cookies Policy</a>. You may receive SMS
+                ,<a href="/privacy-policy">Data Policy</a> and
+                <a href="/privacy-policy">Cookies Policy</a>. You may receive SMS
                 Notifications from us and can opt out any time.
               </p>
+              <button type="reset" className="dark:text-red-400 text-red-700">Clear form</button>
               <div className="flex">
                 <button
                   type="submit"
