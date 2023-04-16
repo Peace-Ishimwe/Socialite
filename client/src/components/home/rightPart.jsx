@@ -21,7 +21,7 @@ const RightPart = (props) => {
     navigate("/authenticate");
   };
   return (
-    <main className="right-home  bg-white dark:bg-majorDark w-fit p-5 h-[100vh] overflow-scroll hidden lg:block">
+    <main className="right-home  bg-white dark:bg-majorDark w-fit p-5 h-[100vh] overflow-scroll hidden lg:block lg:w-3/12 xl:w-fit">
       <div className="flex md:gap-5 gap-2 items-center mb-8 justify-end">
         <div className="relative">
           <div onClick={toggleMenu} className="bg-gray-200 dark:bg-gray-700 rounded-full p-1 h-10 w-10 flex items-center justify-center">
