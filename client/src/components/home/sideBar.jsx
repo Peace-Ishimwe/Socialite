@@ -3,15 +3,13 @@ import { Link } from 'react-router-dom'
 import { HomeIcon , AddIcon , InfoIcon , MessagesIcon , MoreIcon , NotificationIcon , PrivacyIcon , PhoneIcon  } from '../../assets/icons/icons'
 import {SideComp ,  AddPost }from './sideBar/sideComp'
 import ProfileImage from '../../assets/Images/profile.jpeg'
-import Logo from '../../assets/Images/logo.1.png'
 import Switcher from '../theme/switcher'
+import { LogoImage } from "./homeAll/homeAll";
 
 const SideBar = () => {
   return (
-    <main className="sidebar-home flex flex-col gap-10 px-5 pt-5 pb-20 h-[100vh] justify-between bg-white dark:bg-majorDark md:w-[15%] min-w-fit">
-        <div>
-            <img src={Logo} alt="" />
-        </div>
+    <main className="sidebar-home md:flex flex-col gap-10 px-5 pt-5 pb-20 h-[100vh] justify-between bg-white dark:bg-majorDark md:w-[15%] min-w-fit hidden ">
+        <LogoImage />
         <div className='flex flex-col gap-10'>
             <SideComp 
             component={<HomeIcon/>}
