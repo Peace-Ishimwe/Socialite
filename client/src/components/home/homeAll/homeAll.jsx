@@ -13,7 +13,7 @@ export const HomeAll = (props) => {
       }
     }
   return (
-    <div className={`${props.display} md:gap-5 gap-2 items-center mb-8 justify-end`}>
+    <div className={`${props.display} md:gap-5 gap-2 items-center mb-6 justify-end`}>
         <div className="relative">
             <div onClick={toggleMenu} className="bg-gray-200 dark:bg-gray-700 rounded-full p-1 h-10 w-10 sm:flex items-center hidden justify-center">
                 <ChrevonDown />
