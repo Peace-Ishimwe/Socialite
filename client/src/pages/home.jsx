@@ -1,25 +1,27 @@
 import React from "react";
-import { protectRoute } from "../components/protectedRoutes";
+import { protectRoute } from "../components/auth/protectedRoutes";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import SideBar from "../components/home/sideBar";
+import Middle from "../components/home/middle";
 import Switcher from "../components/theme/switcher";
+import RightPart from "../components/home/rightPart";
 
 const Home = () => {
-  const navigate = useNavigate()
-  const [cookies, setCookie, removeCookie] = useCookies([]);
+  // const navigate = useNavigate()
+  // const [cookies, setCookie, removeCookie] = useCookies([]);
   protectRoute()
-  const logOut = () => {
-    removeCookie("jwt");
-    navigate("/authenticate");
-  };
+  // const logOut = () => {
+  //   removeCookie("jwt");
+  //   navigate("/authenticate");
+  // };
   return (
-    <div className="h-[100vh] w-full bg-white dark:bg-mainDark flex justify-center items-center">
-      <div className="text-3xl  text-blue-500 font-semibold">
-        <h1>Super Secret Page</h1>
-        <button className="text-white text-xl bg-red-500 py-2 px-5 rounded-md mt-5 ml-16" onClick={logOut}>Log out</button>
-        <Switcher />
+    <div className="bg-gray-200 dark:bg-mainDark flex items-start w-full">
+        {/* <Switcher /> */}
+        <SideBar />
+        <Middle />
+        <RightPart />
       </div>
-    </div>
   );
 }
 

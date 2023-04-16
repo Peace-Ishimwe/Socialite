@@ -9,9 +9,9 @@ const About = () => {
   theme === 'light' ? background = "bg-[url('/Images/group-cover-1.jpg')]" : background = ""
 
   return (
-    <div className="main_content">
+    <div className="main_content dark:bg-mainDark">
       <div
-        className={`w-full lg:h-80 h-52 pb-10 bg-cover ${background} dark:bg-mainDark flex justify-center items-center relative`}>
+        className={`w-full lg:h-80 h-52 pb-10 bg-cover ${background}  flex justify-center items-center relative`}>
         <div className="text-center max-w-xl mx-auto z-10 relative text-white">
           <div className="lg:text-4xl text-2xl text  font-semibold mb-3">
             {" "}
@@ -19,8 +19,7 @@ const About = () => {
           </div>
           <div className=" text-lg font-medium text-opacity-90">
             {" "}
-            Socialite Is a template for developers who want to start their next
-            social web application UI
+            Socialite is a social media platform that connects people from around the world. 
           </div>
         </div>
         <div className="absolute w-full h-full inset-0 bg-gray-600 bg-opacity-20">

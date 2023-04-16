@@ -6,12 +6,14 @@ import Contact from "./pages/contact";
 import Privacy from "./pages/privacy";
 import Home from "./pages/home";
 import "react-toastify/dist/ReactToastify.css";
+import PageNotFounde from "./pages/pageNotFound";
 
 const App = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="*" element={<PageNotFounde />} />
         <Route path="/authenticate" element={<Authentication />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />

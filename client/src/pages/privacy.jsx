@@ -1,5 +1,5 @@
 import React from "react";
-import { protectRoute } from "../components/protectedRoutes";
+import { protectRoute } from "../components/auth/protectedRoutes";
 import Theme from "../components/theme/theme";
 
 const Privacy = () => {

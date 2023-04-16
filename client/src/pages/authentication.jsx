@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { ToastContainer, toast } from "react-toastify";
 import LoginImage from "../assets/Images/logo.1.png";
-import {Close } from "../components/icons";
 import Theme from "../components/theme/theme";
+import { Close } from "../assets/icons/icons";
 
 const Authentication = () => {
   //  redirect options using useNavigate hook
