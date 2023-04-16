@@ -23,7 +23,6 @@ export const HomeAll = (props) => {
                 <button className="py-1 px-3 rounded-md text-gray-200 bg-red-500" onClick={props.logout}>Logout</button>
             </div>
             </div>
-
             <div className="flex items-center gap-2">
             <div className="rounded-full bg-black w-fit overflow-hidden">
                 <img

@@ -2,7 +2,7 @@ import React from 'react'
 
 export const SideComp = (props) => {
   return (
-    <main className='sidebar-home font-semibold text-gray-800 dark:text-gray-200'>
+    <main className='sidebar-home font-semibold text-gray-800 dark:text-gray-200' onClick={props.onClick}>
         <div className='flex w-fit items-center gap-2'>
             <div className='bg-gray-200 dark:bg-gray-700 rounded-full p-2'>
                 {props.component}

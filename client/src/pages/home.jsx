@@ -16,7 +16,7 @@ const Home = () => {
   // };
   return (
     <div className="bg-gray-200 dark:bg-mainDark flex items-start w-full">
-        <SideBar />
+        <SideBar display="hidden md:flex h-[100vh]" />
         <Middle />
         <RightPart />
       </div>
