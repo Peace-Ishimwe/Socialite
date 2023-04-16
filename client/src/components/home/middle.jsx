@@ -31,7 +31,7 @@ const Middle = () => {
         </div>
         <div className='flex gap-1 border-2 rounded-full p-2 bg-white w-6/12 sm:w-7/12 md:w-10/12 lg:mx-auto'>
           <SearchIcon />
-          <input className='outline-none w-full' type="search" name="search" id="search" placeholder='connect with friends' />
+          <input className='outline-none w-full input' type="search" name="search" id="search" placeholder='connect with friends' />
         </div>
         <HomeAll logout={logOut} display='flex lg:hidden' />
       </div>
