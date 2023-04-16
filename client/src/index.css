@@ -27,6 +27,15 @@
     from { top: -50%;}
     to { top: 2.5rem;}   
 }
+.menuHome{
+    animation-name: menuHome;
+    animation-duration: .5s;
+}
+
+@keyframes menuHome {
+    from { top: -50%;}
+    to { top: 5.5rem;}   
+}
 
 *::-webkit-scrollbar{
     display: none;
