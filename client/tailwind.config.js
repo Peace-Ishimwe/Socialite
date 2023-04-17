@@ -14,7 +14,6 @@ export default {
         "subMainDark": "#1D1D24",
         "majorDark": "#1F1F27",
         "subMajorDark": "#2A2A32",
-
       }
     },
   },
