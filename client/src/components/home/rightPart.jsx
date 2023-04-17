@@ -3,6 +3,8 @@ import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { HomeAll } from "./homeAll/homeAll";
 import Profile from "./rightPart/profile";
+
+
 const RightPart = (props) => {
   
   const navigate = useNavigate()
@@ -16,6 +18,7 @@ const RightPart = (props) => {
       <HomeAll display = "flex" logout= {logOut} />
       <hr className=" border  border-[#cfcdcd] " />
       <Profile />
+      <hr className=" border mt-5 mb-5  border-[#cfcdcd] " />
     </main>
   );
 };
