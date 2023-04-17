@@ -5,6 +5,7 @@ import { SideComp } from './sideBar/sideComp'
 import SideBar from './sideBar'
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import PostShare from './middle/PostShare'
 
 const Middle = () => {
   const [displayMenu, setDisplayMenu] = useState('hidden')
@@ -22,6 +23,7 @@ const Middle = () => {
   };
   return (
     <main className="header-home w-full md:w-10/12 lg:w-8/12">
+      {/* The main header in the middle part which is the main part of the homepage */}
       <div className='top-middle bg-white dark:bg-majorDark pt-5 lg:pb-5 flex justify-between px-5 w-full gap-5 items-start sticky top-0 shadow-md'>
         <div className='md:hidden'>
           <SideComp component={<MenuIcon />} onClick = {showMenu}/>
@@ -35,6 +37,10 @@ const Middle = () => {
         </div>
         <HomeAll logout={logOut} display='flex lg:hidden' />
       </div>
+      {/* end of the header in the middle part */}
+
+      <PostShare />
+
     </main>
   )
 }
