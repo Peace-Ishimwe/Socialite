@@ -2,36 +2,62 @@
 @tailwind components;
 @tailwind utilities;
 
-.signup{
-    animation-name: rollDown;
-    animation-duration: .5s;
+.signup {
+  animation-name: rollDown;
+  animation-duration: 0.5s;
 }
 @keyframes rollDown {
-    from { top: -50%;}
-    to { top: 0rem;}   
+  from {
+    top: -50%;
+  }
+  to {
+    top: 0rem;
+  }
 }
 @media (min-width: 1024px) {
-    @keyframes rollDown {
-        from { top: -50%;}
-        to { top: 9rem;}   
+  @keyframes rollDown {
+    from {
+      top: -50%;
     }
+    to {
+      top: 9rem;
+    }
+  }
 }
-.moreHome{
-    animation-name: moreHome;
-    animation-duration: .5s;
+.moreHome {
+  animation-name: moreHome;
+  animation-duration: 0.5s;
 }
 @keyframes moreHome {
-    from { top: -50%;}
-    to { top: 2.5rem;}   
+  from {
+    top: -50%;
+  }
+  to {
+    top: 2.5rem;
+  }
 }
-.menuHome{
-    animation-name: menuHome;
-    animation-duration: .5s;
+.menuHome {
+  animation-name: menuHome;
+  animation-duration: 0.5s;
 }
 @keyframes menuHome {
-    from { top: -50%;}
-    to { top: 5.5rem;}   
+  from {
+    top: -50%;
+  }
+  to {
+    top: 5.5rem;
+  }
 }
-*::-webkit-scrollbar{
+
+*::-webkit-scrollbar {
     display: none;
-}
+    height: 12px;
+  }
+  .suggestedContainer::-webkit-scrollbar{
+      display: flex;
+  }
+  .suggestedContainer::-webkit-scrollbar-thumb {
+    background-color: #fffbfb;
+    border-radius: 10px;
+    width: 5px;
+  }
