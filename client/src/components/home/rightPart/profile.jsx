@@ -3,7 +3,7 @@ import ProfileImage from "../../../assets/Images/profile.jpeg";
 
 const Profile = () => {
   return (
-    <div className="profile-user mt-5 bg-gray-200 dark:bg-subMajorDark rounded-2xl overflow-hidden pb-5">
+    <div className="profile-user mt-5 bg-gray-100 dark:bg-subMajorDark rounded-2xl overflow-hidden pb-5">
       <div className="relative w-fit">
         <img
           className="w-[20rem] h-[8rem] object-cover"
