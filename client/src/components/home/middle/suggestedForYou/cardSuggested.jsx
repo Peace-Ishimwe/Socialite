@@ -2,7 +2,7 @@ import React from 'react'
 
 const cardSuggested = () => {
   return (
-    <div>cardSuggested</div>
+    <div>cardSuggested people to follow</div>
   )
 }
 
