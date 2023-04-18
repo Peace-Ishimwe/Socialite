@@ -1,8 +1,11 @@
 import React from 'react'
+import cardSuggested from './suggestedForYou/cardSuggested'
 
 const suggestedForYou = () => {
   return (
-    <div>suggestedForYou</div>
+    <div className='main-container'>
+        <cardSuggested />
+    </div>
   )
 }
 

@@ -6,7 +6,6 @@ import { CloseCirled , ImageIcon , RocketIcon } from "../../../assets/icons/icon
 const PostShare = () => {
   const [image, setImage] = useState(null);
   const imageRef = useRef();
-  console.log(image)
 
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {

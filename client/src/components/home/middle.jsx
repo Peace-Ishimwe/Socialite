@@ -6,6 +6,7 @@ import SideBar from './sideBar'
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import PostShare from './middle/PostShare'
+import suggestedForYou from './middle/suggestedForYou'
 
 const Middle = () => {
   const [displayMenu, setDisplayMenu] = useState('hidden')
@@ -40,6 +41,9 @@ const Middle = () => {
       {/* end of the header in the middle part */}
 
       <PostShare />
+
+      <suggestedForYou />
+
 
     </main>
   )
