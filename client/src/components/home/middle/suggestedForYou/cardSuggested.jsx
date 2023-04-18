@@ -1,9 +1,9 @@
 import React from 'react'
 
-const cardSuggested = () => {
+const CardSuggested = () => {
   return (
     <div>cardSuggested people to follow</div>
   )
 }
 
-export default cardSuggested
+export default CardSuggested

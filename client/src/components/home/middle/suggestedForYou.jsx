@@ -1,12 +1,12 @@
 import React from 'react'
-import cardSuggested from './suggestedForYou/cardSuggested'
+import CardSuggested from './suggestedForYou/cardSuggested'
 
-const suggestedForYou = () => {
+const SuggestedForYou = () => {
   return (
     <div className='main-container'>
-        <cardSuggested />
+        <CardSuggested />
     </div>
   )
 }
 
-export default suggestedForYou
+export default SuggestedForYou
