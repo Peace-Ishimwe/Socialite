@@ -21,7 +21,7 @@ const Authentication = () => {
 
   const generateError= (error) =>
   toast.error(error, {
-    position: "top-right",
+    position: "top-center",
   });
 
 

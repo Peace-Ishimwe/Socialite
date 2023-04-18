@@ -10,19 +10,16 @@
     from { top: -50%;}
     to { top: 0rem;}   
 }
-
 @media (min-width: 1024px) {
     @keyframes rollDown {
         from { top: -50%;}
         to { top: 9rem;}   
     }
 }
-
 .moreHome{
     animation-name: moreHome;
     animation-duration: .5s;
 }
-
 @keyframes moreHome {
     from { top: -50%;}
     to { top: 2.5rem;}   
@@ -31,12 +28,10 @@
     animation-name: menuHome;
     animation-duration: .5s;
 }
-
 @keyframes menuHome {
     from { top: -50%;}
     to { top: 5.5rem;}   
 }
-
 *::-webkit-scrollbar{
     display: none;
 }
