@@ -19,7 +19,7 @@ import { LogoImage } from "./homeAll/homeAll";
 const SideBar = (props) => {
   return (
     <main
-      className={`sidebar-home ${props.display} flex-col gap-10 pl-5 pb-20 overflow-scroll  justify-between bg-white dark:bg-majorDark md:w-[15%] min-w-fit `}
+      className={`sidebar-home ${props.display} flex-col gap-10 pl-5 pb-10 overflow-scroll  justify-between bg-white dark:bg-majorDark md:w-[15%] min-w-fit `}
     >
       
       <div className="sticky top-0 bg-white dark:bg-majorDark pt-5 flex justify-between">
