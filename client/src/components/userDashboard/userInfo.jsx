@@ -2,7 +2,7 @@ import React from "react";
 
 const UserInfo = () => {
   return (
-    <div className="followStatus flex mb-4 items-center justify-evenly mt-10 bg-white w-11/12 md:w-10/12 2xl:w-8/12 mx-auto p-5">
+    <div className="followStatus flex mb-10 items-center justify-evenly mt-10 bg-white dark:bg-subMajorDark w-11/12 md:w-10/12 2xl:w-8/12 mx-auto p-5">
       <div className="follow flex flex-col justify-center items-center">
         <span className="dark:text-gray-200 text-gray-700 font-bold text-xl">
           6,890

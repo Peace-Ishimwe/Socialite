@@ -13,6 +13,7 @@ const protectRoute =  () => {
   const [cookies, setCookie, removeCookie] = useCookies([]);
 
   useEffect(() => {
+    
     const verifyUser = async () => {
       if (!cookies.jwt) {
         navigate("/authenticate");
@@ -33,6 +34,7 @@ const protectRoute =  () => {
         };
       }
     };
+
     verifyUser();
   }, [cookies, navigate, removeCookie]);
 

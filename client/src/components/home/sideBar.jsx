@@ -15,7 +15,7 @@ import Switcher from "../theme/switcher";
 import { LogoImage } from "./homeAll/homeAll";
 import { UserProfile } from "./sideBar/sideComp";
 
-const SideBar = (props) => {
+const  SideBar = (props) => {
   return (
     <main
       className={`sidebar-home ${props.display} flex-col gap-10 pl-5 pb-10 overflow-scroll  justify-between bg-white dark:bg-majorDark md:w-[15%] min-w-fit `}
@@ -29,18 +29,18 @@ const SideBar = (props) => {
         <a href="/">
           <SideComp component={<HomeIcon />} title={"Home"} true={props.isHome} />
         </a>
-        <SideComp component={<MessagesIcon />} title={"Messages"} />
-        <SideComp component={<NotificationIcon />} title={"Notifications"} />
+        <a href="/u/messages"><SideComp component={<MessagesIcon />} title={"Messages"} /></a>
+        <a href="/u/notifications"><SideComp component={<NotificationIcon />} title={"Notifications"} /></a>
         <a href="/about">
-          <SideComp component={<InfoIcon />} title={"About us"} />
+          <SideComp component={<InfoIcon />} title={"About us" } true={props.isAbout} />
         </a>
         <a href="/contact">
-          <SideComp component={<PhoneIcon />} title={"Contact us"} />
+          <SideComp component={<PhoneIcon />} title={"Contact us"} true={props.isContact}  />
         </a>
         <a href="/privacy-policy">
-          <SideComp component={<PrivacyIcon />} title={"Privacy"} />
+          <SideComp component={<PrivacyIcon />} title={"Privacy"} true={props.isPrivacy}  />
         </a>
-        <SideComp component={<MoreIcon />} title={"More"} />
+        <a href="/more"><SideComp component={<MoreIcon />} title={"More"} /></a>
         <SideComp component={<Switcher />} title={"Theme"} />
       </div>
       <AddPost component={<AddIcon />} title={"ADD POST"} />

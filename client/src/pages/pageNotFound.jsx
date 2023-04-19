@@ -5,7 +5,7 @@ const PageNotFound = () => {
   Theme()
   return (
     <div
-      className="flex items-center justify-center min-h-screen bg-indigo-500  dark:bg-mainDark bg-fixed bg-cover bg-bottom error-bg">
+      className="flex items-center justify-center min-h-screen bg-indigo-500 h-[100vh] overflow-hidden  dark:bg-mainDark bg-fixed bg-cover bg-bottom error-bg">
       <div className="container">
         <div className="row">
           <div className="col-sm-8 offset-sm-2 text-gray-50 text-center -mt-52">

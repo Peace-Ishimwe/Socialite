@@ -36,7 +36,7 @@ const Post = () => {
 
       <div>
         <img
-          src="/Images/profile.jpeg"
+          src="/Images/indianTeam.png"
           className="w-full mx-auto sm:h-fit sm:max-h-[70vh] h-[fit-content] object-cover"
           alt=""
         />

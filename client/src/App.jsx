@@ -1,25 +1,28 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Authentication from "./pages/authentication";
-import About from "./pages/about";
-import Contact from "./pages/contact";
-import Privacy from "./pages/privacy";
+import AboutPage from "./pages/about";
+import PrivacyPage from "./pages/privacy";
 import Home from "./pages/home";
 import "react-toastify/dist/ReactToastify.css";
 import PageNotFounde from "./pages/pageNotFound";
 import UserDashboard from "./pages/userDashboard";
-
+import ContactPage from "./pages/contact";
+import ComingSoonPage from "./pages/comingSoon";
 const App = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="*" element={<PageNotFounde />} />
+        <Route path="/u/messages" element={<ComingSoonPage />} />
+        <Route path="/u/notifications" element={<ComingSoonPage />} />
+        <Route path="/more" element={<ComingSoonPage />} />
         <Route path="/authenticate" element={<Authentication />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="/u/user" element={<UserDashboard />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/privacy-policy" element={<Privacy />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPage />} />
       </Routes>
     </Router>
   );
