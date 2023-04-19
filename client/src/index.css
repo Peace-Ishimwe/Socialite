@@ -51,7 +51,7 @@
 
 *::-webkit-scrollbar {
     display: none;
-    height: 12px;
+    height: 10px;
   }
   .suggestedContainer::-webkit-scrollbar{
       display: flex;
