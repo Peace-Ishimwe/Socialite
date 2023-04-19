@@ -42,7 +42,7 @@ const Profile = () => {
       </div>
       <hr className=" w-[85%] border  border-[#cfcdcd] mx-auto" />
       <div className="text-center mt-4 text-blue-500 text-lg font-semibold">
-        <a href="#">My Profile</a>
+        <a href="/u/user">My Profile</a>
       </div>
     </div>
   );
