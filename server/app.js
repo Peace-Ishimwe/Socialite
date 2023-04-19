@@ -17,7 +17,7 @@ app.use(
 app.use(cookieParser())
 app.use(express.json());
 
-// // ------------- routes -------------- 
+// ------------- routes -------------- 
 import  authRoutes  from "./routes/authRoutes.js"
 app.use("/", authRoutes);
 
@@ -39,6 +39,5 @@ app.listen(port , ()=>{
 // database connection 
 import connectDB from "./utils/database.js";
 connectDB()
-
 
 app.use(express.json());
