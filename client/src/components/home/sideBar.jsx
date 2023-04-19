@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import {
   HomeIcon,
   AddIcon,
@@ -12,9 +11,9 @@ import {
   Close,
 } from "../../assets/icons/icons";
 import { SideComp, AddPost } from "./sideBar/sideComp";
-import ProfileImage from "../../assets/Images/profile.jpeg";
 import Switcher from "../theme/switcher";
 import { LogoImage } from "./homeAll/homeAll";
+import { UserProfile } from "./sideBar/sideComp";
 
 const SideBar = (props) => {
   return (
@@ -43,18 +42,7 @@ const SideBar = (props) => {
         <SideComp component={<Switcher />} title={"Theme"} />
       </div>
       <AddPost component={<AddIcon />} title={"ADD POST"} />
-      <div className="flex items-center gap-2">
-        <div className="rounded-full bg-black w-fit overflow-hidden">
-          <img
-            className="object-cover h-10 w-10"
-            src={ProfileImage}
-            alt="the profile image"
-          />
-        </div>
-        <span className="text-lg text-gray-800 dark:text-gray-200">
-          Peace Ishimwe
-        </span>
-      </div>
+      <UserProfile />
     </main>
   );
 };

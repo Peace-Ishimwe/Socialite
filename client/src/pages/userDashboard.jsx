@@ -4,7 +4,12 @@ import { protectRoute } from "../components/auth/protectedRoutes";
 const UserDashboard = () => {
   protectRoute();
 
-  return <div>UserDashboard</div>;
+  return (
+    <div>
+      <div>UserDashboard</div>
+      <div>UserDashboard</div>
+    </div>
+  );
 };
 
 export default UserDashboard;

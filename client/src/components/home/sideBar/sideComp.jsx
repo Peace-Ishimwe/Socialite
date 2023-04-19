@@ -31,3 +31,20 @@ export const AddPost = (props) => {
     </main>
   );
 };
+
+export const UserProfile = () => {
+  return (
+    <div className="flex items-center gap-2">
+      <div className="rounded-full bg-black w-fit overflow-hidden">
+        <img
+          className="object-cover h-10 w-10"
+          src="/Images/profile.jpeg"
+          alt="the profile image"
+        />
+      </div>
+      <span className="text-lg text-gray-800 dark:text-gray-200">
+        Peace Ishimwe
+      </span>
+    </div>
+  );
+};
