@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CommentIcon , LikeIconChecked, LikeIconUnChecked } from "../../assets/icons/icons";
+import { CommentIcon , GlobeIcon, LikeIconChecked, LikeIconUnChecked } from "../../assets/icons/icons";
 
 const Post = () => {
 
@@ -24,7 +24,7 @@ const Post = () => {
         />
         <div>
           <p className="font-medium">Indian Cricket Team</p>
-          <p className="text-[.90rem] font-medium">5h</p>
+          <p className="text-[.90rem] font-medium flex gap-1">5h. <GlobeIcon style={"h-[18px] w-[18px] text-gray-900 dark:text-gray-200"} /></p>
         </div>
       </div>
 

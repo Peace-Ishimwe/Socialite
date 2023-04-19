@@ -35,7 +35,7 @@ const Profile = () => {
         <div className="h-14 w-[.13rem] bg-[#cfcdcd]"></div>
         <div className="follow flex flex-col justify-center items-center">
           <span className="dark:text-gray-200 text-gray-700 font-bold text-xl">
-            1
+            3
           </span>
           <span className="dark:text-gray-200 text-gray-700">Followings</span>
         </div>
