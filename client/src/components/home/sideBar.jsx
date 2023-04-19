@@ -26,7 +26,9 @@ const SideBar = (props) => {
         {props.close && <SideComp component={<Close click={props.click} />} />}
       </div>
       <div className="flex flex-col gap-10">
-        <SideComp component={<HomeIcon />} title={"Home"} true={true} />
+        <a href="/">
+          <SideComp component={<HomeIcon />} title={"Home"} true={props.isHome} />
+        </a>
         <SideComp component={<MessagesIcon />} title={"Messages"} />
         <SideComp component={<NotificationIcon />} title={"Notifications"} />
         <a href="/about">
