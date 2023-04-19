@@ -44,7 +44,7 @@ const Header = (props) => {
             placeholder="connect with friends"
           />
         </div>
-        <HomeAll logout={logOut} display={props.homeDisplay} />
+        <HomeAll display={props.homeDisplay} />
       </div>
   );
 };

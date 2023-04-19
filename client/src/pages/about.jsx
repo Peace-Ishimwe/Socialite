@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Theme from "../components/theme/theme";
+import Footer from "../components/footer/footer";
 
 const About = () => {
   Theme()
@@ -9,7 +10,7 @@ const About = () => {
   theme === 'light' ? background = "bg-[url('/Images/group-cover-1.jpg')]" : background = ""
 
   return (
-    <div className="main_content dark:bg-mainDark">
+    <div className="main_content dark:bg-mainDark h-[100vh] overflow-y-scroll">
       <div
         className={`w-full lg:h-80 h-52 pb-10 bg-cover ${background}  flex justify-center items-center relative`}>
         <div className="text-center max-w-xl mx-auto z-10 relative text-white">
@@ -70,6 +71,7 @@ const About = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

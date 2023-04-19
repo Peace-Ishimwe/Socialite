@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import protectRoute from "../../auth/protectedRoutes";
 
 export const SideComp = (props) => {
   return (
@@ -34,6 +35,7 @@ export const AddPost = (props) => {
 };
 
 export const UserProfile = () => {
+  const [email , firstName , lastName] = protectRoute();
   return (
     <Link to="/u/user">
       <div className="flex items-center gap-2">
@@ -45,7 +47,7 @@ export const UserProfile = () => {
           />
         </div>
         <span className="text-lg text-gray-800 dark:text-gray-200">
-          Peace Ishimwe
+          {firstName} {lastName}
         </span>
       </div>
     </Link>

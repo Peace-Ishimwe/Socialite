@@ -1,5 +1,5 @@
 import React from "react";
-import { protectRoute } from "../components/auth/protectedRoutes";
+import  protectRoute  from "../components/auth/protectedRoutes";
 import SideBar from "../components/home/sideBar";
 import Header from "../components/navBar/header";
 import User from "../components/userDashboard/user";

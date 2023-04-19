@@ -1,8 +1,8 @@
 import  User from "../model/authModel.js"
 import  jwt  from "jsonwebtoken"
 
-export const checkUser = (req, res, next) => {
-  const token = req.cookies.jwt;
+export const checkUser = async (req, res, next) => {
+  const token = await req.cookies.jwt;
   if (token) {
     jwt.verify(
       token,
@@ -13,7 +13,10 @@ export const checkUser = (req, res, next) => {
           next();
         } else {
           const user = await User.findById(decodedToken.id);
-          if (user) res.json({ status: true, user: user.email });
+          if (user) {
+            const { email , firstName, lastName } = user
+            res.json({ status: true, email , firstName, lastName})
+          }
           else res.json({ status: false });
           next();
         }

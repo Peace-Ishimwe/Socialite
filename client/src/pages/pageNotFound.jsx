@@ -1,5 +1,6 @@
 import React from "react";
 import Theme from "../components/theme/theme";
+import Footer from "../components/footer/footer";
 const PageNotFound = () => {
   Theme()
   return (
@@ -30,6 +31,7 @@ const PageNotFound = () => {
           </div>
         </div>
       </div>
+      {/* <Footer /> */}
     </div>
   );
 };

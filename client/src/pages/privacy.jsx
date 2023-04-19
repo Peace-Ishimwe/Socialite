@@ -1,6 +1,6 @@
 import React from "react";
-import { protectRoute } from "../components/auth/protectedRoutes";
 import Theme from "../components/theme/theme";
+import Footer from "../components/footer/footer";
 
 const Privacy = () => {
   Theme();
@@ -14,7 +14,7 @@ const Privacy = () => {
       <p className="text-white text-3xl font-semibold text-center pb-8">
         Privacy Policy
       </p>
-      <div className="main_content">
+      <div className="main_content ">
         <div className="mcontainer">
           <div className="bg-white dark:bg-subMajorDark max-w-4xl mx-auto md:p-10 p-6 relative rounded-md shadow">
             <div className="md:space-y-6 space-y-4 text-gray-400 md:text-lg dark:text-white">
@@ -107,6 +107,7 @@ const Privacy = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

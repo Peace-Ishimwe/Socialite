@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { ChrevonDown, CloseCirled } from "../../../assets/icons/icons";
 import Logo from "../../../assets/Images/logo.1.png";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 export const HomeAll = (props) => {
   const [hidden, setHidden] = useState("hidden");
@@ -12,6 +14,15 @@ export const HomeAll = (props) => {
       setHidden("hidden");
     }
   };
+
+  // LOGOUT FUNCTION
+  const navigate = useNavigate();
+  const [cookies, setCookie, removeCookie] = useCookies([]);
+  const logOut = () => {
+    removeCookie("jwt");
+    navigate("/authenticate");
+  };
+
   return (
     <div
       className={`${props.display} flex md:gap-5 gap-2 items-center mb-6 justify-end`}
@@ -29,7 +40,7 @@ export const HomeAll = (props) => {
           <CloseCirled position="place-self-end" action={toggleMenu} />
           <button
             className="py-1 px-3 rounded-md text-gray-200 bg-red-500"
-            onClick={props.logout}
+            onClick={logOut}
           >
             Logout
           </button>
