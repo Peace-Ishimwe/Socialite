@@ -16,7 +16,7 @@ const RightPart = (props) => {
   };
   return (
     <main className="right-home  bg-white dark:bg-majorDark w-fit p-5 h-[100vh] hidden lg:block lg:w-[30%] xl:w-fit">
-      <HomeAll display = "flex" logout= {logOut} />
+      <HomeAll logout= {logOut} />
       <hr className=" border  border-[#cfcdcd] " />
       <Profile />
       <hr className=" border mt-5 mb-5  border-[#cfcdcd] " />

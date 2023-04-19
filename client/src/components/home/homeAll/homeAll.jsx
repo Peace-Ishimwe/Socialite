@@ -14,7 +14,7 @@ export const HomeAll = (props) => {
   };
   return (
     <div
-      className={`${props.display} md:gap-5 gap-2 items-center mb-6 justify-end`}
+      className={`${props.userDisplay} ${props.display} flex md:gap-5 gap-2 items-center mb-6 justify-end`}
     >
       <div className="relative">
         <div

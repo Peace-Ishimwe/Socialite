@@ -6,7 +6,8 @@ import SideBar from "../home/sideBar";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 
-const Header = () => {
+const Header = (props) => {
+  
   const [displayMenu, setDisplayMenu] = useState("hidden");
   const showMenu = () => {
     setDisplayMenu("flex");
@@ -43,7 +44,7 @@ const Header = () => {
             placeholder="connect with friends"
           />
         </div>
-        <HomeAll logout={logOut} display="flex lg:hidden" />
+        <HomeAll logout={logOut} display={props.homeDisplay} />
       </div>
   );
 };
