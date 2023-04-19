@@ -7,6 +7,7 @@ import Privacy from "./pages/privacy";
 import Home from "./pages/home";
 import "react-toastify/dist/ReactToastify.css";
 import PageNotFounde from "./pages/pageNotFound";
+import UserDashboard from "./pages/userDashboard";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="*" element={<PageNotFounde />} />
         <Route path="/authenticate" element={<Authentication />} />
         <Route path="/about" element={<About />} />
+        <Route path="/u/user" element={<UserDashboard />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/privacy-policy" element={<Privacy />} />
       </Routes>
