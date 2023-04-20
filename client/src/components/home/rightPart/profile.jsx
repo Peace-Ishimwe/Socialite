@@ -3,7 +3,7 @@ import ProfileImage from "../../../assets/Images/profile.jpeg";
 import protectRoute from "../../auth/protectedRoutes";
 
 const Profile = () => {
-  const [email , firstName , lastName] = protectRoute();
+  const [email , firstName , lastName , about] = protectRoute();
 
   return (
     <div className="profile-user mt-5 bg-gray-100 dark:bg-subMajorDark rounded-2xl overflow-hidden pb-5">
@@ -24,7 +24,7 @@ const Profile = () => {
           {firstName} {lastName}
         </span>
         <span className="dark:text-gray-200 text-gray-700">
-          Junior software developer
+          {about}
         </span>
       </div>
       <hr className=" w-[85%] border  border-[#cfcdcd] mx-auto" />
