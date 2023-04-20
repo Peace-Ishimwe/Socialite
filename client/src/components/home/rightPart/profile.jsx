@@ -23,7 +23,7 @@ const Profile = () => {
         <span className="dark:text-gray-200 text-gray-700 text-xl font-semibold">
           {firstName} {lastName}
         </span>
-        <span className="dark:text-gray-200 text-gray-700">
+        <span className="dark:text-gray-200 text-gray-700 text-center">
           {about}
         </span>
       </div>
