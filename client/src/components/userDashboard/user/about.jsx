@@ -5,26 +5,35 @@ import EmojiPicker from "emoji-picker-react";
 
 const AboutUser = (props) => {
   // Handle the emoji picker and form
-  const [aboutForm, setAboutForm] = useState(false);
   const [isPickerVisible, setIsPickerVisible] = useState(false);
-  const [theme, setTheme] = useState("");
+  const [Theme, setTheme] = useState("dark");
   const [innerWidth, setInnerWidth] = useState()
   const [width, setWidth] = useState()
 
-  window.onresize(
+  const [inputStr, setInputStr] = useState("");
+
+  const onEmojiClick = (event, emojiObject) => {
+    setInputStr((prevInput) => prevInput + emojiObject.emoji);
+    setIsPickerVisible(false);
+  };
+
+  window.addEventListener("resize", () => {
     setInnerWidth(window.innerWidth)
-  )
+  })
+
   useEffect(()=>{
-    if(innerWidth >= 640){
-        setWidth(300)
+    if(innerWidth < 640){
+        setWidth(240)
+    }else if(innerWidth < 400){
+        setWidth(180)
     }
   }, [window.onresize])
 
   useEffect(() => {
     if (localStorage.theme === "light") {
-      setTheme("dark");
-    } else {
       setTheme("light");
+    } else {
+      setTheme("dark");
     }
   }, []);
 
@@ -46,6 +55,8 @@ const AboutUser = (props) => {
             id=""
             cols="30"
             rows="10"
+            value={inputStr}
+            onChange={(e) => setInputStr(e.target.value)}
           ></textarea>
           <div
             className="w-fit cursor-pointer"
@@ -59,7 +70,7 @@ const AboutUser = (props) => {
         {isPickerVisible && (
           <div className="relative mt-3">
             <div className="absolute top-3/4">
-              <EmojiPicker theme={theme} width={width} />
+              <EmojiPicker theme={Theme} width={width} onEmojiClick={onEmojiClick} />
             </div>
           </div>
         )}
