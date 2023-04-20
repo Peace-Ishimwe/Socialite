@@ -3,7 +3,7 @@ import { PencilIcon, CameraIcon, CloseCirled , RocketIcon } from "../../assets/i
 import protectRoute from "../auth/protectedRoutes";
 
 const User = () => {
-  const [email, firstName, lastName] = protectRoute();
+  const [email, firstName, lastName , about] = protectRoute();
 
   // Handle the profile image change
 
@@ -114,7 +114,7 @@ const User = () => {
         </div>
         <div className="flex gap-2 sm:gap-6 items-center">
           <div className="more-about-you text-center">
-            Student at Rwanda Coding Academy and addicted to codes 😄{" "}
+            {about}
           </div>
           <button
             type="submit"

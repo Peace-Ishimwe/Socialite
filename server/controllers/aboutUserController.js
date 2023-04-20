@@ -7,7 +7,7 @@ const aboutUserPost = async (req , res) => {
 
          const token = await req.cookies.jwt;
          const decoded = jwt.verify(token , process.env.SECRET_KEY)
-         const userId = decoded.id;
+         const userId = await decoded.id;
 
          const about = await AboutUser.create({about: aboutUser , userId: userId})
 
