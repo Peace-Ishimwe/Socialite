@@ -40,7 +40,7 @@ const Authentication = () => {
     event.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/v1/api/login",
+        "http://localhost:3000/v1/api/login",
         {
           ...loginData,
         },
@@ -76,7 +76,7 @@ const Authentication = () => {
     event.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/v1/api/register",
+        "http://localhost:3000/v1/api/register",
         {
           ...signupData,
         },

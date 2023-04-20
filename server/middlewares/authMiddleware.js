@@ -14,10 +14,10 @@ export const checkUser = async (req, res, next) => {
           next();
         } else {
           const user = await User.findById(decodedToken.id);
-          const aboutInfo = await AboutUser.find({userId: decodedToken.id})
-          if (user && aboutInfo) {
+          const aboutInfo = await AboutUser.findOne({userId: decodedToken.id})
+          if (user) {
             const { email , firstName, lastName } = user
-            const about  = aboutInfo[0].about
+            const { about }  = aboutInfo
             res.json({ status: true, email , firstName, lastName , about })
           }
           else res.json({ status: false });
