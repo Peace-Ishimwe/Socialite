@@ -1,4 +1,5 @@
 import  User from "../model/authModel.js"
+import AboutUser from "../model/aboutModel.js";
 import  jwt  from "jsonwebtoken"
 
 export const checkUser = async (req, res, next) => {
@@ -13,9 +14,11 @@ export const checkUser = async (req, res, next) => {
           next();
         } else {
           const user = await User.findById(decodedToken.id);
-          if (user) {
+          const aboutInfo = await AboutUser.find({userId: decodedToken.id})
+          if (user && aboutInfo) {
             const { email , firstName, lastName } = user
-            res.json({ status: true, email , firstName, lastName})
+            const about  = aboutInfo[0].about
+            res.json({ status: true, email , firstName, lastName , about })
           }
           else res.json({ status: false });
           next();
