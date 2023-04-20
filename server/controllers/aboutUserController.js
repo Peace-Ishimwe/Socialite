@@ -9,6 +9,8 @@ const aboutUserPost = async (req , res) => {
          const decoded = jwt.verify(token , process.env.SECRET_KEY)
          const userId = await decoded.id;
 
+         await AboutUser.deleteOne({userId: userId})
+
          const about = await AboutUser.create({about: aboutUser , userId: userId})
 
          res.json({message: "Updated successfully"})

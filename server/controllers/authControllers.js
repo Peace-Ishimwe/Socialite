@@ -1,5 +1,6 @@
 import User from "../model/authModel.js";
 import jwt from "jsonwebtoken"
+import AboutUser from "../model/aboutModel.js";
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = (id) => {
   return jwt.sign({ id }, process.env.SECRET_KEY, {
@@ -44,6 +45,8 @@ export const register = async (req, res, next) => {
       httpOnly: false,
       maxAge: maxAge * 1000,
     });
+
+    const aboutUser = await AboutUser.create({about: "Tell us more about you 😃" , userId: user._id})
 
     res.status(201).json({ user: user._id, created: true });
   } catch (err) {

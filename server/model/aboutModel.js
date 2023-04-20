@@ -5,8 +5,6 @@ const aboutSchema = new mongoose.Schema(
     about: {
       type: String,
       required: true,
-      minLength: 15,
-      maxlength: 255,
     },
     userId:{
         type: String,
