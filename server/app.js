@@ -15,7 +15,8 @@ app.use(
   })
 );
 app.use(cookieParser())
-app.use(express.json());
+app.use(express.json({limit:"10mb"}));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 // ------------- routes -------------- 
 import  authRoutes  from "./routes/authRoutes.js"
@@ -23,12 +24,7 @@ app.use("/", authRoutes);
 
 // ------------ the dotenv file ------------- 
 import dotenv from 'dotenv'
-import path, { dirname } from 'path';
-import { fileURLToPath } from 'url';
-const __dirname = dirname(fileURLToPath(import.meta.url));
-dotenv.config({
-  path: path.resolve(__dirname, './utils/config.env')
-});
+dotenv.config()
 
 // --------------- Listening to port -------------- 
 const port = process.env.PORT || 8080
