@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { EmojiIconPicker } from "../../../assets/icons/icons";
 import { CloseCirled } from "../../../assets/icons/icons";
-import EmojiPicker from "emoji-picker-react";
+import Picker from "emoji-picker-react";
 
 const AboutUser = (props) => {
   // Handle the emoji picker and form
@@ -49,15 +49,13 @@ const AboutUser = (props) => {
           Tell us more about your self{" "}
         </label>
         <div className="text-gray-700 dark:text-gray-200 flex items-center border-b-2 border-gray-700 dark:border-gray-200">
-          <textarea
+          <input
             className=" h-12 mt-2 px-3 w-full  outline-none bg-white dark:bg-mainDark"
-            name=""
-            id=""
-            cols="30"
-            rows="10"
+            name="aboutUser"
+            id="aboutUser"
             value={inputStr}
             onChange={(e) => setInputStr(e.target.value)}
-          ></textarea>
+          />
           <div
             className="w-fit cursor-pointer"
             onClick={() => {
@@ -70,7 +68,7 @@ const AboutUser = (props) => {
         {isPickerVisible && (
           <div className="relative mt-3">
             <div className="absolute top-3/4">
-              <EmojiPicker theme={Theme} width={width} onEmojiClick={onEmojiClick} />
+              <Picker theme={Theme} width={width} onEmojiClick={onEmojiClick} />
             </div>
           </div>
         )}
