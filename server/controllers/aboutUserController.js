@@ -13,7 +13,7 @@ const aboutUserPost = async (req , res) => {
 
          const about = await AboutUser.create({about: aboutUser , userId: userId})
 
-         res.json({message: "Updated successfully"})
+         res.json({message: "Updated successfully reload to see the changes"})
         
     } catch (err) {
         res.status(500).json({message: "internal error"})
