@@ -15,8 +15,8 @@ app.use(
   })
 );
 app.use(cookieParser())
-app.use(express.json({limit:"10mb"}));
-app.use(express.urlencoded({ limit: '50mb', extended: true }));
+app.use(express.json({limit:"3mb"}));
+app.use(express.urlencoded({ limit: '3mb', extended: true }));
 
 // ------------- routes -------------- 
 import  authRoutes  from "./routes/authRoutes.js"

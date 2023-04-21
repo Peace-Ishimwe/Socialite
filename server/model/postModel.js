@@ -6,9 +6,28 @@ const postSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    userId:{
-        type: String,
-        required: true,
+    userId: {
+      type: String,
+      required: true,
+    },
+    profile: {
+      type: Boolean,
+      required: false,
+    },
+    cover: {
+      type: Boolean,
+      required: false,
+    },
+    date: {
+      type: String,
+      default: function() {
+        const now = new Date();
+        const day = now.getDate();
+        const month = now.toLocaleString('default', { month: 'short' });
+        const year = now.getFullYear();
+        const formattedDate = `${day} ${month} ${year}`;
+        return formattedDate;
+      }
     }
   },
   {

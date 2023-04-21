@@ -2,18 +2,26 @@
 import cloudinary from '../utils/cloudinary.js';
 import Posts from '../model/postModel.js';
 import jwt  from 'jsonwebtoken';
+import User from '../model/authModel.js';
 
 export const getPost = async (req, res) =>{
     try {
-        const { resources } = await cloudinary.search
-        .expression('folder:socialite_posts')
-        .sort_by('public_id', 'desc')
-        .max_results(30)
-        .execute();
+        const token= await req.cookies.jwt
+        const decoded = jwt.verify(token , process.env.SECRET_KEY);
+        const userId = decoded.id
+        const posts = await Posts.find({userId: userId})
+        const user = await User.findOne({_id: userId})
+        if(posts){
+            const postUser = []
+            const {firstName , lastName} = user
+            posts.map(post =>{
+                postUser.push(post.post)
+            })
+            res.json({postUser , firstName , lastName})
+        }else{
+            res.json({ messages: "You don't have any posts" })
+        }
 
-    const publicIds = resources.map((file) => file.public_id);
-    res.send(publicIds);
-    console.log(publicIds);
     } catch (err) {
         console.log(err);
     }
