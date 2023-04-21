@@ -40,7 +40,7 @@ const Authentication = () => {
     event.preventDefault();
     try {
       const { data } = await axios.post(
-        "/v1/api/login",
+        "http://localhost:3000/v1/api/login",
         {
           ...loginData,
         },
@@ -49,7 +49,6 @@ const Authentication = () => {
       if (data) {
         if (data.errors) {
           const { email, password } = data.errors;
-          console.log(email, password);
           if (email) generateError(email);
           else if (password) generateError(password);
         } else {
@@ -76,7 +75,7 @@ const Authentication = () => {
     event.preventDefault();
     try {
       const { data } = await axios.post(
-        "/v1/api/register",
+        "http://localhost:3000/v1/api/register",
         {
           ...signupData,
         },

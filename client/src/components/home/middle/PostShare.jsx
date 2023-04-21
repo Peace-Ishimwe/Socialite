@@ -1,26 +1,30 @@
 import React, { useState, useRef } from "react";
 import ProfileImage from "../../../assets/Images/profile.jpeg";
-import {CloseCirled,ImageIcon,RocketIcon} from "../../../assets/icons/icons";
+import {
+  CloseCirled,
+  ImageIcon,
+  RocketIcon,
+} from "../../../assets/icons/icons";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
+import { Audio } from "react-loader-spinner";
 
 const PostShare = () => {
   //toast
-  const generateSuccess= (success) =>
-  toast.success(success, {
-    position: "top-center",
-  });
-  const generateError= (success) =>
-  toast.success(success, {
-    position: "top-center",
-  });
+  const generateSuccess = (success) =>
+    toast.success(success, {
+      position: "top-center",
+    });
+  const generateError = (success) =>
+    toast.error(success, {
+      position: "top-center",
+    });
 
   const imageRef = useRef();
   const [fileInputState, setFileInputState] = useState("");
   const [previewSource, setPreviewSource] = useState("");
   const [selectedFile, setSelectedFile] = useState();
-  const [successMsg, setSuccessMsg] = useState("");
-  const [errMsg, setErrMsg] = useState("");
+  const [loader, setLoader] = useState(false);
 
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
@@ -40,39 +44,44 @@ const PostShare = () => {
   const uploadImage = async (base64EncodedImage) => {
     try {
       const { data } = await axios.post(
-        "v1/api/upload/post",
+        "http://localhost:3000/v1/api/upload/post",
         {
-         previewSource
-        },{
-          withCredentials: true
+          previewSource,
+        },
+        {
+          withCredentials: true,
         }
-      )
-      if(data.message) {
+      );
+      if (data.message) {
         generateSuccess(data.message);
-      }else{
-        generateError(data.error)
+        setLoader(false);
+      } else {
+        generateError(data.error);
+        setLoader(false);
       }
-      ;
       setFileInputState("");
       setPreviewSource("");
-      setSuccessMsg("Image uploaded successfully");
     } catch (err) {
       console.error(err);
-      setErrMsg("Something went wrong!");
+      generateError(err);
     }
   };
 
   const handleSubmitFile = (e) => {
     e.preventDefault();
-    if (!selectedFile) return;
+    if (!selectedFile){
+      generateError("Please select a file")
+      return
+    };
     const reader = new FileReader();
     reader.readAsDataURL(selectedFile);
     reader.onloadend = () => {
       uploadImage(reader.result);
     };
+    setLoader(true);
     reader.onerror = () => {
       console.error("AHHHHHHHH!!");
-      setErrMsg("something went wrong!");
+      generateError("something went wrong!");
     };
   };
 
@@ -96,16 +105,30 @@ const PostShare = () => {
           <div
             className="option text-blue-500 flex  flex-col items-center"
             onClick={() => imageRef.current.click()}
+            
           >
             <ImageIcon style={"text-blue-600"} />
             Photo
           </div>
-          <button
-            type="submit"
-            className="button bg-blue-500 self-center px-5 py-2 text-white rounded-md flex gap-1 font-semibold"
-          >
-            Share <RocketIcon />{" "}
-          </button>
+          { loader == false &&
+            <button
+              type="submit"
+              className="button bg-blue-500 self-center px-5 py-2 text-white rounded-md flex gap-1 font-semibold"
+            >
+              Share <RocketIcon />
+            </button>
+          }
+          { loader == true &&
+            <button className="button bg-blue-500 self-center px-5 py-2 text-white rounded-md flex gap-1 font-semibold">
+              <Audio
+                height="24"
+                width="60"
+                radius="9"
+                color="white"
+                ariaLabel="loading"
+              />
+            </button>
+          }
           <div>
             <input
               type="file"
@@ -121,7 +144,7 @@ const PostShare = () => {
           <div className="previewImage w-full flex items-center justify-center flex-col relative">
             <CloseCirled
               position={"absolute top-2 right-2 text-red-500 w-9 h-9"}
-              action={() => setPreviewSource(null)}
+              action={() => setPreviewSource("")}
             />
             <img
               className=" max-h-[16rem] md:max-h-[24rem] w-[100%] object-cover rounded-[0.5rem]"
