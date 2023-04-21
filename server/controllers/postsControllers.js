@@ -15,7 +15,7 @@ export const getPost = async (req, res) =>{
             const postUser = []
             const {firstName , lastName} = user
             posts.map(post =>{
-                postUser.push(post.post)
+                postUser.push([post.post , post.date , post.data])
             })
             res.json({postUser , firstName , lastName})
         }else{
@@ -30,14 +30,14 @@ export const getPost = async (req, res) =>{
 export const uploadPost = async (req, res) =>{
     try {
         const previewSource = req.body.previewSource;
+        const dataPost = req.body.dataPost;
         const uploadResponse = await cloudinary.uploader.upload(previewSource, {
             folder:"socialite_posts"
         });
-        console.log(uploadResponse.url);
         const token = await req.cookies.jwt;
         const decoded = jwt.verify(token , process.env.SECRET_KEY)
         const userId = await decoded.id;
-        const post = Posts.create({post: uploadResponse.url , userId: userId})
+        const post = Posts.create({post: uploadResponse.url , data: dataPost ,  userId: userId})
         res.json({ message: 'Uploaded successfully' });
     } catch (err) {
         console.error(err);
