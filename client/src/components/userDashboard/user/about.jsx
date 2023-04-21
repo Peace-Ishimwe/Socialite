@@ -5,7 +5,6 @@ import Picker from "@emoji-mart/react"
 import data from "@emoji-mart/data"
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-import protectRoute from "../../auth/protectedRoutes";
 
 const AboutUser = (props) => {
   // Handle the emoji picker and form

@@ -12,7 +12,7 @@ const postSchema = new mongoose.Schema(
     }
   },
   {
-    collection: "aboutUser",
+    collection: "posts",
   }
 );
 

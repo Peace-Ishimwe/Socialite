@@ -1,13 +1,20 @@
 import React, { useState, useRef } from "react";
 import ProfileImage from "../../../assets/Images/profile.jpeg";
-import {
-  CloseCirled,
-  ImageIcon,
-  RocketIcon,
-} from "../../../assets/icons/icons";
+import {CloseCirled,ImageIcon,RocketIcon} from "../../../assets/icons/icons";
+import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 
 const PostShare = () => {
+  //toast
+  const generateSuccess= (success) =>
+  toast.success(success, {
+    position: "top-center",
+  });
+  const generateError= (success) =>
+  toast.success(success, {
+    position: "top-center",
+  });
+
   const imageRef = useRef();
   const [fileInputState, setFileInputState] = useState("");
   const [previewSource, setPreviewSource] = useState("");
@@ -37,9 +44,15 @@ const PostShare = () => {
         {
          previewSource
         },{
-          withCredentials: true,
+          withCredentials: true
         }
-      );
+      )
+      if(data.message) {
+        generateSuccess(data.message);
+      }else{
+        generateError(data.error)
+      }
+      ;
       setFileInputState("");
       setPreviewSource("");
       setSuccessMsg("Image uploaded successfully");
@@ -118,6 +131,7 @@ const PostShare = () => {
           </div>
         )}
       </div>
+      <ToastContainer />
     </form>
   );
 };

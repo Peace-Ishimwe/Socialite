@@ -32,6 +32,6 @@ export const uploadPost = async (req, res) =>{
         res.json({ message: 'Uploaded successfully' });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ message: 'Something went wrong' });
+        res.status(500).json({ error: 'Something went wrong try again' });
     }
 }

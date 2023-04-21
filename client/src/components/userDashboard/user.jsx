@@ -1,10 +1,5 @@
 import React, { useState, useRef } from "react";
-import {
-  PencilIcon,
-  CameraIcon,
-  CloseCirled,
-  RocketIcon,
-} from "../../assets/icons/icons";
+import {PencilIcon,CameraIcon,CloseCirled,RocketIcon,} from "../../assets/icons/icons";
 import protectRoute from "../auth/protectedRoutes";
 import AboutUser from "./user/about";
 
