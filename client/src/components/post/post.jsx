@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { CommentIcon , GlobeIcon, LikeIconChecked, LikeIconUnChecked } from "../../assets/icons/icons";
 
-const Post = () => {
+const Post = (props) => {
+
+  const [pageVisible , setPageVisible] = useState(false)
 
   const [isliked , setIsliked] = useState(false)
   const [textColor , setTextColor] = useState('')
@@ -23,7 +25,7 @@ const Post = () => {
           alt=""
         />
         <div>
-          <p className="font-medium">Indian Cricket Team</p>
+          <p className="font-medium flex gap-1"><span>{props.firstName}</span> <span>{props.lastName}</span></p>
           <p className="text-[.90rem] font-medium flex gap-1">5h. <GlobeIcon style={"h-[18px] w-[18px] text-gray-900 dark:text-gray-200"} /></p>
         </div>
       </div>
@@ -36,7 +38,7 @@ const Post = () => {
 
       <div>
         <img
-          src="/Images/indianTeam.png"
+          src={props.src}
           className="w-full mx-auto sm:h-fit sm:max-h-[70vh] h-[fit-content] object-cover"
           alt=""
         />
