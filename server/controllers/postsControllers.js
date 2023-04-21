@@ -13,6 +13,7 @@ export const getPost = async (req, res) =>{
 
     const publicIds = resources.map((file) => file.public_id);
     res.send(publicIds);
+    console.log(publicIds);
     } catch (err) {
         console.log(err);
     }
@@ -20,15 +21,15 @@ export const getPost = async (req, res) =>{
 
 export const uploadPost = async (req, res) =>{
     try {
-        const fileStr = req.body.data;
-        const uploadResponse = await cloudinary.uploader.upload(fileStr, {
-            upload_preset: 'socialite_posts',
+        const previewSource = req.body.previewSource;
+        const uploadResponse = await cloudinary.uploader.upload(previewSource, {
+            folder:"socialite_posts"
         });
-        console.log(uploadResponse);
+        console.log(uploadResponse.url);
         const token = await req.cookies.jwt;
         const decoded = jwt.verify(token , process.env.SECRET_KEY)
         const userId = await decoded.id;
-        const post = Posts.create({post: uploadResponse , userId: userId})
+        const post = Posts.create({post: uploadResponse.url , userId: userId})
         res.json({ message: 'Uploaded successfully' });
     } catch (err) {
         console.error(err);

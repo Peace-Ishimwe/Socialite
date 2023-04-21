@@ -20,7 +20,11 @@ app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 // ------------- routes -------------- 
 import  authRoutes  from "./routes/authRoutes.js"
+import postRoutes from "./routes/postRoutes.js"
+import aboutRoutes from "./routes/aboutRoutes.js"
 app.use("/", authRoutes);
+app.use("/", postRoutes);
+app.use("/", aboutRoutes);
 
 // ------------ the dotenv file ------------- 
 import dotenv from 'dotenv'
