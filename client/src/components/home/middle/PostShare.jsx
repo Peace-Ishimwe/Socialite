@@ -40,7 +40,7 @@ const PostShare = () => {
   const uploadImage = async (base64EncodedImage) => {
     try {
       const { data } = await axios.post(
-        "http://localhost:3000/v1/api/upload/post",
+        "v1/api/upload/post",
         {
          previewSource
         },{
