@@ -32,7 +32,7 @@ const UserPost = () => {
     <div className='main-container flex flex-col gap-10 w-11/12 md:w-10/12 2xl:w-8/12 mx-auto mb-10'>
       {
         userPost.map((post)=>{
-          return <Post firstName={userFirstName} lastName={userLastName} src={post} key={post} />;
+          return <Post date={post[1]} title={post[2]} firstName={userFirstName} lastName={userLastName} src={post[0]} key={post[0]} />;
         })
       }
     </div>

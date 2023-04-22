@@ -26,14 +26,12 @@ const Post = (props) => {
         />
         <div>
           <p className="font-medium flex gap-1"><span>{props.firstName}</span> <span>{props.lastName}</span></p>
-          <p className="text-[.90rem] font-medium flex gap-1">5h. <GlobeIcon style={"h-[18px] w-[18px] text-gray-900 dark:text-gray-200"} /></p>
+          <p className="text-[.90rem] font-medium flex gap-1">{props.date}. <GlobeIcon style={"h-[18px] w-[18px] text-gray-900 dark:text-gray-200"} /></p>
         </div>
       </div>
 
       <div className="p-5">
-        India has been touring Australia since 1947, but all that changed after
-        winning the first and third Tests in Adelaide and Melbourne,
-        respectively.
+        {props.title}
       </div>
 
       <div>

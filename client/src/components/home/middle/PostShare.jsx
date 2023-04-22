@@ -23,8 +23,9 @@ const PostShare = () => {
   const imageRef = useRef();
   const [fileInputState, setFileInputState] = useState("");
   const [previewSource, setPreviewSource] = useState("");
-  const [selectedFile, setSelectedFile] = useState();
+  const [selectedFile, setSelectedFile] = useState("");
   const [loader, setLoader] = useState(false);
+  const [dataPost , setDataPost] = useState("")
 
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
@@ -46,7 +47,7 @@ const PostShare = () => {
       const { data } = await axios.post(
         "http://localhost:3000/v1/api/upload/post",
         {
-          previewSource,
+          previewSource , dataPost
         },
         {
           withCredentials: true,
@@ -61,9 +62,16 @@ const PostShare = () => {
       }
       setFileInputState("");
       setPreviewSource("");
+      setDataPost("")
+      setSelectedFile("")
     } catch (err) {
+      generateError(err.response.statusText);
+      setPreviewSource("")
+      setDataPost("")
+      setFileInputState("");
+      setSelectedFile("")
+      setLoader(false);
       console.error(err);
-      generateError(err);
     }
   };
 
@@ -100,6 +108,8 @@ const PostShare = () => {
           className="bg-[#28343e12] dark:bg-gray-200 rounded-[10px] p-[6px] sm:p-[10px]  text-sm sm:text-[17px] border-none outline-none"
           type="text"
           placeholder="What's happening"
+          onChange={(e)=> setDataPost(e.target.value)}
+          value={dataPost}          
         />
         <div className="flex justify-between items-center">
           <div
