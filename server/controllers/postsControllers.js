@@ -49,21 +49,35 @@ export const uploadPost = async (req, res) => {
   }
 };
 
-
-export const getAllPosts = async(req , res) => {
+export const getAllPosts = async (req, res) => {
   try {
-    const userPost = []
-    const allPosts = await Posts.find()
-    
+    const userPosts = [];
+    const allPosts = await Posts.find();
+
     for (const post of allPosts) {
-      const userInfo = await User.findById(post.userId)
-      const userId = post.userId
-      userPost.push([post.post , post.data , post.date , userInfo.firstName , userInfo.lastName])
+      const userInfo = await User.findById(post.userId);
+      const userId = post.userId;
+      userPosts.push({
+        post: post.post,
+        data: post.data,
+        date: post.date,
+        firstName: userInfo.firstName,
+        lastName: userInfo.lastName,
+      });
     }
-    res.json(userPost)
-    
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+    const mixedArray = shuffleArray(userPosts);
+
+
+    res.json(mixedArray);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Server Error' })
+    res.status(500).json({ error: "Server Error" });
   }
-}
+};
