@@ -48,3 +48,22 @@ export const uploadPost = async (req, res) => {
     res.status(500).json({ error: "Something went wrong try again" });
   }
 };
+
+
+export const getAllPosts = async(req , res) => {
+  try {
+    const userPost = []
+    const allPosts = await Posts.find()
+    
+    for (const post of allPosts) {
+      const userInfo = await User.findById(post.userId)
+      const userId = post.userId
+      userPost.push([post.post , post.data , post.date , userInfo.firstName , userInfo.lastName])
+    }
+    res.json(userPost)
+    
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server Error' })
+  }
+}
