@@ -5,8 +5,7 @@ import axios from "axios";
 const PostHome = () => {
 
   const [allPosts , setAllPosts] = useState()
-  console.log(allPosts)
-
+  
   useEffect(() => {
     const getAllPosts = async() => {
       try {
