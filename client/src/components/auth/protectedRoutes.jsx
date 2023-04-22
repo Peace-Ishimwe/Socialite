@@ -14,32 +14,36 @@ const protectRoute = () => {
 
   useEffect(() => {
     const verifyUser = async () => {
-      if (!cookies.jwt) {
-        navigate("/authenticate");
-      } else {
-        const { data } = await axios.post(
-          "http://localhost:3000/v1/api",
-          {},
-          {
-            withCredentials: true,
-          }
-        )
-        if(data){
-          setEmail(data.email);
-          setFirstName(data.firstName)
-          setLastName(data.lastName)
-          setLastAboutUser(data.about)
-        }
-        if (!data.status) {
-          removeCookie("jwt");
+      try {
+        if (!cookies.jwt) {
           navigate("/authenticate");
+        } else {
+          const { data } = await axios.post(
+            "http://localhost:3000/v1/api",
+            {},
+            {
+              withCredentials: true,
+            }
+          );
+          if (data) {
+            setEmail(data.email);
+            setFirstName(data.firstName);
+            setLastName(data.lastName);
+            setLastAboutUser(data.about);
+          }
+          if (!data.status) {
+            removeCookie("jwt");
+            navigate("/authenticate");
+          }
         }
+      } catch (err) {
+        console.log(err);
       }
     };
     verifyUser();
-  }, [cookies, navigate, removeCookie]);
+  }, []);
 
-  return [email, firstName, lastName , aboutUser];
+  return [email, firstName, lastName, aboutUser];
 };
 
 export default protectRoute;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import  protectRoute  from "../components/auth/protectedRoutes";
 import SideBar from "../components/home/sideBar";
 import Header from "../components/navBar/header";

@@ -13,7 +13,7 @@ const UserPost = () => {
       // e.preventDefault();
       try {
         const { data } = await axios.get(
-          "http://localhost:3000/v1/api/post",
+          "http://localhost:3000/v1/api/u/post",
           { withCredentials: true }
         );
         if (data) {
