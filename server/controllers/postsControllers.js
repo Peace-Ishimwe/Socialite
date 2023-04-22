@@ -52,7 +52,7 @@ export const uploadPost = async (req, res) => {
 export const getAllPosts = async (req, res) => {
   try {
     const userPosts = [];
-    const allPosts = await Posts.find();
+    const allPosts = await Posts.find().sort({ timeStamp: -1 });
 
     for (const post of allPosts) {
       const userInfo = await User.findById(post.userId);
@@ -65,17 +65,7 @@ export const getAllPosts = async (req, res) => {
         lastName: userInfo.lastName,
       });
     }
-    function shuffleArray(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-      return array;
-    }
-    const mixedArray = shuffleArray(userPosts);
-
-
-    res.json(mixedArray);
+    res.json(userPosts);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Server Error" });

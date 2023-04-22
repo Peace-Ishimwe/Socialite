@@ -22,6 +22,11 @@ const postSchema = new mongoose.Schema(
       type: Boolean,
       required: false,
     },
+    timeStamp: {
+      type: Date,
+      default: Date.now,
+      required: false,
+    },
     date: {
       type: String,
       default: function() {
