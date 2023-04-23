@@ -9,18 +9,51 @@ import axios from "axios";
 
 const Post = (props) => {
   const [isLiked, setIsLiked] = useState(false);
-  const [numberOfLikes, setNumberOfLikes] = useState(0);
+  const [numberOfLikes, setNumberOfLikes] = useState(props.likes);
+  const [id , setId]   = useState(props.id);
 
-  const handleLike = () => {
-    setIsLiked(!isLiked);
-    setNumberOfLikes(numberOfLikes + 1);
-    const {like} = axios.put("http://localhost:3000/api/v1/u/post/like" , {withCredentials: true})
+  
+
+  const checkIfLiked = async(e) => {
+    e.preventDefault();
+    try {
+      const { liked } = await axios.get(
+        "http://localhost:3000/v1/api/u/post/checkIfLiked",
+        { withCredentials: true }
+      );
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  const handleLike = async () => {
+    try {
+      setIsLiked(!isLiked);
+      setNumberOfLikes(numberOfLikes + 1);
+
+      const { like } = await axios.put(
+        "http://localhost:3000/v1/api/u/post/like",
+        {id},
+        { withCredentials: true }
+      );
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleUnLike = () => {
-    setIsLiked(!isLiked);
-    setNumberOfLikes(numberOfLikes - 1);
-    const {like} = axios.put("http://localhost:3000/api/v1/u/post/unlike" , {withCredentials: true})
+    try {
+      setIsLiked(!isLiked);
+      setNumberOfLikes(numberOfLikes - 1);
+
+      const { unLike } = axios.put(
+        "http://localhost:3000/v1/api/u/post/unLike",
+        {id},
+        { withCredentials: true }
+      );
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -45,22 +78,21 @@ const Post = (props) => {
       </div>
 
       <div className="p-5">{props.title}</div>
-
       <div>
         <img
           src={props.src}
-          className="w-full mx-auto sm:h-fit sm:max-h-[70vh] h-[fit-content] object-cover"
+          className="w-full mx-auto sm:h-fit h-[fit-content] object-cover"
           alt=""
         />
       </div>
       <div className="p-5 flex gap-3 font-medium flex-col">
         <div className="flex justify-between w-full">
-          { numberOfLikes > 0 &&
+          {numberOfLikes > 0 && (
             <div className="text-blue-500 font-medium flex gap-2">
               <LikeIconChecked />
               {numberOfLikes}
             </div>
-          }
+          )}
           <div className="text-blue-500">46 Comments</div>
         </div>
         <hr className=" border  border-[#cfcdcd] " />

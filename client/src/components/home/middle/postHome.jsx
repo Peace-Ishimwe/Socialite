@@ -26,7 +26,7 @@ const PostHome = () => {
     <div className="main-container w-11/12 sm:w-8/12 mx-auto mt-5 flex flex-col gap-10 pb-10">
       {
         allPosts && allPosts.map((post) => {
-          return <Post likes = {25} date={post.date} title={post.data} firstName={post.firstName} lastName={post.lastName} src={post.post} key={post.post} />;
+          return <Post id={post.id} likes = {post.likes} date={post.date} title={post.data} firstName={post.firstName} lastName={post.lastName} src={post.post} key={post.post} />;
         })
       }
     </div>
