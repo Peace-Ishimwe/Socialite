@@ -20,6 +20,7 @@ const Post = (props) => {
       const { liked } = await axios.get(
         "http://localhost:3000/v1/api/u/post/checkIfLiked",
         { withCredentials: true }
+
       );
     } catch (err) {
       console.error(err);
