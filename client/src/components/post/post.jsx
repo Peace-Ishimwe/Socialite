@@ -10,26 +10,25 @@ import axios from "axios";
 const Post = (props) => {
   const [isLiked, setIsLiked] = useState(false);
   const [numberOfLikes, setNumberOfLikes] = useState(props.likes);
-  const [id , setId]   = useState(props.id);
-  const [data , setData] = useState();
+  const [id, setId] = useState(props.id);
 
-  const checkIfLiked = async(e) => {
+  const checkIfLiked = async (e) => {
     try {
       const { data } = await axios.get(
         "http://localhost:3000/v1/api/u/post/checkIfLiked",
         { withCredentials: true }
-      )
-      if(data){
-        setData(data);
+      );
+      if (data.includes(id)) {
+        setIsLiked(true);
       }
     } catch (err) {
       console.error(err);
     }
-  }
+  };
 
-  useEffect(()=>{
-    checkIfLiked()
-  } , [])
+  useEffect(() => {
+    checkIfLiked();
+  }, []);
 
   const handleLike = async () => {
     try {
@@ -38,7 +37,7 @@ const Post = (props) => {
 
       const { like } = await axios.put(
         "http://localhost:3000/v1/api/u/post/like",
-        {id},
+        { id },
         { withCredentials: true }
       );
     } catch (err) {
@@ -53,7 +52,7 @@ const Post = (props) => {
 
       const { unLike } = axios.put(
         "http://localhost:3000/v1/api/u/post/unLike",
-        {id},
+        { id },
         { withCredentials: true }
       );
     } catch (err) {
@@ -96,6 +95,8 @@ const Post = (props) => {
             <div className="text-blue-500 font-medium flex gap-2">
               <LikeIconChecked />
               {numberOfLikes}
+              {numberOfLikes > 1 && <span>Likes</span>}
+              {numberOfLikes == 1 && <span>Like</span>}
             </div>
           )}
           <div className="text-blue-500">46 Comments</div>

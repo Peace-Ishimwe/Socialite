@@ -148,7 +148,7 @@ export const checkIfLiked = async (req, res) => {
     }, []);
 
     if (likedPostIds.length > 0) {
-      res.json({ liked: true, likedPostIds });
+      res.json( likedPostIds );
     } else {
       res.json({ liked: false });
     }
