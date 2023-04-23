@@ -5,77 +5,138 @@ import User from "../model/authModel.js";
 
 export const getPost = async (req, res) => {
   try {
-    const token = await req.cookies.jwt;
+    const token = req.cookies.jwt;
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
     const userId = decoded.id;
-    const posts = await Posts.find({ userId: userId });
-    const user = await User.findOne({ _id: userId });
-    if (posts) {
-      const postUser = [];
+
+    const posts = await Posts.find({ userId });
+    const user = await User.findById(userId);
+
+    if (posts.length) {
+      const postUser = posts.map(post => [post.post, post.date, post.data , post.likes.length]);
       const { firstName, lastName } = user;
-      posts.map((post) => {
-        postUser.push([post.post, post.date, post.data]);
-      });
       res.json({ postUser, firstName, lastName });
     } else {
-      res.json({ messages: "You don't have any posts" });
+      res.json({ message: "You don't have any posts" });
     }
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server Error" });
   }
 };
 
+
 export const uploadPost = async (req, res) => {
   try {
-    const previewSource = req.body.previewSource;
-    const dataPost = req.body.dataPost;
-    const uploadResponse = await cloudinary.uploader.upload(previewSource, {
+    const { previewSource, dataPost } = req.body;
+    const { id: userId } = jwt.verify(req.cookies.jwt, process.env.SECRET_KEY);
+    const { secure_url: postUrl } = await cloudinary.uploader.upload(previewSource, {
       use_filename: true,
       folder: "socialite_posts",
     });
-    const token = await req.cookies.jwt;
-    const decoded = jwt.verify(token, process.env.SECRET_KEY);
-    const userId = await decoded.id;
-    const post = Posts.create({
-      post: uploadResponse.url,
-      data: dataPost,
-      userId: userId,
-    });
-    res.json({ message: "Uploaded successfully" });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Something went wrong try again" });
+    const newPost = await Posts.create({ post: postUrl, data: dataPost, userId });
+    res.json({ message: "Uploaded successfully", newPost });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Something went wrong. Please try again later." });
   }
 };
 
 export const getAllPosts = async (req, res) => {
   try {
-    const userPosts = [];
-    const allPosts = await Posts.find().sort({ timeStamp: -1 });
-
-    for (const post of allPosts) {
-      const userInfo = await User.findById(post.userId);
-      const userId = post.userId;
-      userPosts.push({
-        post: post.post,
-        data: post.data,
-        date: post.date,
-        firstName: userInfo.firstName,
-        lastName: userInfo.lastName,
-      });
-    }
+    const allPosts = await Posts.find().sort({ timeStamp: -1 }).populate('userId', 'firstName lastName');
+    const userPosts = allPosts.map(post => ({
+      post: post.post,
+      data: post.data,
+      date: post.date,
+      id: post._id,
+      likes: post.likes.length ,
+      firstName: post.userId.firstName,
+      lastName: post.userId.lastName,
+    }));
     res.json(userPosts);
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Server Error" });
   }
 };
 
-export const likePosts = async (req, res) => {
+export const likePost = async (req, res) => {
   try {
-    
-  } catch (err) {
-    console.error(err);
-    res.status(500).json(err);
+    const { id } = req.body;
+    const token = req.cookies.jwt;
+
+    if (!token) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
+
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    const userId = decoded.id;
+
+    const post = await Posts.findById(id);
+
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found' });
+    }
+
+    if (post.likes.includes(userId)) {
+      return res.status(400).json({ message: 'Post already liked' });
+    }
+
+    post.likes.push(userId);
+    await post.save();
+
+    res.status(200).json({ message: 'Post liked' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server Error' });
   }
 };
+
+
+
+export const unLikePost = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const token = req.cookies.jwt;
+
+    if (!token) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
+
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    const userId = decoded.id;
+
+    const post = await Posts.findById(id);
+
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found' });
+    }
+
+    if (!post.likes.includes(userId)) {
+      return res.status(400).json({ message: 'Post not liked' });
+    }
+
+    post.likes = post.likes.filter((like) => like !== userId);
+    await post.save();
+
+    res.status(200).json({ message: 'Post unliked' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+};
+
+export const checkIfLiked = async (req , res) => {
+  try {
+    const posts = await Posts.find()
+    const likedUserId = [] 
+    posts.map((post)=>{
+      likedUserId.push(post.likes)
+    })
+    res.json(likedUserId)
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "ServerError"}) 
+  }
+}

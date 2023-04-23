@@ -10,7 +10,7 @@ const postSchema = new mongoose.Schema(
       type: String,
     },
      likes:[
-      {type: mongoose.Types.ObjectId},
+      {type: String},
      ],
     userId: {
       type: String,

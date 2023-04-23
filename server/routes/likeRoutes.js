@@ -1,9 +1,10 @@
 import { Router } from "express";
-import { likePost , unlikePost } from "../controllers/postsControllers.js";
+import { likePost , unLikePost , checkIfLiked } from "../controllers/postsControllers.js";
 
 const router = new Router();
 
-router.get("api/v1/u/post/like", likePost);
-router.post("api/v1/u/post/unlike", unlikePost);
+router.put("/v1/api/u/post/like", likePost);
+router.put("/v1/api/u/post/unLike", unLikePost);
+router.get("/v1/api/u/post/checkIfLiked", checkIfLiked);
 
 export default router;
