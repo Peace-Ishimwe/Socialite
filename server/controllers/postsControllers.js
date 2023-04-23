@@ -1,4 +1,3 @@
-// config cloudinary
 import cloudinary from "../utils/cloudinary.js";
 import Posts from "../model/postModel.js";
 import jwt from "jsonwebtoken";
@@ -69,5 +68,14 @@ export const getAllPosts = async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Server Error" });
+  }
+};
+
+export const likePosts = async (req, res) => {
+  try {
+    
+  } catch (err) {
+    console.error(err);
+    res.status(500).json(err);
   }
 };
