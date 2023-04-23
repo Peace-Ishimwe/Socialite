@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   CommentIcon,
   GlobeIcon,
@@ -11,21 +11,25 @@ const Post = (props) => {
   const [isLiked, setIsLiked] = useState(false);
   const [numberOfLikes, setNumberOfLikes] = useState(props.likes);
   const [id , setId]   = useState(props.id);
-
-  
+  const [data , setData] = useState();
 
   const checkIfLiked = async(e) => {
-    e.preventDefault();
     try {
-      const { liked } = await axios.get(
+      const { data } = await axios.get(
         "http://localhost:3000/v1/api/u/post/checkIfLiked",
         { withCredentials: true }
-
-      );
+      )
+      if(data){
+        setData(data);
+      }
     } catch (err) {
       console.error(err);
     }
   }
+
+  useEffect(()=>{
+    checkIfLiked()
+  } , [])
 
   const handleLike = async () => {
     try {
