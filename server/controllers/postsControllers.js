@@ -127,16 +127,27 @@ export const unLikePost = async (req, res) => {
   }
 };
 
-export const checkIfLiked = async (req , res) => {
+export const checkIfLiked = async (req, res) => {
   try {
-    const posts = await Posts.find()
-    const likedUserId = [] 
-    posts.map((post)=>{
-      likedUserId.push(post.likes)
-    })
-    res.json(likedUserId)
+    const token = await req.cookies.jwt;
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    const userId = decoded.id;
+
+    const posts = await Posts.find();
+    const likedPostIds = posts.reduce((acc, post) => {
+      if (post.likes.includes(userId)) {
+        acc.push(post._id);
+      }
+      return acc;
+    }, []);
+
+    if (likedPostIds.length > 0) {
+      res.json({ liked: true, likedPostIds });
+    } else {
+      res.json({ liked: false });
+    }
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: "ServerError"}) 
+    res.status(500).json({ message: "ServerError" });
   }
-}
+};
