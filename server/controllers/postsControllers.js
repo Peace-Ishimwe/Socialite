@@ -44,22 +44,28 @@ export const uploadPost = async (req, res) => {
 
 export const getAllPosts = async (req, res) => {
   try {
+    const userPosts = [];
     const allPosts = await Posts.find().sort({ timeStamp: -1 }).populate('userId', 'firstName lastName');
-    const userPosts = allPosts.map(post => ({
-      post: post.post,
-      data: post.data,
-      date: post.date,
-      id: post._id,
-      likes: post.likes.length ,
-      firstName: post.userId.firstName,
-      lastName: post.userId.lastName,
-    }));
+
+    for (const post of allPosts) {
+      const userInfo = await User.findById(post.userId);
+      const userId = post.userId;
+      userPosts.push({
+        post: post.post,
+        data: post.data,
+        date: post.date,
+        id: post._id,
+        likes: post.likes,
+        firstName: userInfo.firstName,
+        lastName: userInfo.lastName,
+      });
+    }
     res.json(userPosts);
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    console.error(err);
     res.status(500).json({ error: "Server Error" });
   }
-};
+}; 
 
 export const likePost = async (req, res) => {
   try {
