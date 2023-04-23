@@ -11,11 +11,25 @@ export const getPost = async (req, res) => {
 
     const posts = await Posts.find({ userId });
     const user = await User.findById(userId);
+    const userPosts = []
 
-    if (posts.length) {
-      const postUser = posts.map(post => [post.post, post.date, post.data , post.likes.length]);
+
+    if (posts.length > 0) {
       const { firstName, lastName } = user;
-      res.json({ postUser, firstName, lastName });
+      for (const post of posts) {
+        const userInfo = await User.findById(post.userId);
+        const userId = post.userId;
+        userPosts.push({
+          post: post.post,
+          data: post.data,
+          date: post.date,
+          id: post._id,
+          likes: post.likes,
+          firstName: userInfo.firstName,
+          lastName: userInfo.lastName,
+        });
+      }
+      res.json(userPosts)
     } else {
       res.json({ message: "You don't have any posts" });
     }
