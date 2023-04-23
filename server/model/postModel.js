@@ -8,24 +8,23 @@ const postSchema = new mongoose.Schema(
     },
     data:{
       type: String,
-      required: false,
     },
+     likes:[
+      {type: mongoose.Types.ObjectId},
+     ],
     userId: {
       type: String,
       required: true,
     },
     profile: {
       type: Boolean,
-      required: false,
     },
     cover: {
       type: Boolean,
-      required: false,
     },
     timeStamp: {
       type: Date,
       default: Date.now,
-      required: false,
     },
     date: {
       type: String,
