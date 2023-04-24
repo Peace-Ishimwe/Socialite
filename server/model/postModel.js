@@ -12,6 +12,9 @@ const postSchema = new mongoose.Schema(
      likes:[
       {type: String},
      ],
+     comments:[
+      {type: String},
+     ],
     userId: {
       type: String,
       required: true,
