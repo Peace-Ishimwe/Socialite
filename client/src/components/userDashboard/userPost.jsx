@@ -39,6 +39,7 @@ const userPost = () => {
               lastName={post.lastName}
               src={post.post}
               key={post.post}
+              comments={post.comments}
             />
           );
         })}

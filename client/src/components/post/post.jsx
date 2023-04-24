@@ -11,6 +11,7 @@ import axios from "axios";
 import Picker from "@emoji-mart/react";
 import data from "@emoji-mart/data";
 import protectRoute from "../auth/protectedRoutes";
+import { Audio } from "react-loader-spinner";
 
 const Post = (props) => {
   const [isLiked, setIsLiked] = useState(false);
@@ -50,7 +51,7 @@ const Post = (props) => {
         "http://localhost:3000/v1/api/u/post/checkIfLiked",
         { withCredentials: true }
       );
-      if (data.includes(id)) {
+      if (Object.keys(data).includes(id)) {
         setIsLiked(true);
       }
     } catch (err) {
@@ -105,6 +106,7 @@ const Post = (props) => {
       setPostedComment(comments);
       setIsPostedCommentVisible(true);
       setComments("");
+      props.comments.length += 1;
     } catch (err) {
       console.log(err);
       setData("Something went wrong");
@@ -117,6 +119,20 @@ const Post = (props) => {
   const month = now.toLocaleString("default", { month: "short" });
   const year = now.getFullYear();
   const formattedDate = `${day} ${month} ${year}`;
+
+
+  // image loader 
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
+
+  function handleLoad() {
+    setIsLoading(false);
+  }
+
+  function handleError() {
+    setIsLoading(false);
+    setHasError(true);
+  }
 
   return (
     <div className="bg-white dark:bg-subMajorDark text-gray-900 dark:text-gray-200 rounded-md">
@@ -141,13 +157,22 @@ const Post = (props) => {
 
       <div className="p-5">{props.title}</div>
       <div>
-        <img
-          src={props.src}
-          className="w-full mx-auto sm:h-fit h-[fit-content] object-cover"
-          alt=""
-        />
+        {isLoading && (
+          <Audio type="Oval" color="#00BFFF" height={80} width={80} />
+        )}
+        {hasError ? (
+          <p>Unable to load image.</p>
+        ) : (
+          <img
+            src={props.src}
+            className="w-full mx-auto sm:h-fit h-[fit-content] object-cover"
+            onLoad={handleLoad}
+            onError={handleError}
+            style={{ display: isLoading || hasError ? "none" : "block" }}
+          />
+        )}
       </div>
-      <div className="p-5 flex gap-3 font-medium flex-col">
+      <div className=" px-5 pt-5 flex gap-3 font-medium flex-col">
         <div className="flex justify-between w-full">
           {numberOfLikes > 0 && (
             <div className="text-blue-500 font-medium flex gap-2">
@@ -158,7 +183,7 @@ const Post = (props) => {
             </div>
           )}
           <div className="text-blue-500 flex gap-1">
-            <span>{props.comments.length}</span>
+            <span>{props.comments.length > 0 && props.comments.length}</span>
             <span>
               {props.comments.length == 1 && "Comment"}
               {props.comments.length > 1 && "Comments"}
@@ -239,7 +264,7 @@ const Post = (props) => {
           </form>
           {isPickerVisible && (
             <div className=" mt-3 relative overflow-visible">
-                 <Picker theme={Theme} data={data} onEmojiSelect={onEmojiSelect} />
+              <Picker theme={Theme} data={data} onEmojiSelect={onEmojiSelect} />
             </div>
           )}
           {isPostedCommentVisible && (
@@ -294,20 +319,22 @@ const Post = (props) => {
                 </div>
               );
             })}
-          <div
-            onClick={() => {
-              setCommentsVisible("");
-            }}
-            className="relative mt-10 text-blue-500 hover:underline cursor-pointer"
-          >
-            See less
-          </div>
-          {commentsVisible == "" && (
+          {props.comments.length != 0 && (
+            <div
+              onClick={() => {
+                setCommentsVisible("");
+              }}
+              className="relative mb-5 text-blue-500 hover:underline cursor-pointer"
+            >
+              See less
+            </div>
+          )}
+          {props.comments.length != 0 && commentsVisible == "" && (
             <div
               onClick={() => {
                 setCommentsVisible("h-fit");
               }}
-              className="absolute top-[250px] text-blue-500 hover:underline cursor-pointer"
+              className="absolute top-[225px] ml-1 text-blue-500 hover:underline cursor-pointer"
             >
               View all comments
             </div>
