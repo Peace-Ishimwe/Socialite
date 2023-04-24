@@ -11,8 +11,7 @@ export const getPost = async (req, res) => {
 
     const posts = await Posts.find({ userId });
     const user = await User.findById(userId);
-    const userPosts = []
-
+    const userPosts = [];
 
     if (posts.length > 0) {
       const { firstName, lastName } = user;
@@ -29,7 +28,7 @@ export const getPost = async (req, res) => {
           lastName: userInfo.lastName,
         });
       }
-      res.json(userPosts)
+      res.json(userPosts);
     } else {
       res.json({ message: "You don't have any posts" });
     }
@@ -39,27 +38,37 @@ export const getPost = async (req, res) => {
   }
 };
 
-
 export const uploadPost = async (req, res) => {
   try {
     const { previewSource, dataPost } = req.body;
     const { id: userId } = jwt.verify(req.cookies.jwt, process.env.SECRET_KEY);
-    const { secure_url: postUrl } = await cloudinary.uploader.upload(previewSource, {
-      use_filename: true,
-      folder: "socialite_posts",
+    const { secure_url: postUrl } = await cloudinary.uploader.upload(
+      previewSource,
+      {
+        use_filename: true,
+        folder: "socialite_posts",
+      }
+    );
+    const newPost = await Posts.create({
+      post: postUrl,
+      data: dataPost,
+      userId,
     });
-    const newPost = await Posts.create({ post: postUrl, data: dataPost, userId });
     res.json({ message: "Uploaded successfully", newPost });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Something went wrong. Please try again later." });
+    res
+      .status(500)
+      .json({ error: "Something went wrong. Please try again later." });
   }
 };
 
 export const getAllPosts = async (req, res) => {
   try {
     const userPosts = [];
-    const allPosts = await Posts.find().sort({ timeStamp: -1 }).populate('userId', 'firstName lastName');
+    const allPosts = await Posts.find()
+      .sort({ timeStamp: -1 })
+      .populate("userId", "firstName lastName");
 
     for (const post of allPosts) {
       const userInfo = await User.findById(post.userId);
@@ -70,6 +79,7 @@ export const getAllPosts = async (req, res) => {
         date: post.date,
         id: post._id,
         likes: post.likes,
+        comments: post.comments.reverse(),
         firstName: userInfo.firstName,
         lastName: userInfo.lastName,
       });
@@ -79,7 +89,7 @@ export const getAllPosts = async (req, res) => {
     console.error(err);
     res.status(500).json({ error: "Server Error" });
   }
-}; 
+};
 
 export const likePost = async (req, res) => {
   try {
@@ -87,7 +97,7 @@ export const likePost = async (req, res) => {
     const token = req.cookies.jwt;
 
     if (!token) {
-      return res.status(401).json({ message: 'Unauthorized' });
+      return res.status(401).json({ message: "Unauthorized" });
     }
 
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
@@ -96,24 +106,22 @@ export const likePost = async (req, res) => {
     const post = await Posts.findById(id);
 
     if (!post) {
-      return res.status(404).json({ message: 'Post not found' });
+      return res.status(404).json({ message: "Post not found" });
     }
 
     if (post.likes.includes(userId)) {
-      return res.status(400).json({ message: 'Post already liked' });
+      return res.status(400).json({ message: "Post already liked" });
     }
 
     post.likes.push(userId);
     await post.save();
 
-    res.status(200).json({ message: 'Post liked' });
+    res.status(200).json({ message: "Post liked" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Server Error' });
+    res.status(500).json({ message: "Server Error" });
   }
 };
-
-
 
 export const unLikePost = async (req, res) => {
   try {
@@ -121,7 +129,7 @@ export const unLikePost = async (req, res) => {
     const token = req.cookies.jwt;
 
     if (!token) {
-      return res.status(401).json({ message: 'Unauthorized' });
+      return res.status(401).json({ message: "Unauthorized" });
     }
 
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
@@ -130,20 +138,20 @@ export const unLikePost = async (req, res) => {
     const post = await Posts.findById(id);
 
     if (!post) {
-      return res.status(404).json({ message: 'Post not found' });
+      return res.status(404).json({ message: "Post not found" });
     }
 
     if (!post.likes.includes(userId)) {
-      return res.status(400).json({ message: 'Post not liked' });
+      return res.status(400).json({ message: "Post not liked" });
     }
 
     post.likes = post.likes.filter((like) => like !== userId);
     await post.save();
 
-    res.status(200).json({ message: 'Post unliked' });
+    res.status(200).json({ message: "Post unliked" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Server Error' });
+    res.status(500).json({ message: "Server Error" });
   }
 };
 
@@ -162,7 +170,7 @@ export const checkIfLiked = async (req, res) => {
     }, []);
 
     if (likedPostIds.length > 0) {
-      res.json( likedPostIds );
+      res.json(likedPostIds);
     } else {
       res.json({ liked: false });
     }
@@ -172,27 +180,35 @@ export const checkIfLiked = async (req, res) => {
   }
 };
 
-
-export const commentPost = async(req, res) => {
+export const commentPost = async (req, res) => {
   try {
-    const { id  , comments } = req.body;
+    const { id, comments } = req.body;
     const token = req.cookies.jwt;
 
     if (!token) {
-      return res.status(401).json({ message: 'Unauthorized' });
+      return res.status(401).json({ message: "Unauthorized" });
     }
 
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
     const userId = decoded.id;
 
+    const userInfo = await User.findById(userId);
+    const { firstName, lastName } = userInfo;
+
     const post = await Posts.findById(id);
 
-    post.comments.push(userId , comments);
+    const now = new Date();
+    const day = now.getDate();
+    const month = now.toLocaleString("default", { month: "short" });
+    const year = now.getFullYear();
+    const formattedDate = `${day} ${month} ${year}`;
+
+    post.comments.push({ firstName, lastName, comments , formattedDate });
     await post.save();
 
-    res.status(200).json({ message: 'Post liked' });
+    res.status(200).json({ message: "Comment posted succesfully" });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "ServerError" });
   }
-}
+};

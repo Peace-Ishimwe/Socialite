@@ -6,15 +6,11 @@ const postSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    data:{
+    data: {
       type: String,
     },
-     likes:[
-      {type: String},
-     ],
-     comments:[
-      {type: String},
-     ],
+    likes: [{ type: String }],
+    comments: [{ type: Object }],
     userId: {
       type: String,
       required: true,
@@ -31,20 +27,20 @@ const postSchema = new mongoose.Schema(
     },
     date: {
       type: String,
-      default: function() {
+      default: function () {
         const now = new Date();
         const day = now.getDate();
-        const month = now.toLocaleString('default', { month: 'short' });
+        const month = now.toLocaleString("default", { month: "short" });
         const year = now.getFullYear();
         const formattedDate = `${day} ${month} ${year}`;
         return formattedDate;
-      }
-    }
+      },
+    },
   },
   {
     collection: "posts",
   }
 );
 
-const Posts = mongoose.model('Posts', postSchema , "posts")
+const Posts = mongoose.model("Posts", postSchema, "posts");
 export default Posts;
