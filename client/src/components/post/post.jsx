@@ -51,7 +51,12 @@ const Post = (props) => {
         "http://localhost:3000/v1/api/u/post/checkIfLiked",
         { withCredentials: true }
       );
-      if (Object.keys(data).includes(id)) {
+      if (
+        data &&
+        (Array.isArray(data)
+          ? data.includes(id)
+          : Object.keys(data).includes(id))
+      ) {
         setIsLiked(true);
       }
     } catch (err) {
@@ -95,8 +100,11 @@ const Post = (props) => {
 
   // comments here
 
+  const [isCommentSent , setIsCommentSent] =useState(true)
+
   const handleComments = async (e) => {
     e.preventDefault();
+    setIsCommentSent(false)
     try {
       const { data } = await axios.post(
         "http://localhost:3000/v1/api/u/post/comment",
@@ -107,6 +115,7 @@ const Post = (props) => {
       setIsPostedCommentVisible(true);
       setComments("");
       props.comments.length += 1;
+      setIsCommentSent(true)
     } catch (err) {
       console.log(err);
       setData("Something went wrong");
@@ -120,8 +129,7 @@ const Post = (props) => {
   const year = now.getFullYear();
   const formattedDate = `${day} ${month} ${year}`;
 
-
-  // image loader 
+  // image loader
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
@@ -158,7 +166,14 @@ const Post = (props) => {
       <div className="p-5">{props.title}</div>
       <div>
         {isLoading && (
-          <Audio type="Oval" color="#00BFFF" height={80} width={80} />
+          <Audio
+            height="32"
+            width="60"
+            radius="9"
+            color="gray"
+            ariaLabel="loading"
+          />
+
         )}
         {hasError ? (
           <p>Unable to load image.</p>
@@ -254,12 +269,28 @@ const Post = (props) => {
               <EmojiIconPicker style="w-10 h-10" />
             </div>
             <div>
-              <button
-                type="submit"
-                className="bg-blue-500 text-white rounded-md py-1 px-4 bg-"
-              >
-                <RocketIcon />
-              </button>
+              { isCommentSent &&
+                <button
+                  type="submit"
+                  className="bg-blue-500 text-white rounded-md py-1 px-4 bg-"
+                >
+                  <RocketIcon />
+                </button>
+              }
+              {  isCommentSent === false &&
+                <button
+                type="button"
+                  className="bg-blue-500 text-white rounded-md py-1 px-4 bg-"
+                >
+                  <Audio
+                    height="24"
+                    width="24"
+                    radius="9"
+                    color="white"
+                    ariaLabel="loading"
+                  />
+                </button>
+              }
             </div>
           </form>
           {isPickerVisible && (
@@ -334,7 +365,7 @@ const Post = (props) => {
               onClick={() => {
                 setCommentsVisible("h-fit");
               }}
-              className="absolute top-[225px] ml-1 text-blue-500 hover:underline cursor-pointer"
+              className="absolute bottom-0 bg-white dark:bg-subMajorDark w-full text-blue-500 hover:underline cursor-pointer"
             >
               View all comments
             </div>
