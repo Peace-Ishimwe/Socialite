@@ -325,7 +325,7 @@ const Post = (props) => {
               return (
                 <div
                   key={comment.comments}
-                  className="bg-white dark:bg-subMainDark shadow-md rounded-lg p-4 mt-6 mb-6"
+                  className="bg-white dark:bg-subMainDark shadow-md rounded-lg px-4 py-2 mt-6 mb-6"
                 >
                   <div className="flex items-start mb-4">
                     <img
@@ -355,7 +355,7 @@ const Post = (props) => {
               onClick={() => {
                 setCommentsVisible("");
               }}
-              className="relative mb-5 text-blue-500 hover:underline cursor-pointer"
+              className="relative mb-3 mt-2 text-blue-500 hover:underline cursor-pointer"
             >
               See less
             </div>
@@ -365,7 +365,7 @@ const Post = (props) => {
               onClick={() => {
                 setCommentsVisible("h-fit");
               }}
-              className="absolute bottom-0 bg-white dark:bg-subMajorDark w-full text-blue-500 hover:underline cursor-pointer"
+              className="absolute bottom-0 bg-white p-1 dark:bg-subMajorDark w-full text-blue-500 hover:underline cursor-pointer"
             >
               View all comments
             </div>

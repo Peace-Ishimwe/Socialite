@@ -7,7 +7,7 @@ const protectRoute = () => {
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [aboutUser, setLastAboutUser] = useState("");
+  const [aboutUserIn, setLastAboutUser] = useState("");
 
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies([]);
@@ -43,7 +43,7 @@ const protectRoute = () => {
     verifyUser();
   }, []);
 
-  return [email, firstName, lastName, aboutUser];
+  return [email, firstName, lastName, aboutUserIn];
 };
 
 export default protectRoute;
