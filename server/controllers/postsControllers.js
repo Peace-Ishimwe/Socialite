@@ -24,6 +24,7 @@ export const getPost = async (req, res) => {
           date: post.date,
           id: post._id,
           likes: post.likes,
+          comments: post.comments.reverse(),
           firstName: userInfo.firstName,
           lastName: userInfo.lastName,
         });
@@ -203,7 +204,7 @@ export const commentPost = async (req, res) => {
     const year = now.getFullYear();
     const formattedDate = `${day} ${month} ${year}`;
 
-    post.comments.push({ firstName, lastName, comments , formattedDate });
+    post.comments.push({ firstName, lastName, comments, formattedDate });
     await post.save();
 
     res.status(200).json({ message: "Comment posted succesfully" });
