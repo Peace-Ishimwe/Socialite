@@ -171,3 +171,13 @@ export const checkIfLiked = async (req, res) => {
     res.status(500).json({ message: "ServerError" });
   }
 };
+
+
+export const commentPost = (req, res) => {
+  try {
+    
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "ServerError" });
+  }
+}
