@@ -103,6 +103,7 @@ const Post = (props) => {
         </div>
         <hr className=" border  border-[#cfcdcd] " />
         <div className="flex justify-evenly">
+          {/* Like and unlike a post */}
           {!isLiked && (
             <button
               className={`gap-5 lg:px-0 px-4 flex  lg:w-3/12 items-center py-2 justify-center hover:bg-gray-300 dark:hover:bg-gray-700 rounded-md`}
@@ -122,15 +123,57 @@ const Post = (props) => {
             </button>
           )}
 
-          <button
-            className="flex gap-5 lg:px-0 px-4  lg:w-3/12 items-center py-2 justify-center hover:bg-gray-300 dark:hover:bg-gray-700 rounded-md "
-            type="submit"
-          >
-            <CommentIcon />
-            Comment
-          </button>
+          {/* Comment on the post */}
+            <button
+              className="flex gap-5 lg:px-0 px-4  lg:w-3/12 items-center py-2 justify-center hover:bg-gray-300 dark:hover:bg-gray-700 rounded-md "
+              type="submit"
+            >
+              <CommentIcon />
+              Comment
+            </button>
         </div>
         <hr className=" border  border-[#cfcdcd] " />
+        <div class="w-full max-w-md mx-auto">
+            <h2 class="text-lg font-medium mb-4">Comments</h2>
+            <div class="bg-white rounded-lg shadow p-4">
+              <div class="mb-4">
+                <textarea
+                  class="w-full p-2 border border-gray-300 rounded"
+                  rows="3"
+                  placeholder="Add a comment..."
+                ></textarea>
+              </div>
+              <div class="flex justify-end">
+                <button class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">
+                  Post Comment
+                </button>
+              </div>
+            </div>
+            <div class="bg-white rounded-lg shadow p-4 mt-4">
+              <div class="flex items-start mb-4">
+                <img
+                  class="w-8 h-8 rounded-full mr-2"
+                  src="https://i.pravatar.cc/150?img=10"
+                  alt="User avatar"
+                />
+                <div class="flex-1">
+                  <h3 class="text-gray-900 font-medium mb-1">John Doe</h3>
+                  <p class="text-gray-600">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                    finibus eleifend felis, at tincidunt quam congue id. Fusce
+                    id ex nec eros bibendum lacinia.
+                  </p>
+                  <div class="flex items-center justify-between">
+                    <p class="text-gray-500 text-sm">10 minutes ago</p>
+                    <button class="text-gray-500 hover:text-gray-700 text-sm">
+                      Reply
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
       </div>
     </div>
   );
