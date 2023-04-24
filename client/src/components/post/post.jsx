@@ -4,13 +4,38 @@ import {
   GlobeIcon,
   LikeIconChecked,
   LikeIconUnChecked,
+  RocketIcon,
+  EmojiIconPicker,
 } from "../../assets/icons/icons";
 import axios from "axios";
+import Picker from "@emoji-mart/react";
+import data from "@emoji-mart/data";
 
 const Post = (props) => {
   const [isLiked, setIsLiked] = useState(false);
   const [numberOfLikes, setNumberOfLikes] = useState(props.likes);
   const [id, setId] = useState(props.id);
+  const [Theme, setTheme] = useState("dark");
+  const [isPickerVisible, setIsPickerVisible] = useState(false);
+
+  const [comments, setComments] = useState("");
+
+  useEffect(() => {
+    if (localStorage.theme === "light") {
+      setTheme("light");
+    } else {
+      setTheme("dark");
+    }
+  }, []);
+
+  const onEmojiSelect = (e) => {
+    let sym = e.unified.split("-");
+    let codesArray = [];
+    sym.forEach((el) => codesArray.push("0x" + el));
+    let emoji = String.fromCodePoint(...codesArray);
+    setComments(comments + emoji);
+    setIsPickerVisible(!isPickerVisible);
+  };
 
   const checkIfLiked = async (e) => {
     try {
@@ -59,6 +84,9 @@ const Post = (props) => {
       console.log(err);
     }
   };
+
+
+  // comments here
 
   return (
     <div className="bg-white dark:bg-subMajorDark text-gray-900 dark:text-gray-200 rounded-md">
@@ -124,56 +152,78 @@ const Post = (props) => {
           )}
 
           {/* Comment on the post */}
-            <button
-              className="flex gap-5 lg:px-0 px-4  lg:w-3/12 items-center py-2 justify-center hover:bg-gray-300 dark:hover:bg-gray-700 rounded-md "
-              type="submit"
-            >
-              <CommentIcon />
-              Comment
-            </button>
+          <button
+            className="flex gap-5 lg:px-0 px-4  lg:w-3/12 items-center py-2 justify-center hover:bg-gray-300 dark:hover:bg-gray-700 rounded-md "
+            type="submit"
+          >
+            <CommentIcon />
+            Comment
+          </button>
         </div>
-        <hr className=" border  border-[#cfcdcd] " />
-        <div class="w-full max-w-md mx-auto">
-            <h2 class="text-lg font-medium mb-4">Comments</h2>
-            <div class="bg-white rounded-lg shadow p-4">
-              <div class="mb-4">
-                <textarea
-                  class="w-full p-2 border border-gray-300 rounded"
-                  rows="3"
-                  placeholder="Add a comment..."
-                ></textarea>
-              </div>
-              <div class="flex justify-end">
-                <button class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">
-                  Post Comment
-                </button>
-              </div>
+        <hr className=" border  border-[#cfcdcd]" />
+        <div className="w-full mx-auto">
+          <h2 className="text-lg font-medium mb-4">Comments</h2>
+          <div className="flex justify-between items-end pr-3 bg-white dark:bg-subMajorDark rounded-lg shadow pb-1">
+            <div className="w-10/12">
+              <textarea
+                className="textarea text-gray-700 dark:text-gray-200 bg-white dark:bg-subMajorDark block w-full py-2 p-2 outline-none overflow-hidden resize min-h-[40px] leading-[20px]"
+                id="comments"
+                name="comments"
+                value={comments}
+                onChange={(e) => setComments(e.target.value)}
+                placeholder="Write comments"
+                required
+              />
             </div>
-            <div class="bg-white rounded-lg shadow p-4 mt-4">
-              <div class="flex items-start mb-4">
-                <img
-                  class="w-8 h-8 rounded-full mr-2"
-                  src="https://i.pravatar.cc/150?img=10"
-                  alt="User avatar"
+            <div
+              className="text-blue-500 cursor-pointer"
+              onClick={() => {
+                setIsPickerVisible(!isPickerVisible);
+              }}
+            >
+              <EmojiIconPicker style="w-10 h-10" />
+            </div>
+            <div>
+              <button
+                type="submit"
+                className="bg-blue-500 text-white rounded-md py-1 px-4 bg-"
+              >
+                <RocketIcon />
+              </button>
+            </div>
+          </div>
+          {isPickerVisible && (
+            <div className="relative mt-3">
+                <Picker
+                  theme={Theme}
+                  data={data}
+                  onEmojiSelect={onEmojiSelect}
                 />
-                <div class="flex-1">
-                  <h3 class="text-gray-900 font-medium mb-1">John Doe</h3>
-                  <p class="text-gray-600">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                    finibus eleifend felis, at tincidunt quam congue id. Fusce
-                    id ex nec eros bibendum lacinia.
-                  </p>
-                  <div class="flex items-center justify-between">
-                    <p class="text-gray-500 text-sm">10 minutes ago</p>
-                    <button class="text-gray-500 hover:text-gray-700 text-sm">
-                      Reply
-                    </button>
-                  </div>
+            </div>
+          )}
+          <div className="bg-white dark:bg-subMainDark shadow-md rounded-lg p-4 mt-4">
+            <div className="flex items-start mb-4">
+              <img
+                className="w-8 h-8 rounded-full mr-2"
+                src="https://i.pravatar.cc/150?img=10"
+                alt="User avatar"
+              />
+              <div className="flex-1">
+                <h3 className="text-gray-900 dark:text-gray-200 font-medium mb-1">
+                  John Doe
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                  finibus eleifend felis, at tincidunt quam congue id. Fusce id
+                  ex nec eros bibendum lacinia.
+                </p>
+                <div className="flex items-center justify-between">
+                  <p className="text-gray-500 text-sm">10 minutes ago</p>
                 </div>
               </div>
             </div>
           </div>
-
+        </div>
       </div>
     </div>
   );
