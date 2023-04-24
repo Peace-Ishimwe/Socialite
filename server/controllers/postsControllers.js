@@ -173,9 +173,24 @@ export const checkIfLiked = async (req, res) => {
 };
 
 
-export const commentPost = (req, res) => {
+export const commentPost = async(req, res) => {
   try {
-    
+    const { id  , comments } = req.body;
+    const token = req.cookies.jwt;
+
+    if (!token) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
+
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    const userId = decoded.id;
+
+    const post = await Posts.findById(id);
+
+    post.comments.push(userId , comments);
+    await post.save();
+
+    res.status(200).json({ message: 'Post liked' });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "ServerError" });
