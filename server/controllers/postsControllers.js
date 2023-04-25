@@ -89,7 +89,7 @@ export const getAllPosts = async (req, res) => {
     res.json(userPosts);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Server Error" });
+    res.status(500).json({ error: "Network Error" });
   }
 };
 
@@ -205,7 +205,7 @@ export const commentPost = async (req, res) => {
     const year = now.getFullYear();
     const formattedDate = `${day} ${month} ${year}`;
 
-    post.comments.push({ firstName, lastName, comments, formattedDate });
+    post.comments.push({ firstName, lastName, commenterId:userId  , comments, formattedDate });
     await post.save();
 
     res.status(200).json({ message: "Comment posted succesfully" });

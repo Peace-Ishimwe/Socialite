@@ -23,10 +23,14 @@ import  authRoutes  from "./routes/authRoutes.js"
 import postRoutes from "./routes/postRoutes.js"
 import aboutRoutes from "./routes/aboutRoutes.js"
 import visitUserRoutes from "./routes/visitUserRoutes.js"
+import findUsersRoutes from "./routes/findUsersRoutes.js"
+import followUserRoutes from './routes/followRoutes.js';
 app.use("/", authRoutes);
 app.use("/", postRoutes);
 app.use("/", aboutRoutes);
 app.use("/" , visitUserRoutes)
+app.use("/" , findUsersRoutes)
+app.use("/" , followUserRoutes)
 
 // ------------ the dotenv file ------------- 
 import dotenv from 'dotenv'

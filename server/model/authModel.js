@@ -32,7 +32,8 @@ const userSchema = new mongoose.Schema(
     telephone: {
         type: String,
         required: false
-    }
+    },
+    followers: [{ type: String }],
   },
   {
     collection: "Socialites",
