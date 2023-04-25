@@ -25,7 +25,6 @@ const Profile = () => {
         </span>
         <span className="dark:text-gray-200 text-gray-700 text-center">
           {about != "Tell us more about you 😃" && about}
-  
         </span>
       </div>
       <hr className=" w-[85%] border  border-[#cfcdcd] mx-auto" />
