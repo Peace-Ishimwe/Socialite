@@ -80,6 +80,7 @@ export const getAllPosts = async (req, res) => {
         date: post.date,
         id: post._id,
         likes: post.likes,
+        userId: post.userId,
         comments: post.comments.reverse(),
         firstName: userInfo.firstName,
         lastName: userInfo.lastName,
@@ -183,7 +184,7 @@ export const checkIfLiked = async (req, res) => {
 
 export const commentPost = async (req, res) => {
   try {
-    const { id, comments } = req.body;
+    const { id , comments } = req.body;
     const token = req.cookies.jwt;
 
     if (!token) {

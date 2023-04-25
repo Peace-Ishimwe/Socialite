@@ -22,9 +22,11 @@ app.use(express.urlencoded({ limit: '3mb', extended: true }));
 import  authRoutes  from "./routes/authRoutes.js"
 import postRoutes from "./routes/postRoutes.js"
 import aboutRoutes from "./routes/aboutRoutes.js"
+import visitUserRoutes from "./routes/visitUserRoutes.js"
 app.use("/", authRoutes);
 app.use("/", postRoutes);
 app.use("/", aboutRoutes);
+app.use("/" , visitUserRoutes)
 
 // ------------ the dotenv file ------------- 
 import dotenv from 'dotenv'
