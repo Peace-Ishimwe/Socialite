@@ -42,7 +42,6 @@ export const getUserPostsVisit = async (req , res) => {
                 lastName: userInfo.lastName,
               });
             }
-            
             res.json(postUserVisit.reverse());
           } else {
             res.json({ message: "You don't have any posts" });
