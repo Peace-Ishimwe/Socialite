@@ -41,6 +41,7 @@ export const getUserPostsVisit = async (req , res) => {
                 firstName: userInfo.firstName,
                 lastName: userInfo.lastName,
               });
+              
             }
             res.json(postUserVisit.reverse());
           } else {
