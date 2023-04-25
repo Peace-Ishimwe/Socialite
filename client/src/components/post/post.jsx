@@ -258,7 +258,6 @@ const Post = (props) => {
           <label
             className="flex gap-5 lg:px-0 px-4  lg:w-3/12 items-center py-2 justify-center hover:bg-gray-300 dark:hover:bg-gray-700 rounded-md "
             type="submit"
-            htmlFor="comments"
           >
             <CommentIcon />
             Comment
@@ -355,15 +354,21 @@ const Post = (props) => {
                   className="bg-white dark:bg-subMainDark shadow-md rounded-lg px-4 py-2 mt-6 mb-6"
                 >
                   <div className="flex items-start mb-4">
+                    <Link to={`/u/user/visit/${comment.commenterId}`}>
                     <img
                       className="w-8 h-8 rounded-full mr-2"
                       src="https://i.pravatar.cc/150?img=10"
                       alt="User avatar"
                     />
+                    </Link>
                     <div className="flex-1">
-                      <h3 className="text-gray-900 dark:text-gray-200 font-medium mb-1">
-                        {comment.firstName} {comment.lastName}
-                      </h3>
+                      <Link to={`/u/user/visit/${comment.commenterId}`}>
+                        {" "}
+                        <h3 className="text-gray-900 dark:text-gray-200 font-medium mb-1">
+                          {comment.firstName} {comment.lastName}
+                        </h3>
+                      </Link>
+
                       <p className="text-gray-600 dark:text-gray-400">
                         {comment.comments}
                       </p>

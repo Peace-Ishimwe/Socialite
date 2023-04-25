@@ -7,6 +7,8 @@ import { useParams } from "react-router-dom";
 const userPost = () => {
   const [allPosts, setAllPosts] = useState();
   const { userId } = useParams();
+  const [noPost, setNoPost] = useState();
+
 
   const [userInfo, setUserInfo] = useState();
 
@@ -23,7 +25,7 @@ const userPost = () => {
         if (!posts.data.message) {
           setAllPosts(posts.data);
         } else {
-          setNoPost(posts.data.message);
+          setNoPost("No posts available");
         }
       } catch (err) {
         console.log(err);
@@ -43,7 +45,7 @@ const userPost = () => {
               date={post.date}
               title={post.data}
               firstName={post.firstName}
-              lastName={ post.lastName}
+              lastName={post.lastName}
               src={post.post}
               key={post.post}
               comments={post.comments}
@@ -51,6 +53,11 @@ const userPost = () => {
             />
           );
         })}
+      {noPost && (
+        <div className="w-full text-center mt-5 text-xl font-medium dark:text-gray-200 text-gray-700">
+          {noPost}
+        </div>
+      )}
     </div>
   );
 };
