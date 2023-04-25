@@ -1,18 +1,25 @@
 import Post from "../post/post";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios, { all } from "axios";
 import PostShare from "../home/middle/PostShare";
+import { useParams } from "react-router-dom";
 
 const userPost = () => {
   const [allPosts, setAllPosts] = useState();
-  const [noPost, setNoPost] = useState();
+  const { userId } = useParams();
+
+  const [userInfo, setUserInfo] = useState();
 
   useEffect(() => {
     const getAllPosts = async () => {
       try {
-        const posts = await axios.get("http://localhost:3000/v1/api/u/post", {
-          withCredentials: true,
-        });
+        const posts = await axios.post(
+          `http://localhost:3000/v1/api/u/user/post/visit/${userId}`,
+          {},
+          {
+            withCredentials: true,
+          }
+        );
         if (!posts.data.message) {
           setAllPosts(posts.data);
         } else {
@@ -36,23 +43,14 @@ const userPost = () => {
               date={post.date}
               title={post.data}
               firstName={post.firstName}
-              lastName={post.lastName}
+              lastName={ post.lastName}
               src={post.post}
               key={post.post}
               comments={post.comments}
+              redirect={false}
             />
           );
         })}
-
-      {noPost && (
-        <div className=" dark:bg-subMajorDark bg-white p-5 ">
-          <div className="w-full text-center mt-5 text-xl font-medium dark:text-gray-200 text-gray-700">
-            {noPost}
-            <span className="block">Post Some</span>
-          </div>
-          <PostShare />
-        </div>
-      )}
     </div>
   );
 };

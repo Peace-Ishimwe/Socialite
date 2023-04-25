@@ -40,6 +40,7 @@ const userPost = () => {
               src={post.post}
               key={post.post}
               comments={post.comments}
+              redirect={false}
             />
           );
         })}

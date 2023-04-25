@@ -9,6 +9,7 @@ import {
 } from "../../assets/icons/icons";
 import axios from "axios";
 import Picker from "@emoji-mart/react";
+import { Link } from "react-router-dom";
 import data from "@emoji-mart/data";
 import protectRoute from "../auth/protectedRoutes";
 import { Audio } from "react-loader-spinner";
@@ -17,6 +18,7 @@ const Post = (props) => {
   const [isLiked, setIsLiked] = useState(false);
   const [numberOfLikes, setNumberOfLikes] = useState(props.likes);
   const [id, setId] = useState(props.id);
+  const [userId, setUserId] = useState(props.userId);
   const [Theme, setTheme] = useState("dark");
   const [isPickerVisible, setIsPickerVisible] = useState(false);
   const [comments, setComments] = useState("");
@@ -100,11 +102,11 @@ const Post = (props) => {
 
   // comments here
 
-  const [isCommentSent , setIsCommentSent] =useState(true)
+  const [isCommentSent, setIsCommentSent] = useState(true);
 
   const handleComments = async (e) => {
     e.preventDefault();
-    setIsCommentSent(false)
+    setIsCommentSent(false);
     try {
       const { data } = await axios.post(
         "http://localhost:3000/v1/api/u/post/comment",
@@ -115,7 +117,7 @@ const Post = (props) => {
       setIsPostedCommentVisible(true);
       setComments("");
       props.comments.length += 1;
-      setIsCommentSent(true)
+      setIsCommentSent(true);
     } catch (err) {
       console.log(err);
       setData("Something went wrong");
@@ -144,24 +146,50 @@ const Post = (props) => {
 
   return (
     <div className="bg-white dark:bg-subMajorDark text-gray-900 dark:text-gray-200 rounded-md">
-      <div className="flex gap-2 items-center p-5">
-        <img
-          className="rounded-full sm:w-[3.5rem] sm:h-[3.5rem] h-[2rem] w-[2rem] object-cover"
-          src="/Images/profile.jpeg"
-          alt=""
-        />
-        <div>
-          <p className="font-medium flex gap-1">
-            <span>{props.firstName}</span> <span>{props.lastName}</span>
-          </p>
-          <p className="text-[.90rem] font-medium flex gap-1">
-            {props.date}.{" "}
-            <GlobeIcon
-              style={"h-[18px] w-[18px] text-gray-900 dark:text-gray-200"}
-            />
-          </p>
+      {props.redirect === true && (
+        <Link
+          to={`/u/user/visit/${userId}`}
+          className="flex gap-2 items-center p-5"
+        >
+          <img
+            className="rounded-full sm:w-[3.5rem] sm:h-[3.5rem] h-[2rem] w-[2rem] object-cover"
+            src="/Images/profile.jpeg"
+            alt=""
+          />
+          <div>
+            <p className="font-medium flex gap-1">
+              <span>{props.firstName}</span> <span>{props.lastName}</span>
+            </p>
+            <p className="text-[.90rem] font-medium flex gap-1">
+              {props.date}.{" "}
+              <GlobeIcon
+                style={"h-[18px] w-[18px] text-gray-900 dark:text-gray-200"}
+              />
+            </p>
+          </div>
+        </Link>
+      )}
+
+      {props.redirect === false && (
+        <div className="flex gap-2 items-center p-5">
+          <img
+            className="rounded-full sm:w-[3.5rem] sm:h-[3.5rem] h-[2rem] w-[2rem] object-cover"
+            src="/Images/profile.jpeg"
+            alt=""
+          />
+          <div>
+            <p className="font-medium flex gap-1">
+              <span>{props.firstName}</span> <span>{props.lastName}</span>
+            </p>
+            <p className="text-[.90rem] font-medium flex gap-1">
+              {props.date}.{" "}
+              <GlobeIcon
+                style={"h-[18px] w-[18px] text-gray-900 dark:text-gray-200"}
+              />
+            </p>
+          </div>
         </div>
-      </div>
+      )}
 
       <div className="p-5">{props.title}</div>
       <div>
@@ -173,7 +201,6 @@ const Post = (props) => {
             color="gray"
             ariaLabel="loading"
           />
-
         )}
         {hasError ? (
           <p>Unable to load image.</p>
@@ -269,17 +296,17 @@ const Post = (props) => {
               <EmojiIconPicker style="w-10 h-10" />
             </div>
             <div>
-              { isCommentSent &&
+              {isCommentSent && (
                 <button
                   type="submit"
                   className="bg-blue-500 text-white rounded-md py-1 px-4 bg-"
                 >
                   <RocketIcon />
                 </button>
-              }
-              {  isCommentSent === false &&
+              )}
+              {isCommentSent === false && (
                 <button
-                type="button"
+                  type="button"
                   className="bg-blue-500 text-white rounded-md py-1 px-4 bg-"
                 >
                   <Audio
@@ -290,7 +317,7 @@ const Post = (props) => {
                     ariaLabel="loading"
                   />
                 </button>
-              }
+              )}
             </div>
           </form>
           {isPickerVisible && (

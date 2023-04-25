@@ -38,7 +38,9 @@ const PostHome = () => {
               lastName={post.lastName}
               src={post.post}
               key={post.post}
+              userId={post.userId}
               comments={post.comments}
+              redirect={true}
             />
           );
         })}
