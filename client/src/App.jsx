@@ -9,6 +9,7 @@ import PageNotFounde from "./pages/pageNotFound";
 import UserDashboard from "./pages/userDashboard";
 import ContactPage from "./pages/contact";
 import ComingSoonPage from "./pages/comingSoon";
+import VisitUser from "./pages/visitUser";
 const App = () => {
   return (
     <Router>
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="*" element={<PageNotFounde />} />
         <Route path="/u/messages" element={<ComingSoonPage />} />
+        <Route path="/u/user/visit" element={<VisitUser />} />
         <Route path="/u/notifications" element={<ComingSoonPage />} />
         <Route path="/more" element={<ComingSoonPage />} />
         <Route path="/authenticate" element={<Authentication />} />
