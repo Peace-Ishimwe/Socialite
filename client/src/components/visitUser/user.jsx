@@ -1,9 +1,30 @@
-import React from 'react'
+import React from "react";
 
 const User = () => {
   return (
-    <div>User</div>
-  )
-}
+    <div className="main-container w-11/12 md:w-10/12 2xl:w-8/12 mx-auto mt-10 relative">
+      <div className="relative w-full h-fit dark:bg-subMajorDark bg-white rounded-t-3xl">
+        <div className="relative">
+          <img
+            className="w-full h-[20vh] min-[460px]:h-[30vh] sm:h-[40vh] object-cover rounded-t-3xl"
+            src="/Images/profile.jpeg"
+            alt="the cover image"
+          />
+        </div>
+        <div className="relative h-2 flex justify-center">
+          <img
+            className="object-cover w-36 h-36 rounded-full absolute bottom-[-30px] left-1/2 transform -translate-x-1/2 border-white border-[5px]"
+            src="/Images/profile.jpeg"
+            alt="the profile image"
+          />
+        </div>
+        <div className="mt-10 flex flex-col gap-1">
+          <div className="text-lg">Peace Ishimwe</div>
+          <div>I'm a software engineer</div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default User
+export default User;
