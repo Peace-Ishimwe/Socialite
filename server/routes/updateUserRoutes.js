@@ -4,5 +4,4 @@ const router = new Router();
 
 router.post("/v1/api/u/user/info/update", updateUserInfo);
 
-
 export default router;
