@@ -6,7 +6,7 @@ export const getUserInfoVisit = async (req , res) => {
     const id = req.params.id
     try {
         const user = await User.findById(id)
-        res.json({firstName:user.firstName, lastName:user.lastName})
+        res.json({firstName:user.firstName, lastName:user.lastName , email:user.email , gender:user.gender , telephone:user.telephone , followers:user.followers , followings:user.followings})
     } catch (err) {
         console.log(err)
     }

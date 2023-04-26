@@ -25,12 +25,14 @@ import aboutRoutes from "./routes/aboutRoutes.js"
 import visitUserRoutes from "./routes/visitUserRoutes.js"
 import findUsersRoutes from "./routes/findUsersRoutes.js"
 import followUserRoutes from './routes/followRoutes.js';
+import updateUserRoutes from "./routes/updateUserRoutes.js"
 app.use("/", authRoutes);
 app.use("/", postRoutes);
 app.use("/", aboutRoutes);
 app.use("/" , visitUserRoutes)
 app.use("/" , findUsersRoutes)
 app.use("/" , followUserRoutes)
+app.use("/" , updateUserRoutes)
 
 // ------------ the dotenv file ------------- 
 import dotenv from 'dotenv'
@@ -38,6 +40,7 @@ dotenv.config()
 
 // --------------- Listening to port -------------- 
 const port = process.env.PORT || 8080
+app.use("/" , followUserRoutes)
 app.listen(port , ()=>{
     console.log(`listening on port ${port}`);
 }); 
