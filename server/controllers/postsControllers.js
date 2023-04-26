@@ -10,11 +10,17 @@ export const getPost = async (req, res) => {
     const userId = decoded.id;
 
     const posts = await Posts.find({ userId });
-    const user = await User.findById(userId);
     const userPosts = [];
 
     if (posts.length > 0) {
-      const { firstName, lastName } = user;
+      const profilePost = await Posts.findOne({userId , profile: true})
+      let profileImageUrl;
+      if (profilePost) {
+        profileImageUrl = profilePost.post;
+      } else {
+        profileImageUrl =
+          "https://previews.123rf.com/images/metelsky/metelsky1809/metelsky180900233/109815470-man-avatar-profile-male-face-icon-vector-illustration.jpg";
+      }
       for (const post of posts) {
         const userInfo = await User.findById(post.userId);
         const userId = post.userId;
@@ -22,6 +28,7 @@ export const getPost = async (req, res) => {
           post: post.post,
           data: post.data,
           date: post.date,
+          profileImageUrl: profileImageUrl,
           id: post._id,
           likes: post.likes,
           comments: post.comments.reverse(),
@@ -41,7 +48,7 @@ export const getPost = async (req, res) => {
 
 export const uploadPost = async (req, res) => {
   try {
-    const { previewSource, dataPost } = req.body;
+    const { previewSource, dataPost, cover, profile } = req.body;
     const { id: userId } = jwt.verify(req.cookies.jwt, process.env.SECRET_KEY);
     const { secure_url: postUrl } = await cloudinary.uploader.upload(
       previewSource,
@@ -50,10 +57,27 @@ export const uploadPost = async (req, res) => {
         folder: "socialite_posts",
       }
     );
+
+    if (cover === true) {
+      const coverUpdated = await Posts.findOneAndUpdate(
+        { cover: true },
+        { $set: { cover: false } },
+        { new: true }
+      );
+    } else if (profile === true) {
+      const profileUpdated = await Posts.findOneAndUpdate(
+        { profile: true },
+        { $set: { profile: false } },
+        { new: true }
+      );
+    }
+
     const newPost = await Posts.create({
       post: postUrl,
       data: dataPost,
       userId,
+      profile: profile,
+      cover: cover,
     });
     res.json({ message: "Uploaded successfully", newPost });
   } catch (error) {
@@ -73,11 +97,20 @@ export const getAllPosts = async (req, res) => {
 
     for (const post of allPosts) {
       const userInfo = await User.findById(post.userId);
-      const userId = post.userId;
+      const userId = userInfo._id;
+      const profilePost = await Posts.findOne({userId , profile: true})
+      let profileImageUrl;
+      if (profilePost) {
+        profileImageUrl = profilePost.post;
+      } else {
+        profileImageUrl =
+          "https://previews.123rf.com/images/metelsky/metelsky1809/metelsky180900233/109815470-man-avatar-profile-male-face-icon-vector-illustration.jpg";
+      }
       userPosts.push({
         post: post.post,
         data: post.data,
         date: post.date,
+        profileImageUrl : profileImageUrl,
         id: post._id,
         likes: post.likes,
         userId: post.userId,
@@ -184,7 +217,7 @@ export const checkIfLiked = async (req, res) => {
 
 export const commentPost = async (req, res) => {
   try {
-    const { id , comments } = req.body;
+    const { id, comments } = req.body;
     const token = req.cookies.jwt;
 
     if (!token) {
@@ -205,7 +238,13 @@ export const commentPost = async (req, res) => {
     const year = now.getFullYear();
     const formattedDate = `${day} ${month} ${year}`;
 
-    post.comments.push({ firstName, lastName, commenterId:userId  , comments, formattedDate });
+    post.comments.push({
+      firstName,
+      lastName,
+      commenterId: userId,
+      comments,
+      formattedDate,
+    });
     await post.save();
 
     res.status(200).json({ message: "Comment posted succesfully" });
