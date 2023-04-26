@@ -49,6 +49,19 @@
   }
 }
 
+.updateInfo {
+  animation-name: updateInfo;
+  animation-duration: 0.5s;
+}
+@keyframes updateInfo {
+  from {
+    top: -50%;
+  }
+  to {
+    top: 50%;
+  }
+}
+
 *::-webkit-scrollbar {
     display: none;
     height: 10px;

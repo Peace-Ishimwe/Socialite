@@ -209,7 +209,7 @@ const Post = (props) => {
         ) : (
           <img
             src={props.src}
-            className="w-full mx-auto sm:h-fit h-[fit-content] object-cover"
+            className="w-fit mx-auto sm:h-fit max-h-[80vh] object-cover"
             onLoad={handleLoad}
             onError={handleError}
             style={{ display: isLoading || hasError ? "none" : "block" }}

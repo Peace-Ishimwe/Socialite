@@ -6,7 +6,7 @@ const Profile = () => {
   const [email , firstName , lastName , about , followers , followings ] = protectRoute();
 
   return (
-    <div className="profile-user mt-5 bg-gray-100 dark:bg-subMajorDark rounded-2xl overflow-hidden pb-5">
+    <div className="profile-user mt-5 bg-gray-100 dark:bg-subMajorDark max-w-[20rem] rounded-2xl overflow-hidden pb-5">
       <div className="relative w-fit">
         <img
           className="w-[20rem] h-[8rem] object-cover"
@@ -23,7 +23,7 @@ const Profile = () => {
         <span className="dark:text-gray-200 text-gray-700 text-xl font-semibold">
           {firstName} {lastName}
         </span>
-        <span className="dark:text-gray-200 text-gray-700 text-center">
+        <span className="dark:text-gray-200 text-gray-700 px-2 text-center">
           {about != "Tell us more about you 😃" && about}
         </span>
       </div>
