@@ -46,17 +46,9 @@ const Authentication = () => {
         },
         { withCredentials: true }
       );
-      if (data) {
-        if (data.errors) {
-          const { email, password } = data.errors;
-          if (email) generateError(email);
-          else if (password) generateError(password);
-        } else {
-          navigate("/");
-        }
-      }
-    } catch (ex) {
-      console.log(ex);
+      navigate("/")
+    } catch (error) {
+      generateError(error.response.data.error)
     }
   };
 

@@ -46,8 +46,8 @@ export const UserProfile = () => {
             alt="the profile image"
           />
         </div>
-        <span className="text-lg text-gray-800 dark:text-gray-200">
-          {firstName} {lastName}
+        <span className="text-sm text-gray-800 dark:text-gray-200 flex flex-wrap max-w-[8rem] ">
+          {firstName}  {lastName}
         </span>
       </div>
     </Link>

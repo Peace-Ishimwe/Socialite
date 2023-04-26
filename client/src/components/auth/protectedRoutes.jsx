@@ -8,6 +8,10 @@ const protectRoute = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [aboutUserIn, setLastAboutUser] = useState("");
+  const [followers, setFollowers] = useState("");
+  const [followings, setFollowings] = useState("");
+  const [gender, setGender] = useState("");
+  const [telephone, setTelephone] = useState("");
 
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies([]);
@@ -30,6 +34,10 @@ const protectRoute = () => {
             setFirstName(data.firstName);
             setLastName(data.lastName);
             setLastAboutUser(data.about);
+            setFollowers(data.followers)
+            setFollowings(data.followings)
+            setGender(data.gender)
+            setTelephone(data.telephone)
           }
           if (!data.status) {
             removeCookie("jwt");
@@ -43,7 +51,7 @@ const protectRoute = () => {
     verifyUser();
   }, []);
 
-  return [email, firstName, lastName, aboutUserIn];
+  return [email, firstName, lastName, aboutUserIn , followers, followings , gender , telephone];
 };
 
 export default protectRoute;

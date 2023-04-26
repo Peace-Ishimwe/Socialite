@@ -3,7 +3,7 @@ import ProfileImage from "../../../assets/Images/profile.jpeg";
 import protectRoute from "../../auth/protectedRoutes";
 
 const Profile = () => {
-  const [email , firstName , lastName , about] = protectRoute();
+  const [email , firstName , lastName , about , followers , followings ] = protectRoute();
 
   return (
     <div className="profile-user mt-5 bg-gray-100 dark:bg-subMajorDark rounded-2xl overflow-hidden pb-5">
@@ -31,14 +31,14 @@ const Profile = () => {
       <div className="followStatus flex mt-4 mb-4 items-center justify-evenly">
         <div className="follow flex flex-col justify-center items-center">
           <span className="dark:text-gray-200 text-gray-700 font-bold text-xl">
-            6,890
+            {followers}
           </span>
           <span className="dark:text-gray-200 text-gray-700">Followers</span>
         </div>
         <div className="h-14 w-[.13rem] bg-[#cfcdcd]"></div>
         <div className="follow flex flex-col justify-center items-center">
           <span className="dark:text-gray-200 text-gray-700 font-bold text-xl">
-            3
+            {followings}
           </span>
           <span className="dark:text-gray-200 text-gray-700">Followings</span>
         </div>

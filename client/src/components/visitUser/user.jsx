@@ -65,7 +65,11 @@ const User = () => {
               </p>
             )}
           </div>
-          <div>{userAbout != null && <p>{userAbout}</p>}</div>
+          <div>
+            {userAbout != null && userAbout != "Tell us more about you 😃" && (
+              <p>{userAbout}</p>
+            )}
+          </div>
         </div>
       </div>
     </div>

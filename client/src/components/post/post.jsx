@@ -192,15 +192,17 @@ const Post = (props) => {
       )}
 
       <div className="p-5">{props.title}</div>
-      <div>
+      <div className="flex text-white justify-center items-center">
         {isLoading && (
-          <Audio
-            height="32"
-            width="60"
-            radius="9"
-            color="gray"
-            ariaLabel="loading"
-          />
+          <div className="flex justify-center items-center flex-col gap-2d">
+            <Audio
+              height="32"
+              width="60"
+              radius="9"
+              ariaLabel="loading"
+            />
+            Loading image....
+          </div>
         )}
         {hasError ? (
           <p>Unable to load image.</p>
@@ -355,11 +357,11 @@ const Post = (props) => {
                 >
                   <div className="flex items-start mb-4">
                     <Link to={`/u/user/visit/${comment.commenterId}`}>
-                    <img
-                      className="w-8 h-8 rounded-full mr-2"
-                      src="https://i.pravatar.cc/150?img=10"
-                      alt="User avatar"
-                    />
+                      <img
+                        className="w-8 h-8 rounded-full mr-2"
+                        src="https://i.pravatar.cc/150?img=10"
+                        alt="User avatar"
+                      />
                     </Link>
                     <div className="flex-1">
                       <Link to={`/u/user/visit/${comment.commenterId}`}>
