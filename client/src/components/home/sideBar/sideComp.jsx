@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import protectRoute from "../../auth/protectedRoutes";
+import { getProfileImage } from "../../profileCover/profileCover";
 
 export const SideComp = (props) => {
   return (
@@ -36,13 +37,14 @@ export const AddPost = (props) => {
 
 export const UserProfile = () => {
   const [email , firstName , lastName] = protectRoute();
+  const profileImageUrl = getProfileImage()
   return (
     <Link to="/u/user">
       <div className="flex items-center gap-2">
         <div className="rounded-full bg-black w-fit overflow-hidden">
           <img
             className="object-cover h-10 w-10"
-            src="/Images/profile.jpeg"
+            src={profileImageUrl}
             alt="the profile image"
           />
         </div>

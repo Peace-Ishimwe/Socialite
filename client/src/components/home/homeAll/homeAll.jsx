@@ -4,6 +4,7 @@ import Logo from "../../../assets/Images/logo.1.png";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { getProfileImage } from "../../profileCover/profileCover";
 
 export const HomeAll = (props) => {
   const [hidden, setHidden] = useState("hidden");
@@ -23,6 +24,7 @@ export const HomeAll = (props) => {
     navigate("/authenticate");
   };
 
+  const profileImageUrl = getProfileImage()
   return (
     <div
       className={`${props.display} flex md:gap-5 gap-2 items-center mb-6 justify-end`}
@@ -53,7 +55,7 @@ export const HomeAll = (props) => {
           <div className="rounded-full bg-black w-fit overflow-hidden">
             <img
               className="object-cover h-10 w-10"
-              src="/Images/profile.jpeg"
+              src={profileImageUrl}
               alt="the profile image"
             />
           </div>

@@ -1,21 +1,24 @@
 import React from "react";
 import ProfileImage from "../../../assets/Images/profile.jpeg";
 import protectRoute from "../../auth/protectedRoutes";
+import { getProfileImage , getCoverImage } from "../../profileCover/profileCover";
 
 const Profile = () => {
   const [email , firstName , lastName , about , followers , followings ] = protectRoute();
-
+  const profileImageUrl = getProfileImage()
+  const coverImageUrl = getCoverImage()
+  
   return (
     <div className="profile-user mt-5 bg-gray-100 dark:bg-subMajorDark max-w-[20rem] rounded-2xl overflow-hidden pb-5">
       <div className="relative w-fit">
         <img
           className="w-[20rem] h-[8rem] object-cover"
-          src={ProfileImage}
+          src={coverImageUrl}
           alt="the cover image"
         />
         <img
           className="object-cover w-28 h-28 rounded-full absolute top-16 left-1/2 transform -translate-x-1/2"
-          src={ProfileImage}
+          src={profileImageUrl}
           alt="the profile image"
         />
       </div>

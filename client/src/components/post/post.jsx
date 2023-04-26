@@ -153,7 +153,7 @@ const Post = (props) => {
         >
           <img
             className="rounded-full sm:w-[3.5rem] sm:h-[3.5rem] h-[2rem] w-[2rem] object-cover"
-            src="/Images/profile.jpeg"
+            src={props.profile}
             alt=""
           />
           <div>
@@ -174,7 +174,7 @@ const Post = (props) => {
         <div className="flex gap-2 items-center p-5">
           <img
             className="rounded-full sm:w-[3.5rem] sm:h-[3.5rem] h-[2rem] w-[2rem] object-cover"
-            src="/Images/profile.jpeg"
+            src={props.profile}
             alt=""
           />
           <div>
@@ -209,7 +209,7 @@ const Post = (props) => {
         ) : (
           <img
             src={props.src}
-            className="w-fit mx-auto sm:h-fit max-h-[80vh] object-cover"
+            className="w-full mx-auto sm:h-fit max-h-[100vh] object-cover"
             onLoad={handleLoad}
             onError={handleError}
             style={{ display: isLoading || hasError ? "none" : "block" }}

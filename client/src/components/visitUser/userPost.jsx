@@ -44,6 +44,7 @@ const userPost = () => {
               likes={post.likes.length}
               date={post.date}
               title={post.data}
+              profile={post.profileImageUrl}
               firstName={post.firstName}
               lastName={post.lastName}
               src={post.post}

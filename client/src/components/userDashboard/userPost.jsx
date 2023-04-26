@@ -14,7 +14,7 @@ const userPost = () => {
           withCredentials: true,
         });
         if (!posts.data.message) {
-          setAllPosts(posts.data);
+          setAllPosts(posts.data.reverse());
         } else {
           setNoPost(posts.data.message);
         }
@@ -34,6 +34,7 @@ const userPost = () => {
               id={post.id}
               likes={post.likes.length}
               date={post.date}
+              profile={post.profileImageUrl}
               title={post.data}
               firstName={post.firstName}
               lastName={post.lastName}

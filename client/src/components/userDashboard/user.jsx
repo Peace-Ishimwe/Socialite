@@ -12,38 +12,29 @@ import data from "@emoji-mart/data";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { Audio } from "react-loader-spinner";
+import PostShare from "../home/middle/PostShare";
+import {getProfileImage , getCoverImage} from "../profileCover/profileCover";
 
 const User = () => {
-  const [email, firstName, lastName, aboutUserInfo] = protectRoute();
-  const [showAboutFronted , setShowAboutFronted] = useState(false)
-  const [valueFronted , setValueFronted] = useState()
+  const [
+    email,
+    firstName,
+    lastName,
+    aboutUserInfo,
+    followers,
+    followings,
+    gender,
+    telephone,
+  ] = protectRoute();
+  const [showAboutFronted, setShowAboutFronted] = useState(false);
+  const [valueFronted, setValueFronted] = useState();
   // Handle the profile image change
-
-  const [imageProfile, setImageProfile] = useState(null);
-  const imageRefProfile = useRef();
-
-  const onProfileImageChange = (event) => {
-    if (event.target.files && event.target.files[0]) {
-      let img = event.target.files[0];
-      setImageProfile({
-        image: URL.createObjectURL(img),
-      });
-    }
-  };
-
+  const [profileImage, setProfileImage] = useState(false);
+  const profileImageUrl = getProfileImage();
   // Handle the cover image change
+  const [coverImage, setCoverImage] = useState(false);
+  const coverImageUrl = getCoverImage();
 
-  const [imageCover, setImageCover] = useState(null);
-  const imageRefCover = useRef();
-
-  const onCoverImageChange = (event) => {
-    if (event.target.files && event.target.files[0]) {
-      let img = event.target.files[0];
-      setImageCover({
-        image: URL.createObjectURL(img),
-      });
-    }
-  };
 
   // Handle the emoji picker and form
   const [aboutForm, setAboutForm] = useState(false);
@@ -90,9 +81,9 @@ const User = () => {
         generateSuccess(data.message);
         setAboutUser("");
         setLoader(false);
-        setAboutForm(!aboutForm)
-        setShowAboutFronted(!showAboutFronted)
-        setValueFronted(aboutUser)
+        setAboutForm(!aboutForm);
+        setShowAboutFronted(!showAboutFronted);
+        setValueFronted(aboutUser);
       }
     } catch (err) {
       console.log(err);
@@ -110,91 +101,67 @@ const User = () => {
         <div className="relative">
           <img
             className="w-full h-[20vh] min-[460px]:h-[30vh] sm:h-[40vh] object-cover rounded-t-3xl"
-            src="/Images/profile.jpeg"
+            src={coverImageUrl}
             alt="the cover image"
           />
-          <div>
+          <div className="absolute w-11/12 top-2 left-2 z-30 shadow-2xl">
             <div
               onClick={() => {
-                imageRefCover.current.click();
+                setCoverImage(!coverImage);
               }}
             >
-              <CameraIcon style="text-gray-700 dark:text-gray-200 h-8 w-8 absolute top-2 right-2" />
+              <div className="bg-gray-200 p-1 w-fit rounded-md cursor-pointer">
+                <CameraIcon />
+              </div>
             </div>
-            <input
-              type="file"
-              name="cover"
-              id="cover"
-              className="hidden"
-              ref={imageRefCover}
-              onChange={onCoverImageChange}
-            />
+            {coverImage && (
+              <div className="flex">
+                <span className="absolute right-1/2 ">
+                  <CloseCirled
+                    action={() => {
+                      setCoverImage(!coverImage);
+                    }}
+                    position="h-[2rem] w-[2rem] text-red-300 cursor-pointer"
+                  />
+                </span>
+                <PostShare cover={true} />
+              </div>
+            )}
           </div>
         </div>
         <div className="relative h-2 flex justify-center">
           <img
             className="object-cover w-36 h-36 rounded-full absolute bottom-[-30px] left-1/2 transform -translate-x-1/2 border-white border-[5px]"
-            src="/Images/profile.jpeg"
+            src={profileImageUrl}
             alt="the profile image"
           />
-          <div className="p-2 bg-yellow-500 border-[3px] box-border border-white rounded-full w-fit ml-[10.5rem] z-50"></div>
-          <div>
+          <div className="absolute w-11/12 top-2 left-2 z-30 shadow-2xl">
             <div
+              className="left-[60%] absolute"
               onClick={() => {
-                imageRefProfile.current.click();
+                setProfileImage(!profileImage);
               }}
             >
-              <CameraIcon style="text-gray-700 dark:text-gray-200 h-8 w-8 ml-[2rem]  z-50" />
+              <div className="bg-gray-200 p-1 rounded-md cursor-pointer">
+                <CameraIcon />
+              </div>
             </div>
-            <input
-              type="file"
-              name="profile"
-              id="profile"
-              className="hidden"
-              ref={imageRefProfile}
-              onChange={onProfileImageChange}
-            />
+            <div className="w-full absolute top-[-240px] sm:top-[-340px]">
+              {profileImage && (
+                <div className="flex">
+                  <span className="absolute right-1/2 ">
+                    <CloseCirled
+                      action={() => {
+                        setProfileImage(!profileImage);
+                      }}
+                      position="h-[2rem] cursor-pointer w-[2rem] text-red-300"
+                    />
+                  </span>
+                  <PostShare profile={true} />
+                </div>
+              )}
+            </div>
           </div>
-          {/* Display the profile image */}
-          {imageProfile && (
-            <div className="previewImage w-full absolute bg-whiteflex items-center justify-center flex-col mt-16  bg-white dark:bg-subMajorDark py-5  shadow-xl flex">
-              <CloseCirled
-                position={"absolute top-2 right-2 text-red-500 w-9 h-9"}
-                action={() => setImageProfile(null)}
-              />
-              <img
-                className="w-fit h-fit max-h-[30vh] mx-auto object-cover rounded-[0.5rem]"
-                src={imageProfile.image}
-                alt=""
-              />
-              <button
-                type="submit"
-                className="px-4 py-2 bg-blue-500 rounded-md text-gray-200 text-lg font-normal flex items-center gap-3 mt-5"
-              >
-                Post <RocketIcon />{" "}
-              </button>
-            </div>
-          )}
-          {/* Display the cover image */}
-          {imageCover && (
-            <div className="previewImage w-full absolute bg-whiteflex items-center justify-center flex-col mt-16  bg-white dark:bg-subMajorDark py-5  shadow-xl flex">
-              <CloseCirled
-                position={"absolute top-2 right-2 text-red-500 w-9 h-9"}
-                action={() => setImageCover(null)}
-              />
-              <img
-                className="w-fit h-fit max-h-[30vh] mx-auto object-cover rounded-[0.5rem]"
-                src={imageCover.image}
-                alt=""
-              />
-              <button
-                type="submit"
-                className="px-4 py-2 bg-blue-500 rounded-md text-gray-200 text-lg font-normal flex items-center gap-3 mt-5"
-              >
-                Post <RocketIcon />{" "}
-              </button>
-            </div>
-          )}
         </div>
       </div>
       <div className="bg-white dark:bg-subMajorDark py-10 text-gray-700 dark:text-gray-200 text-lg font-medium flex-col flex items-center justify-center rounded-b-lg px-2 sm:px-7">
@@ -202,16 +169,10 @@ const User = () => {
           {firstName} {lastName}
         </div>
         <div className="flex gap-2 sm:gap-6 items-center">
-          <div className="more-about-you text-center">{
-            showAboutFronted == false && 
-            aboutUserInfo
-
-          }
-          {
-            showAboutFronted &&
-            valueFronted
-
-          }</div>
+          <div className="more-about-you text-center">
+            {showAboutFronted == false && aboutUserInfo}
+            {showAboutFronted && valueFronted}
+          </div>
           <button
             type="submit"
             className="hover:bg-gray-300 p-2 rounded-md dark:hover:bg-gray-500 transition-all duration-1000"

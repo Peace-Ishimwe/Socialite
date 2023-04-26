@@ -8,8 +8,10 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import { Audio } from "react-loader-spinner";
+import { getProfileImage } from "../../profileCover/profileCover";
 
-const PostShare = () => {
+const PostShare = (props) => {
+  const profileImageUrl = getProfileImage()
   //toast
   const generateSuccess = (success) =>
     toast.success(success, {
@@ -47,7 +49,7 @@ const PostShare = () => {
       const { data } = await axios.post(
         "http://localhost:3000/v1/api/upload/post",
         {
-          previewSource , dataPost
+          previewSource , dataPost , cover: props.cover , profile: props.profile 
         },
         {
           withCredentials: true,
@@ -100,7 +102,7 @@ const PostShare = () => {
     >
       <img
         className="rounded-full sm:w-[3rem] sm:h-[3rem] h-[2rem] w-[2rem] object-cover"
-        src={ProfileImage}
+        src={profileImageUrl}
         alt=""
       />
       <div className="flex flex-col w-[90%] sm:gap-5 gap-2 ">
