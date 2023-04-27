@@ -19,7 +19,7 @@ export const getPost = async (req, res) => {
         profileImageUrl = profilePost.post;
       } else {
         profileImageUrl =
-          "https://previews.123rf.com/images/metelsky/metelsky1809/metelsky180900233/109815470-man-avatar-profile-male-face-icon-vector-illustration.jpg";
+          "/Images/profile.jpg";
       }
       for (const post of posts) {
         const userInfo = await User.findById(post.userId);
@@ -60,13 +60,13 @@ export const uploadPost = async (req, res) => {
 
     if (cover === true) {
       const coverUpdated = await Posts.findOneAndUpdate(
-        { cover: true },
+        { cover: true , userId: userId },
         { $set: { cover: false } },
         { new: true }
       );
     } else if (profile === true) {
       const profileUpdated = await Posts.findOneAndUpdate(
-        { profile: true },
+        { profile: true  , userId: userId},
         { $set: { profile: false } },
         { new: true }
       );
@@ -104,7 +104,7 @@ export const getAllPosts = async (req, res) => {
         profileImageUrl = profilePost.post;
       } else {
         profileImageUrl =
-          "https://previews.123rf.com/images/metelsky/metelsky1809/metelsky180900233/109815470-man-avatar-profile-male-face-icon-vector-illustration.jpg";
+          "/Images/profile.jpg";
       }
       userPosts.push({
         post: post.post,

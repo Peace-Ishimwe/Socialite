@@ -11,7 +11,7 @@ export const profileImage = async (req, res) => {
     if(post){
         res.status(200).json({ urlProfileImage: post.post });
     }else{
-        res.status(200).json({ urlProfileImage: "https://previews.123rf.com/images/metelsky/metelsky1809/metelsky180900233/109815470-man-avatar-profile-male-face-icon-vector-illustration.jpg" });
+        res.status(200).json({ urlProfileImage: "/Images/profile.jpg" });
     }
 
   } catch (error) {
@@ -31,7 +31,7 @@ export const coverImage = async (req, res) => {
       if(post){
         res.status(200).json({ urlCoverImage: post.post });
       }else{
-        res.status(200).json({ urlCoverImage:"https://media.istockphoto.com/id/1315768127/photo/abstract-black-background-empty-black-gradient-room-studio-background-abstract-backgrounds.jpg?b=1&s=170667a&w=0&k=20&c=rrYOb0pJGGjAIu22xkfIfgRZC11jRi39s_AmBMgAah4=" });
+        res.status(200).json({ urlCoverImage:"/Images/cover.jpg" });
       }
   
     } catch (error) {

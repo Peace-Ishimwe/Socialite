@@ -3,24 +3,21 @@ import mongoose from "mongoose";
 import User from "../model/authModel.js";
 import Post from "../model/postModel.js";
 
-export const findUsers = async (req, res) => {
+export const getPopularProfiles = async (req, res) => {
   try {
-    const token = req.cookies.jwt;
-    const decoded = jwt.verify(token, process.env.SECRET_KEY);
-    const userId = mongoose.Types.ObjectId(decoded.id);
-    
+
     const users = await User.aggregate([
-      { $match: { _id: { $ne: userId } } },
-      { $sample: { size: 10 } },
-      { 
-        $project: { 
-          _id: 1, 
-          firstName: 1, 
-          lastName: 1,
-          followersCount: { $size: "$followers" },
-        } 
-      }
-    ]);
+        { 
+          $project: { 
+            _id: 1, 
+            firstName: 1, 
+            lastName: 1,
+            followersCount: { $size: "$followers" },
+          } 
+        },
+        { $sort: { followersCount: -1 } },
+        { $limit: 10 },
+      ]);
 
     const updatedUsers = await Promise.all(
       users.map(async (user) => {

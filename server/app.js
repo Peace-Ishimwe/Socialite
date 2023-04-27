@@ -27,6 +27,7 @@ import findUsersRoutes from "./routes/findUsersRoutes.js"
 import followUserRoutes from './routes/followRoutes.js';
 import updateUserRoutes from "./routes/updateUserRoutes.js"
 import profileCoverRoutes from "./routes/profileCoverRoutes.js"
+import popularProfilesRoutes from "./routes/popularProfilesRoutes.js"
 app.use("/", authRoutes);
 app.use("/", postRoutes);
 app.use("/", aboutRoutes);
@@ -35,6 +36,7 @@ app.use("/" , findUsersRoutes)
 app.use("/" , followUserRoutes)
 app.use("/" , updateUserRoutes)
 app.use("/" , profileCoverRoutes)
+app.use("/" , popularProfilesRoutes)
 
 // ------------ the dotenv file ------------- 
 import dotenv from 'dotenv'
