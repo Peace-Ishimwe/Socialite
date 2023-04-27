@@ -19,7 +19,6 @@ const App = () => {
         <Route path="/u/messages" element={<ComingSoonPage />} />
         <Route path="/u/user/visit/:userId" element={<VisitUser />} />
         <Route path="/u/notifications" element={<ComingSoonPage />} />
-        <Route path="/more" element={<ComingSoonPage />} />
         <Route path="/authenticate" element={<Authentication />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/u/user" element={<UserDashboard />} />

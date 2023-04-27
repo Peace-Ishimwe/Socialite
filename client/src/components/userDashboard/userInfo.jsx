@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState  , useEffect } from "react";
 import protectRoute from "../auth/protectedRoutes";
 import { PencilIcon } from "../../assets/icons/icons";
 import { CloseCirled } from "../../assets/icons/icons";
@@ -50,10 +50,20 @@ const UserInfo = () => {
     }
   }
 
+  const [blur, setBlur] = useState("");
+
+  useEffect(() => {
+    if (showUpdate) {
+      setBlur("pointer-events-none blur-xl");
+    } else {
+      setBlur("");
+    }
+  }, [blur, showUpdate]);
+
   return (
     <div className="main-container mt-10">
       <div className=" w-11/12 md:w-10/12 2xl:w-8/12 mx-auto mt-10 mb-10 relative">
-        <div className="flex text-gray-700 dark:text-gray-200 font-extrabold flex-col lg:flex-row justify-evenly  bg-white dark:bg-subMajorDark mx-auto p-5">
+        <div className={`${blur} flex text-gray-700 dark:text-gray-200 font-extrabold flex-col lg:flex-row justify-evenly  bg-white dark:bg-subMajorDark mx-auto p-5`}>
           <div className="flex flex-col gap-2">
             {" "}
             <div className="flex gap-3"><span>First Name: </span> {updatedInfo == false ? <span>{firstName}</span> : <span>{firstNameUpdate}</span> }</div>
@@ -67,14 +77,14 @@ const UserInfo = () => {
           <div className="flex gap-3">Telephone: {updatedInfo == false ? <span>{telephone}</span> : <span>{telephoneUpdate}</span> }</div>
         </div>
         <button
-          className="hover:bg-white p-2 float-right dark:text-gray-200 text-gray-700 rounded-md dark:hover:bg-gray-500 transition-all duration-1000"
+          className={`${blur} hover:bg-white p-2 float-right dark:text-gray-200 text-gray-700 rounded-md dark:hover:bg-gray-500 transition-all duration-1000`}
           onClick={()=>{setShowUpdate(true)}}
         >
           <PencilIcon />
         </button>
 
         { showUpdate && 
-          <form onSubmit={updateUserInfo} className="absolute shadow-xl updateInfo left-1/2 -translate-x-1/2 top-1/2 w-10/12  flex flex-wrap gap-3 bg-white dark:bg-subMajorDark p-10 rounded-md">
+          <form onSubmit={updateUserInfo} className="absolute shadow-xl updateInfo left-1/2 -translate-x-1/2 top-1/2 sm:w-10/12  w-11/12 flex flex-wrap gap-3 bg-white dark:bg-subMajorDark p-10 rounded-md">
             <div className="w-full flex justify-evenly">
               <div className="text-xl font-medium text-gray-700 dark:text-gray-200">Update Your Info</div>
               <div><CloseCirled action={()=>{setShowUpdate(false)}} position="text-red-500" /></div>

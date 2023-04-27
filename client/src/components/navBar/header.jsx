@@ -21,6 +21,8 @@ const Header = (props) => {
     removeCookie("jwt");
     navigate("/authenticate");
   };
+
+  
   
   return (
       <div className="top-middle bg-white dark:bg-majorDark pt-5 lg:pb-5 flex justify-between px-5 w-full gap-5 items-start sticky top-0 shadow-md z-50">

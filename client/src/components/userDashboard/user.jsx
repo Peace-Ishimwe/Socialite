@@ -13,7 +13,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { Audio } from "react-loader-spinner";
 import PostShare from "../home/middle/PostShare";
-import {getProfileImage , getCoverImage} from "../profileCover/profileCover";
+import { getProfileImage, getCoverImage } from "../profileCover/profileCover";
 
 const User = () => {
   const [
@@ -34,10 +34,22 @@ const User = () => {
   // Handle the cover image change
   const [coverImage, setCoverImage] = useState(false);
   const coverImageUrl = getCoverImage();
-
-
   // Handle the emoji picker and form
   const [aboutForm, setAboutForm] = useState(false);
+
+  const [blur, setBlur] = useState("");
+
+  useEffect(() => {
+    if (coverImage) {
+      setBlur("pointer-events-none blur-md");
+    } else if (profileImage) {
+      setBlur("pointer-events-none blur-md");
+    } else if (aboutForm) {
+      setBlur("pointer-events-none blur-md");
+    } else {
+      setBlur("");
+    }
+  }, [blur, profileImage, coverImage, aboutForm]);
 
   // handle the aboutUser
   const [isPickerVisible, setIsPickerVisible] = useState(false);
@@ -96,11 +108,13 @@ const User = () => {
     });
 
   return (
-    <div className="main-container w-11/12 md:w-10/12 2xl:w-8/12 mx-auto mt-10 relative">
+    <div
+      className={`main-container w-11/12 md:w-10/12 2xl:w-8/12 mx-auto mt-10 relative`}
+    >
       <div className="relative w-full h-fit dark:bg-subMajorDark bg-white rounded-t-3xl">
-        <div className="relative">
+        <div className={`relative`}>
           <img
-            className="w-full h-[20vh] min-[460px]:h-[30vh] sm:h-[40vh] object-cover rounded-t-3xl"
+            className={`${blur} w-full h-[20vh] min-[460px]:h-[30vh] sm:h-[40vh] object-cover rounded-t-3xl`}
             src={coverImageUrl}
             alt="the cover image"
           />
@@ -110,7 +124,9 @@ const User = () => {
                 setCoverImage(!coverImage);
               }}
             >
-              <div className="bg-gray-200 p-1 w-fit rounded-md cursor-pointer">
+              <div
+                className={`${blur}  bg-gray-200 p-1 w-fit rounded-md cursor-pointer`}
+              >
                 <CameraIcon />
               </div>
             </div>
@@ -131,22 +147,24 @@ const User = () => {
         </div>
         <div className="relative h-2 flex justify-center">
           <img
-            className="object-cover w-36 h-36 rounded-full absolute bottom-[-30px] left-1/2 transform -translate-x-1/2 border-white border-[5px]"
+            className={`${blur} object-cover w-36 h-36 rounded-full absolute bottom-[-30px] left-1/2 transform -translate-x-1/2 border-white border-[5px]`}
             src={profileImageUrl}
             alt="the profile image"
           />
-          <div className="absolute w-11/12 top-2 left-2 z-30 shadow-2xl">
+          <div className="absolute w-11/12 top-2 left-2 shadow-2xl">
             <div
               className="left-[60%] absolute"
               onClick={() => {
                 setProfileImage(!profileImage);
               }}
             >
-              <div className="bg-gray-200 p-1 rounded-md cursor-pointer">
+              <div
+                className={`${blur} bg-gray-200 p-1 rounded-md cursor-pointer`}
+              >
                 <CameraIcon />
               </div>
             </div>
-            <div className="w-full absolute top-[-240px] sm:top-[-340px]">
+            <div className="w-full absolute top-[-200px] z-30 sm:top-[-340px]">
               {profileImage && (
                 <div className="flex">
                   <span className="absolute right-1/2 ">
@@ -164,7 +182,9 @@ const User = () => {
           </div>
         </div>
       </div>
-      <div className="bg-white dark:bg-subMajorDark py-10 text-gray-700 dark:text-gray-200 text-lg font-medium flex-col flex items-center justify-center rounded-b-lg px-2 sm:px-7">
+      <div
+        className={`${blur} bg-white dark:bg-subMajorDark py-10 text-gray-700 dark:text-gray-200 text-lg font-medium flex-col flex items-center justify-center rounded-b-lg px-2 sm:px-7`}
+      >
         <div className="names mt-16 sm:mt-5 mb-1 text-xl font-semibold">
           {firstName} {lastName}
         </div>
@@ -186,7 +206,7 @@ const User = () => {
       </div>
       {aboutForm && (
         <form
-          className="lg:p-5 p-3 space-y-3 absolute w-11/12 top-[30%] sm:w-8/12 z-50 xl:w-6/12 left-[50%] h-[30vh] -translate-x-1/2 bg-white dark:bg-mainDark shadow-xl rounded-md"
+          className="lg:p-5 p-3 space-y-3 z-20 absolute w-11/12 top-[30%] sm:w-8/12  xl:w-6/12 left-[50%] h-[30vh] -translate-x-1/2 bg-white dark:bg-mainDark shadow-xl rounded-md"
           onSubmit={handleSubmitAboutUser}
         >
           <CloseCirled

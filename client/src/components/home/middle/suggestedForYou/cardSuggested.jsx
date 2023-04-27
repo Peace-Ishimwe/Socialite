@@ -65,7 +65,7 @@ const CardSuggested = (props) => {
       <Link to={`/u/user/visit/${props.id}`}>
         <img
           className="w-[210px] h-[140px] object-cover"
-          src="/Images/profile.jpeg"
+          src={props.profile}
           alt="profile image"
         />
         <div className="text-xl mt-3 mb-1 text-center dark:text-gray-200 text-gray-700 font-medium">

@@ -151,11 +151,13 @@ const Post = (props) => {
           to={`/u/user/visit/${userId}`}
           className="flex gap-2 items-center p-5"
         >
-          <img
-            className="rounded-full sm:w-[3.5rem] sm:h-[3.5rem] h-[2rem] w-[2rem] object-cover"
-            src={props.profile}
-            alt=""
-          />
+          {props.profile && (
+            <img
+              className="rounded-full sm:w-[3.5rem] sm:h-[3.5rem] h-[2rem] w-[2rem] object-cover"
+              src={props.profile}
+              alt=""
+            />
+          )}
           <div>
             <p className="font-medium flex gap-1">
               <span>{props.firstName}</span> <span>{props.lastName}</span>
@@ -192,15 +194,10 @@ const Post = (props) => {
       )}
 
       <div className="p-5">{props.title}</div>
-      <div className="flex text-white justify-center items-center">
+      <div className="flex dark:text-white  text-gray-700 justify-center items-center">
         {isLoading && (
           <div className="flex justify-center items-center flex-col gap-2d">
-            <Audio
-              height="32"
-              width="60"
-              radius="9"
-              ariaLabel="loading"
-            />
+            <Audio height="32" width="60" radius="9" ariaLabel="loading" />
             Loading image....
           </div>
         )}

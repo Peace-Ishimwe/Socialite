@@ -6,6 +6,8 @@ import { ToastContainer, toast } from "react-toastify";
 import LoginImage from "../assets/Images/logo.1.png";
 import Theme from "../components/theme/theme";
 import { Close } from "../assets/icons/icons";
+import Switcher from "../components/theme/switcher";
+import { SideComp } from "../components/home/sideBar/sideComp";
 
 const Authentication = () => {
   //  redirect options using useNavigate hook
@@ -159,19 +161,12 @@ const Authentication = () => {
                   </a>
                 </div>
               </form>
-              <div className="mt-8 text-center text-sm">
-                {" "}
-                <a href="#" className="font-semibold hover:underline">
-                  {" "}
-                  Create a Page{" "}
-                </a>{" "}
-                for a celebrity, band or business{" "}
-              </div>
             </div>
           </div>
+      <SideComp component={<Switcher />}/>
+
         </div>
       </div>
-
       {/* The signup  / register form of socialite */}
 
       {signupToggle && (

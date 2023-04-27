@@ -11,7 +11,7 @@ import { Audio } from "react-loader-spinner";
 import { getProfileImage } from "../../profileCover/profileCover";
 
 const PostShare = (props) => {
-  const profileImageUrl = getProfileImage()
+  const profileImageUrl = getProfileImage();
   //toast
   const generateSuccess = (success) =>
     toast.success(success, {
@@ -27,7 +27,7 @@ const PostShare = (props) => {
   const [previewSource, setPreviewSource] = useState("");
   const [selectedFile, setSelectedFile] = useState("");
   const [loader, setLoader] = useState(false);
-  const [dataPost , setDataPost] = useState("")
+  const [dataPost, setDataPost] = useState("");
 
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
@@ -49,7 +49,10 @@ const PostShare = (props) => {
       const { data } = await axios.post(
         "http://localhost:3000/v1/api/upload/post",
         {
-          previewSource , dataPost , cover: props.cover , profile: props.profile 
+          previewSource,
+          dataPost,
+          cover: props.cover,
+          profile: props.profile,
         },
         {
           withCredentials: true,
@@ -64,14 +67,14 @@ const PostShare = (props) => {
       }
       setFileInputState("");
       setPreviewSource("");
-      setDataPost("")
-      setSelectedFile("")
+      setDataPost("");
+      setSelectedFile("");
     } catch (err) {
       generateError(err.response.statusText);
-      setPreviewSource("")
-      setDataPost("")
+      setPreviewSource("");
+      setDataPost("");
       setFileInputState("");
-      setSelectedFile("")
+      setSelectedFile("");
       setLoader(false);
       console.error(err);
     }
@@ -79,10 +82,10 @@ const PostShare = (props) => {
 
   const handleSubmitFile = (e) => {
     e.preventDefault();
-    if (!selectedFile){
-      generateError("Please select a file")
-      return
-    };
+    if (!selectedFile) {
+      generateError("Please select a file");
+      return;
+    }
     const reader = new FileReader();
     reader.readAsDataURL(selectedFile);
     reader.onloadend = () => {
@@ -100,37 +103,38 @@ const PostShare = (props) => {
       onSubmit={handleSubmitFile}
       className="flex gap-5 bg-white dark:bg-subMajorDark p-3 sm:p-5 rounded-[1rem] min-w-fit w-11/12 sm:w-8/12 mx-auto mt-10 "
     >
-      <img
-        className="rounded-full sm:w-[3rem] sm:h-[3rem] h-[2rem] w-[2rem] object-cover"
-        src={profileImageUrl}
-        alt=""
-      />
+      {profileImageUrl && (
+        <img
+          className="rounded-full sm:w-[3rem] sm:h-[3rem] h-[2rem] w-[2rem] object-cover"
+          src={profileImageUrl}
+          alt=""
+        />
+      )}
       <div className="flex flex-col w-[90%] sm:gap-5 gap-2 ">
         <input
           className="bg-[#28343e12] dark:bg-gray-200 rounded-[10px] p-[6px] sm:p-[10px]  text-sm sm:text-[17px] border-none outline-none"
           type="text"
           placeholder="What's happening"
-          onChange={(e)=> setDataPost(e.target.value)}
-          value={dataPost}          
+          onChange={(e) => setDataPost(e.target.value)}
+          value={dataPost}
         />
         <div className="flex justify-between items-center">
           <div
             className="option text-blue-500 flex  flex-col items-center"
             onClick={() => imageRef.current.click()}
-            
           >
             <ImageIcon style={"text-blue-600"} />
             Photo
           </div>
-          { loader == false &&
+          {loader == false && (
             <button
               type="submit"
               className="button bg-blue-500 self-center px-5 py-2 text-white rounded-md flex gap-1 font-semibold"
             >
               Share <RocketIcon />
             </button>
-          }
-          { loader == true &&
+          )}
+          {loader == true && (
             <button className="button bg-blue-500 self-center px-5 py-2 text-white rounded-md flex gap-1 font-semibold">
               <Audio
                 height="24"
@@ -140,7 +144,7 @@ const PostShare = (props) => {
                 ariaLabel="loading"
               />
             </button>
-          }
+          )}
           <div>
             <input
               type="file"

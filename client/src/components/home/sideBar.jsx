@@ -14,8 +14,11 @@ import { SideComp, AddPost } from "./sideBar/sideComp";
 import Switcher from "../theme/switcher";
 import { LogoImage } from "./homeAll/homeAll";
 import { UserProfile } from "./sideBar/sideComp";
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 
 const  SideBar = (props) => {
+
   return (
     <main
       className={`sidebar-home ${props.display} flex-col gap-10 pl-5 pb-10 overflow-scroll  justify-between bg-white dark:bg-majorDark md:w-[15%] min-w-fit `}
@@ -40,7 +43,6 @@ const  SideBar = (props) => {
         <a href="/privacy-policy">
           <SideComp component={<PrivacyIcon />} title={"Privacy"} true={props.isPrivacy}  />
         </a>
-        <a href="/more"><SideComp component={<MoreIcon />} title={"More"} /></a>
         <SideComp component={<Switcher />} title={"Theme"} />
       </div>
       <AddPost component={<AddIcon />} title={"ADD POST"} />

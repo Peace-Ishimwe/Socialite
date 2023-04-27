@@ -25,7 +25,7 @@ const SuggestedForYou = () => {
 
           responseData.map((data)=>{
             return (
-              <CardSuggested key={data._id} firstName={data.firstName} lastName={data.lastName} id={data._id} followers={data.followersCount}  />
+              <CardSuggested key={data._id} firstName={data.firstName} lastName={data.lastName} id={data._id} followers={data.followersCount} profile={data.profileImage}  />
             )
           })
         }
