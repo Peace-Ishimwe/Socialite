@@ -26,7 +26,7 @@ export const register = async (req, res, next) => {
       sameSite: "None",
       maxAge: maxAge * 1000,
     };
-    // res.cookie("jwt", token, cookieOptions);
+    res.cookie("jwt", token, cookieOptions);
     await AboutUser.create({
       about: "Tell us more about you 😃",
       userId: user._id,
@@ -54,7 +54,7 @@ export const login = async (req, res) => {
           sameSite: "None",
           maxAge: maxAge * 1000,
         };
-        // res.cookie("jwt", token, cookieOptions);
+        res.cookie("jwt", token, cookieOptions);
         res.status(200).json({ user: foundUser._id, authenticated: true, token });
       } else {
         res.status(400).json({ error: "Incorrect email or password" });
