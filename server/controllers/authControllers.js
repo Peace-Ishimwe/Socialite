@@ -19,6 +19,13 @@ export const register = async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await User.create({firstName,lastName,email,password: hashedPassword,gender,telephone});
     const token = createToken(user._id);
+    const cookieOptions = {
+      httpOnly: false,
+      sameSite: "None",
+      secure: true,
+      maxAge: maxAge * 1000
+    };
+    res.cookie("jwt", token , cookieOptions);
     await AboutUser.create({
       about: "Tell us more about you 😃",
       userId: user._id,
@@ -40,6 +47,13 @@ export const login = async (req, res) => {
       const match = await bcrypt.compare(password, foundUser.password);
       if (match) {
         const token = createToken(foundUser._id);
+        const cookieOptions = {
+          httpOnly: false,
+          sameSite: "None",
+          secure: true,
+          maxAge: maxAge * 1000
+        };
+        res.cookie("jwt", token , cookieOptions);
         res.status(200).json({ user: foundUser._id, authenticated: true, token });
       } else {
         res.status(400).json({ error: "Incorrect email or password" });
