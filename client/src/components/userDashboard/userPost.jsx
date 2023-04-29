@@ -10,7 +10,7 @@ const userPost = () => {
   useEffect(() => {
     const getAllPosts = async () => {
       try {
-        const posts = await axios.get("http://localhost:3000/v1/api/u/post", {
+        const posts = await axios.get(`${import.meta.env.VITE_BACKEND_PORT}http://localhost:3000/v1/api/u/post`, {
           withCredentials: true,
         });
         if (!posts.data.message) {

@@ -6,7 +6,7 @@ import { getProfileImage } from "../../profileCover/profileCover";
 export const SideComp = (props) => {
   return (
     <main
-      className="sidebar-home font-semibold text-gray-800 dark:text-gray-200"
+      className="sidebar-home font-semibold hover:bg-gray-200 dark:hover:bg-mainDark p-2 rounded-md text-gray-800 dark:text-gray-200"
       onClick={props.onClick}
     >
       <div className="flex w-fit items-center gap-2">
@@ -55,15 +55,13 @@ export const AddPost = (props) => {
 };
 
 import { useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
 
 export const UserProfile = () => {
   const [email, firstName, lastName] = protectRoute();
   const profileImageUrl = getProfileImage();
   const navigate = useNavigate();
-  const [cookies, setCookie, removeCookie] = useCookies([]);
   const logOut = () => {
-    removeCookie("jwt");
+    document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     navigate("/authenticate");
   };
   return (

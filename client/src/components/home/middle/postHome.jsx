@@ -9,7 +9,7 @@ const PostHome = () => {
     const getAllPosts = async () => {
       try {
         const posts = await axios.get(
-          "http://localhost:3000/v1/api/home/posts",
+          `${import.meta.env.VITE_BACKEND_PORT}/v1/api/home/posts`,
           {
             withCredentials: true,
           }

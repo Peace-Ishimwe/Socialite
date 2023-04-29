@@ -10,7 +10,7 @@ const CardSuggested = (props) => {
   const followUsers = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/v1/api/u/home/suggested/follow",
+        `${import.meta.env.VITE_BACKEND_PORT}/v1/api/u/home/suggested/follow`,
         { id },
         { withCredentials: true }
       );
@@ -25,7 +25,7 @@ const CardSuggested = (props) => {
     try {
       const response = await axios
         .post(
-          "http://localhost:3000/v1/api/u/home/suggested/unfollow",
+          `${import.meta.env.VITE_BACKEND_PORT}/v1/api/u/home/suggested/unfollow`,
           { id },
           { withCredentials: true }
         )
@@ -43,7 +43,7 @@ const CardSuggested = (props) => {
       try {
         const response = await axios
           .post(
-            "http://localhost:3000/v1/api/u/home/check/follow",
+            `${import.meta.env.VITE_BACKEND_PORT}/v1/api/u/home/check/follow`,
             { id },
             { withCredentials: true }
           )

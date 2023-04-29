@@ -7,7 +7,7 @@ const SuggestedForYou = () => {
 
   useEffect(()=>{
     const fetchSuggested = async() =>{
-      const response = await axios.post("http://localhost:3000/v1/api/u/home/suggested" , {} ,  {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_PORT}/v1/api/u/home/suggested` , {} ,  {
         withCredentials: true
       } )
       if(response.data){

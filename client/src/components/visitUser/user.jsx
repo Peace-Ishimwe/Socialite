@@ -13,7 +13,7 @@ const User = () => {
     const getUserInfo = async () => {
       try {
         const response = await axios.post(
-          `http://localhost:3000/v1/api/u/user/info/visit/${userId}`,
+          `${import.meta.env.VITE_BACKEND_PORT}/v1/api/u/user/info/visit/${userId}`,
           {},
           { withCredentials: true }
         );
@@ -27,7 +27,7 @@ const User = () => {
     const getUserProfileCover = async () => {
       try {
         const response = await axios.post(
-          `http://localhost:3000/v1/api/u/user/profileCover/visit/${userId}`,
+          `${import.meta.env.VITE_BACKEND_PORT}/v1/api/u/user/profileCover/visit/${userId}`,
           {},
           { withCredentials: true }
         );
@@ -42,7 +42,7 @@ const User = () => {
     const getUserAbout = async () => {
       try {
         const response = await axios.post(
-          `http://localhost:3000/v1/api/u/user/about/visit/${userId}`,
+          `${import.meta.env.VITE_BACKEND_PORT}/v1/api/u/user/about/visit/${userId}`,
           {},
           { withCredentials: true }
         );

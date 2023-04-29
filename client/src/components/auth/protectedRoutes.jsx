@@ -23,7 +23,7 @@ const protectRoute = () => {
           navigate("/authenticate");
         } else {
           const { data } = await axios.post(
-            "http://localhost:3000/v1/api",
+            `${import.meta.env.VITE_BACKEND_PORT}/v1/api`,
             {},
             {
               withCredentials: true,

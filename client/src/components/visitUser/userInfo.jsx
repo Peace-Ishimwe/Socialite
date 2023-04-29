@@ -10,7 +10,7 @@ const UserInfo = () => {
     const getUserInfo = async () => {
       try {
         const response = await axios.post(
-          `http://localhost:3000/v1/api/u/user/info/visit/${userId}`,
+          `${import.meta.env.VITE_BACKEND_PORT}/v1/api/u/user/info/visit/${userId}`,
           {},
           { withCredentials: true }
         );

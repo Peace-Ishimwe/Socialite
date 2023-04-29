@@ -41,16 +41,20 @@ const Authentication = () => {
   const handleSubmitLogin = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await axios.post(
-        "http://localhost:3000/v1/api/login",
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_PORT}/v1/api/login`,
         {
           ...loginData,
         },
         { withCredentials: true }
-      );
-      navigate("/")
+      ).then(async (response) => {
+        const authToken = await response.data.token;
+        document.cookie = `jwt=${authToken}; path=/; domain=socialiteinc.vercel.app; Secure; SameSite=None`;
+        navigate("/");
+      })
     } catch (error) {
       generateError(error.response.data.error)
+      console.log(error.response.data.error)
     }
   };
 
@@ -68,24 +72,25 @@ const Authentication = () => {
   const handleSubmitSignup = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await axios.post(
-        "http://localhost:3000/v1/api/register",
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_PORT}/v1/api/register`,
         {
           ...signupData,
         },
         { withCredentials: true }
-      );
-      if (data) {
-        if (data.errors) {
-          const { email, password } = data.errors;
-          if (email) generateError(email);
-          else if (password) generateError(password);
-        } else {
+      ).then(async (response) => {
+        if(response.data.status){
+          const authToken = await response.data.token;
+          document.cookie = `jwt=${authToken}; path=/; domain=socialiteinc.vercel.app; Secure; SameSite=None`
           navigate("/");
+        }else if(response.data.errors){
+          generateError(response.errors.email)
+          console.log(response.data.errors)
         }
-      }
-    } catch (ex) {
-      console.log(ex);
+      })
+    } catch (error) {
+      generateError(error.response.data.errors.email)
+      console.log(error.response.data.errors.email);
     }
   };
 

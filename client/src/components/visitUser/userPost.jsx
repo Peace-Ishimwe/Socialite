@@ -1,7 +1,6 @@
 import Post from "../post/post";
 import React, { useEffect, useState } from "react";
 import axios, { all } from "axios";
-import PostShare from "../home/middle/PostShare";
 import { useParams } from "react-router-dom";
 
 const userPost = () => {
@@ -16,7 +15,7 @@ const userPost = () => {
     const getAllPosts = async () => {
       try {
         const posts = await axios.post(
-          `http://localhost:3000/v1/api/u/user/post/visit/${userId}`,
+          `${import.meta.env.VITE_BACKEND_PORT}/v1/api/u/user/post/visit/${userId}`,
           {},
           {
             withCredentials: true,

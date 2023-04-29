@@ -81,7 +81,7 @@ const User = () => {
     try {
       setLoader(true);
       const { data } = await axios.post(
-        "http://localhost:3000/v1/api/aboutUser",
+        `${import.meta.env.VITE_BACKEND_PORT}/v1/api/aboutUser`,
         {
           aboutUser,
         },

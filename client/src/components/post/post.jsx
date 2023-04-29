@@ -50,7 +50,7 @@ const Post = (props) => {
   const checkIfLiked = async (e) => {
     try {
       const { data } = await axios.get(
-        "http://localhost:3000/v1/api/u/post/checkIfLiked",
+        `${import.meta.env.VITE_BACKEND_PORT}/v1/api/u/post/checkIfLiked`,
         { withCredentials: true }
       );
       if (
@@ -76,7 +76,7 @@ const Post = (props) => {
       setNumberOfLikes(numberOfLikes + 1);
 
       const { like } = await axios.put(
-        "http://localhost:3000/v1/api/u/post/like",
+        `${import.meta.env.VITE_BACKEND_PORT}/v1/api/u/post/like`,
         { id },
         { withCredentials: true }
       );
@@ -91,7 +91,7 @@ const Post = (props) => {
       setNumberOfLikes(numberOfLikes - 1);
 
       const { unLike } = axios.put(
-        "http://localhost:3000/v1/api/u/post/unLike",
+        `${import.meta.env.VITE_BACKEND_PORT}/v1/api/u/post/unLike`,
         { id },
         { withCredentials: true }
       );
@@ -109,7 +109,7 @@ const Post = (props) => {
     setIsCommentSent(false);
     try {
       const { data } = await axios.post(
-        "http://localhost:3000/v1/api/u/post/comment",
+        `${import.meta.env.VITE_BACKEND_PORT}/v1/api/u/post/comment`,
         { id, comments },
         { withCredentials: true }
       );

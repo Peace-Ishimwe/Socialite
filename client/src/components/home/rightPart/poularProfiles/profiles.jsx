@@ -11,10 +11,9 @@ const Profiles = (props) => {
         alt="profiles"
       />
       <div>
-        <div className="text-lg">{props.firstName} {props.lastName}</div>
-        <div>{props.followersCount} followers</div>
+        <div className="text-[16px]">{props.firstName} {props.lastName}</div>
+        <div className="text-[14px]">{props.followersCount} followers</div>
       </div>
-      <MapIcon />
     </Link>
   );
 };

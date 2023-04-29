@@ -47,7 +47,7 @@ const PostShare = (props) => {
   const uploadImage = async (base64EncodedImage) => {
     try {
       const { data } = await axios.post(
-        "http://localhost:3000/v1/api/upload/post",
+        `${import.meta.env.VITE_BACKEND_PORT}/v1/api/upload/post`,
         {
           previewSource,
           dataPost,

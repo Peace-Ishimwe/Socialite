@@ -5,7 +5,7 @@ export const getProfileImage = () => {
     const [profileImageUrl , setProfileImageUrl] = useState()
     useEffect(()=>{
         const getProfile = async () => {
-            const response = await axios.post("http://localhost:3000/v1/api/u/user/info/image/profile" , {} , {withCredentials: true})
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_PORT}/v1/api/u/user/info/image/profile` , {} , {withCredentials: true})
             .then((response)=>{
                 setProfileImageUrl(response.data.urlProfileImage)
             })
@@ -19,13 +19,13 @@ export const getProfileImage = () => {
 export const getCoverImage = () => {
     const [coverImageUrl , setCoverImageUrl] = useState()
     useEffect(()=>{
-        const getProfile = async () => {
-            const response = await axios.post("http://localhost:3000/v1/api/u/user/info/image/cover" , {} , {withCredentials: true})
+        const getCover = async () => {
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_PORT}/v1/api/u/user/info/image/cover` , {} , {withCredentials: true})
             .then((response)=>{
                 setCoverImageUrl(response.data.urlCoverImage)
             })
         }
-        getProfile()
+        getCover()
     },[])
     
     return coverImageUrl
