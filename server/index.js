@@ -9,19 +9,19 @@ import morgan from "morgan"
 app.use(morgan('tiny'))
 
 // implementation of the cross orgin 
-// app.use(function(req, res, next) {
-//   res.header('Access-Control-Allow-Origin', "https://socialiteinc.vercel.app");
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', "https://socialiteinc.vercel.app");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   
-//   next();
-// });
-// app.use(
-//   cors({
-//     origin: "https://socialiteinc.vercel.app",
-//     methods: ["GET", "POST" , "PUT" , "DELETE" , "PATCH"],
-//     credentials: true,
-//   })
-// );
+  next();
+});
+app.use(
+  cors({
+    origin: "https://socialiteinc.vercel.app",
+    methods: ["GET", "POST" , "PUT" , "DELETE" , "PATCH"],
+    credentials: true,
+  })
+);
 
 // when using localhost
 // app.use(function(req, res, next) {
@@ -31,13 +31,13 @@ app.use(morgan('tiny'))
 //   next();
 // });
 
-app.use(
-  cors({
-    origin: ["http://localhost:5000"],
-    methods: ["GET", "POST" , "PUT" , "DELETE" , "PATCH"],
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: ["http://localhost:5000"],
+//     methods: ["GET", "POST" , "PUT" , "DELETE" , "PATCH"],
+//     credentials: true,
+//   })
+// );
 
 app.use(cookieParser())
 app.use(express.json({limit:"5mb"}));
