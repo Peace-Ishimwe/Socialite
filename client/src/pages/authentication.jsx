@@ -49,7 +49,7 @@ const Authentication = () => {
         { withCredentials: true }
       ).then(async (response) => {
         const authToken = await response.data.token;
-        document.cookie = `jwt=${authToken}; path=/; domain=socialiteinc.vercel.app; Secure; SameSite=None`;
+        document.cookie = `jwt=${authToken}; path=/;`;
         navigate("/");
       })
     } catch (error) {
@@ -81,7 +81,7 @@ const Authentication = () => {
       ).then(async (response) => {
         if(response.data.status){
           const authToken = await response.data.token;
-          document.cookie = `jwt=${authToken}; path=/; domain=socialiteinc.vercel.app; Secure; SameSite=None`
+          document.cookie = `jwt=${authToken}; path=/;`
           navigate("/");
         }else if(response.data.errors){
           generateError(response.errors.email)
@@ -168,8 +168,7 @@ const Authentication = () => {
               </form>
             </div>
           </div>
-      <SideComp component={<Switcher />}/>
-
+          <Switcher />
         </div>
       </div>
       {/* The signup  / register form of socialite */}

@@ -55,13 +55,16 @@ export const AddPost = (props) => {
 };
 
 import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 export const UserProfile = () => {
   const [email, firstName, lastName] = protectRoute();
   const profileImageUrl = getProfileImage();
   const navigate = useNavigate();
+  const [cookies, setCookie, removeCookie] = useCookies([]);
   const logOut = () => {
     document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    removeCookie("jwt");
     navigate("/authenticate");
   };
   return (

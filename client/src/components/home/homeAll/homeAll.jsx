@@ -7,6 +7,7 @@ import {
 import Logo from "../../../assets/Images/logo.1.png";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 import { getProfileImage } from "../../profileCover/profileCover";
 
 export const HomeAll = (props) => {
@@ -21,8 +22,10 @@ export const HomeAll = (props) => {
 
   // LOGOUT FUNCTION
   const navigate = useNavigate();
+  const [cookies, setCookie, removeCookie] = useCookies([]);
   const logOut = () => {
     document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    removeCookie("jwt");
     navigate("/authenticate");
   };
 
