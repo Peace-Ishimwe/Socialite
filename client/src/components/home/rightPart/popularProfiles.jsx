@@ -6,8 +6,7 @@ const PopularProfiles = () => {
   const [profiles, setProfiles] = useState();
   useEffect(() => {
     const getPopularProfiles = async () => {
-      const response = await axios
-        .post(
+      const response = await axios.post(
           `${import.meta.env.VITE_BACKEND_PORT}/v1/api/u/home/popular/profiles`,
           {},
           { withCredentials: true }
