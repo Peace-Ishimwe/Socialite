@@ -8,9 +8,7 @@ const PopularProfiles = () => {
     const getPopularProfiles = async () => {
       const response = await axios
         .post(
-          "http://localhost:3000/v1/api/u/home/popular/profiles",
-          {},
-          { withCredentials: true }
+          `${import.meta.env.VITE_BACKEND_PORT}/v1/api/u/home/popular/profiles`${import.meta.env.VITE_BACKEND_PORT}     { withCredentials: true }
         )
         .then((response) => {
           setProfiles(response.data);
