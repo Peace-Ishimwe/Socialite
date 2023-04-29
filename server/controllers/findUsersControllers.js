@@ -5,7 +5,10 @@ import Post from "../model/postModel.js";
 
 export const findUsers = async (req, res) => {
   try {
-    const token = req.cookies.jwt;
+    const token = await req.cookies.jwt;
+    if (!token) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
     const userId = mongoose.Types.ObjectId(decoded.id);
     
@@ -33,7 +36,7 @@ export const findUsers = async (req, res) => {
         } else {
           return {
             ...user,
-            profileImage: "/Images/profile.jpg",
+            profileImage: "https://marketplace.canva.com/EAFEits4-uw/1/0/1600w/canva-boy-cartoon-gamer-animated-twitch-profile-photo-oEqs2yqaL8s.jpg",
           };
         }
       })

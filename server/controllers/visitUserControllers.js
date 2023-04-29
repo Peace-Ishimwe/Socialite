@@ -36,7 +36,7 @@ export const getUserPostsVisit = async (req , res) => {
               profileImageUrl = profilePost.post;
             } else {
               profileImageUrl =
-                "/Images/profile.jpg";
+              "https://marketplace.canva.com/EAFEits4-uw/1/0/1600w/canva-boy-cartoon-gamer-animated-twitch-profile-photo-oEqs2yqaL8s.jpg";
             }
             for (const post of posts) {
               postUserVisit.push({
@@ -68,10 +68,10 @@ export const getUserProfileCover = async (req, res) => {
       const userId = req.params.id;
   
       const profileImage = await Posts.findOne({ userId: userId, profile: true });
-      const profileImageUrl = profileImage ? profileImage.post : "/Images/profile.jpg";
+      const profileImageUrl = profileImage ? profileImage.post : "https://marketplace.canva.com/EAFEits4-uw/1/0/1600w/canva-boy-cartoon-gamer-animated-twitch-profile-photo-oEqs2yqaL8s.jpg";
   
       const coverImage = await Posts.findOne({ userId: userId, cover: true });
-      const coverImageUrl = coverImage ? coverImage.post : "/Images/cover.jpg";
+      const coverImageUrl = coverImage ? coverImage.post :"https://img.freepik.com/free-vector/blank-meadow-landscape-scene_1308-59927.jpg?w=2000";
   
       res.status(200).json({ profileImageUrl, coverImageUrl });
     } catch (error) {

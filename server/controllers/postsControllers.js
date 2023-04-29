@@ -5,7 +5,7 @@ import User from "../model/authModel.js";
 
 export const getPost = async (req, res) => {
   try {
-    const token = req.cookies.jwt;
+    const token = await req.cookies.jwt;
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
     const userId = decoded.id;
 
@@ -19,7 +19,7 @@ export const getPost = async (req, res) => {
         profileImageUrl = profilePost.post;
       } else {
         profileImageUrl =
-          "/Images/profile.jpg";
+        "https://marketplace.canva.com/EAFEits4-uw/1/0/1600w/canva-boy-cartoon-gamer-animated-twitch-profile-photo-oEqs2yqaL8s.jpg";
       }
       for (const post of posts) {
         const userInfo = await User.findById(post.userId);
@@ -48,7 +48,7 @@ export const getPost = async (req, res) => {
 
 export const uploadPost = async (req, res) => {
   try {
-    const { previewSource, dataPost, cover, profile } = req.body;
+    const { previewSource, dataPost, cover, profile } = await req.body;
     const { id: userId } = jwt.verify(req.cookies.jwt, process.env.SECRET_KEY);
     const { secure_url: postUrl } = await cloudinary.uploader.upload(
       previewSource,
@@ -104,7 +104,7 @@ export const getAllPosts = async (req, res) => {
         profileImageUrl = profilePost.post;
       } else {
         profileImageUrl =
-          "/Images/profile.jpg";
+        "https://marketplace.canva.com/EAFEits4-uw/1/0/1600w/canva-boy-cartoon-gamer-animated-twitch-profile-photo-oEqs2yqaL8s.jpg";
       }
       userPosts.push({
         post: post.post,

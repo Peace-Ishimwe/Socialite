@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "'the backend of socialite platform'",
-  "main": "app.js",
+  "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "nodemon app"

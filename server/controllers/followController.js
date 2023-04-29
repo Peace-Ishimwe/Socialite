@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 
 export const followUserSuggested = async (req, res) => {
   try {
-    const token = req.cookies.jwt;
+    const token = await req.cookies.jwt;
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
     const userId = decoded.id;
 

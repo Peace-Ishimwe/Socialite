@@ -1,11 +1,8 @@
-import jwt from "jsonwebtoken";
-import mongoose from "mongoose";
 import User from "../model/authModel.js";
 import Post from "../model/postModel.js";
 
 export const getPopularProfiles = async (req, res) => {
   try {
-
     const users = await User.aggregate([
         { 
           $project: { 
@@ -30,13 +27,13 @@ export const getPopularProfiles = async (req, res) => {
         } else {
           return {
             ...user,
-            profileImage: "/Images/profile.jpg",
+            profileImage: "https://marketplace.canva.com/EAFEits4-uw/1/0/1600w/canva-boy-cartoon-gamer-animated-twitch-profile-photo-oEqs2yqaL8s.jpg",
           };
         }
       })
     );
-
     res.json(updatedUsers);
+
   } catch (err) {
     console.log(err);
     res.json("Server error");
