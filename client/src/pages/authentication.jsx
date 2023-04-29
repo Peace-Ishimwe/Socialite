@@ -49,7 +49,7 @@ const Authentication = () => {
         { withCredentials: true }
       ).then(async (response) => {
         const authToken = await response.data.token;
-        document.cookie = `jwt=${authToken}; path=/; domain=socialiteinc.vercel.app; Secure; SameSite=None`;
+        // document.cookie = `jwt=${authToken}; path=/; domain=socialiteinc.vercel.app; Secure; SameSite=None`;
         navigate("/");
       })
     } catch (error) {
@@ -81,7 +81,7 @@ const Authentication = () => {
       ).then(async (response) => {
         if(response.data.status){
           const authToken = await response.data.token;
-          document.cookie = `jwt=${authToken}; path=/; domain=socialiteinc.vercel.app; Secure; SameSite=None`
+          // document.cookie = `jwt=${authToken}; path=/; domain=socialiteinc.vercel.app; Secure ; SameSite=None`
           navigate("/");
         }else if(response.data.errors){
           generateError(response.errors.email)
