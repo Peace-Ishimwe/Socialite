@@ -24,12 +24,12 @@ app.use(morgan('tiny'))
 // );
 
 // when using localhost
-app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', "http://localhost:5000");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+// app.use(function(req, res, next) {
+//   res.header('Access-Control-Allow-Origin', "http://localhost:5000");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   
-  next();
-});
+//   next();
+// });
 
 app.use(
   cors({
