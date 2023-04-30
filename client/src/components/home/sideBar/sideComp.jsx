@@ -6,7 +6,7 @@ import { getProfileImage } from "../../profileCover/profileCover";
 export const SideComp = (props) => {
   return (
     <main
-      className="sidebar-home font-semibold hover:bg-gray-200 dark:hover:bg-mainDark p-2 rounded-md text-gray-800 dark:text-gray-200"
+      className={`sidebar-home font-semibold ${props.style}  rounded-md text-gray-800 dark:text-gray-200`}
       onClick={props.onClick}
     >
       <div className="flex w-fit items-center gap-2">
@@ -24,38 +24,40 @@ export const SideComp = (props) => {
   );
 };
 import PostShare from "../middle/PostShare";
-import { CloseCirled, LogoutIcon } from "../../../assets/icons/icons";
 import { useState } from "react";
+import { Button, Modal } from "@mui/material";
+
 export const AddPost = (props) => {
-  const [showAddPost, setShowAddPost] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
-    <main className="sidebar-home text-xs font-semibold hidden md:block text-gray-200 rounded-full bg-blue-500 w-fit px-2 py-1">
-      <div
-        className="flex w-fit items-center gap-2 p-1 cursor-pointer"
-        onClick={() => {
-          setShowAddPost(!showAddPost);
-        }}
-      >
-        {props.component}
-        <span>{props.title}</span>
-      </div>
-      {showAddPost && (
-        <div className="absolute top-[20%] w-8/12 bg-white p-5 rounded-md shadow-2xl dark:bg-subMajorDark">
-          <CloseCirled
-            action={() => {
-              setShowAddPost(!setShowAddPost);
-            }}
-            position="h-[2rem] text-red-500 cursor-pointer w-[2rem] absolute left-1/2"
-          />
+    <main className="sidebar-home text-xs font-semibold flex  rounded-full bg-blue-500 w-fit px-2 py-1">
+      <Button onClick={handleOpen}>
+        <div className="flex w-fit items-center gap-2 p-1 cursor-pointer text-gray-200">
+          {props.component}
+          <span>{props.title}</span>
+        </div>
+      </Button>
+      <Modal open={open} onClose={handleClose}>
+        <div className="moreHome absolute top-[40%] left-[5%] sm:left-[15%] w-11/12 sm:w-8/12 bg-white p-5 rounded-md shadow-2xl dark:bg-subMajorDark">
           <PostShare />
         </div>
-      )}
+      </Modal>
     </main>
   );
 };
 
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { LogoutIcon } from "../../../assets/icons/icons";
 
 export const UserProfile = () => {
   const [email, firstName, lastName] = protectRoute();
@@ -63,7 +65,7 @@ export const UserProfile = () => {
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies([]);
   const logOut = () => {
-    document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     removeCookie("jwt");
     navigate("/authenticate");
   };

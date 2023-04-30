@@ -1,9 +1,8 @@
 import React, { useState  , useEffect } from "react";
 import protectRoute from "../auth/protectedRoutes";
 import { PencilIcon } from "../../assets/icons/icons";
-import { CloseCirled } from "../../assets/icons/icons";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { Button , Modal } from "@mui/material";
  
 const UserInfo = () => {
   const [
@@ -26,7 +25,6 @@ const UserInfo = () => {
   const [lastNameUpdate, setLastNameUpdate] = useState("");
   const [genderUpdate, setGenderUpdate] = useState("");
   const [telephoneUpdate, setTelephoneUpdate] = useState("");
-  const [showUpdate, setShowUpdate] = useState(false);
 
   const [updatedInfo , setUpdatedInfo] = useState(false);
 
@@ -41,7 +39,6 @@ const UserInfo = () => {
       },{withCredentials: true})
       if(response){
         setUpdatedInfo(true)
-        setShowUpdate(false)
         generateSuccess("Updated your info")
       }
       
@@ -50,20 +47,20 @@ const UserInfo = () => {
     }
   }
 
-  const [blur, setBlur] = useState("");
+  const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    if (showUpdate) {
-      setBlur("pointer-events-none blur-xl");
-    } else {
-      setBlur("");
-    }
-  }, [blur, showUpdate]);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <div className="main-container mt-10">
       <div className=" w-11/12 md:w-10/12 2xl:w-8/12 mx-auto mt-10 mb-10 relative">
-        <div className={`${blur} flex text-gray-700 dark:text-gray-200 font-extrabold flex-col lg:flex-row justify-evenly  bg-white dark:bg-subMajorDark mx-auto p-5`}>
+        <div className={`flex text-gray-700 dark:text-gray-200 font-extrabold flex-col lg:flex-row justify-evenly  bg-white dark:bg-subMajorDark mx-auto p-5`}>
           <div className="flex flex-col gap-2">
             {" "}
             <div className="flex gap-3"><span>First Name: </span> {updatedInfo == false ? <span>{firstName}</span> : <span>{firstNameUpdate}</span> }</div>
@@ -76,18 +73,18 @@ const UserInfo = () => {
           </div>
           <div className="flex gap-3">Telephone: {updatedInfo == false ? <span>{telephone}</span> : <span>{telephoneUpdate}</span> }</div>
         </div>
-        <button
-          className={`${blur} hover:bg-white p-2 float-right dark:text-gray-200 text-gray-700 rounded-md dark:hover:bg-gray-500 transition-all duration-1000`}
-          onClick={()=>{setShowUpdate(true)}}
+
+        <Button onClick={handleOpen}>
+        <div
+          className={`hover:bg-white p-2 float-right dark:text-gray-200 text-gray-700 rounded-md dark:hover:bg-gray-500 transition-all duration-1000`}
         >
           <PencilIcon />
-        </button>
-
-        { showUpdate && 
+        </div>
+        </Button>
+        <Modal open={open} onClose={handleClose}>
           <form onSubmit={updateUserInfo} className="absolute shadow-xl updateInfo left-1/2 -translate-x-1/2 top-1/2 sm:w-10/12  w-11/12 flex flex-wrap gap-3 bg-white dark:bg-subMajorDark p-10 rounded-md">
             <div className="w-full flex justify-evenly">
               <div className="text-xl font-medium text-gray-700 dark:text-gray-200">Update Your Info</div>
-              <div><CloseCirled action={()=>{setShowUpdate(false)}} position="text-red-500" /></div>
             </div>
             <div className="w-full flex gap-3">
               {" "}
@@ -114,16 +111,18 @@ const UserInfo = () => {
             </div>
             <div className="w-full flex gap-3">
               {" "}
-              <input
-                type="text"
-                className="w-6/12 outline-none p-2 rounded-md border-2 "
-                name="gender"
-                placeholder="gender"
-                onChange={(e) => {
-                  setGenderUpdate(e.target.value);
-                }}
-                required
-              />
+              <select
+                    onChange={(e)=>{setGenderUpdate(e.target.value)}}
+                    name="gender"
+                    id="gender"
+                    className="selectpicker w-[50%]  mt-2 p-[0.70rem] outline-none border-2 rounded-md text-gray-500"
+                    required
+                  >
+                    <option value="">--Select gender--</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                  </select>
               <input
                 type="tel"
                 className="w-6/12 outline-none p-2 rounded-md border-2 "
@@ -137,7 +136,7 @@ const UserInfo = () => {
             </div>
             <button type="submit" className="bg-blue-500 px-10 py-2 text-center text-white rounded-md mx-auto">Update</button>
           </form>
-        }
+          </Modal>   
       </div>
       <div className="followStatus flex mb-10  items-center justify-evenly mt-14 bg-white dark:bg-subMajorDark w-11/12 md:w-10/12 2xl:w-8/12 mx-auto p-5">
         <div className="follow flex flex-col justify-center items-center">

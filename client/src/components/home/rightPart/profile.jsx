@@ -13,7 +13,7 @@ const Profile = () => {
   const coverImageUrl = getCoverImage();
 
   return (
-    <div className="profile-user mt-5 bg-gray-100 dark:bg-subMajorDark max-w-[20rem] rounded-2xl overflow-hidden pb-5">
+    <div className="profile-user mt-5 bg-gray-100 dark:bg-subMajorDark w-[20rem] max-w-[20rem] rounded-2xl overflow-hidden pb-5">
       <div className="relative w-fit">
         {coverImageUrl && (
           <img

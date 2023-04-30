@@ -5,6 +5,7 @@ import User from "../components/visitUser/user";
 import UserInfo from "../components/visitUser/userInfo";
 import UserPost from "../components/visitUser/userPost";
 import { useParams } from "react-router-dom";
+import FollowUser from "../components/visitUser/followUser";
 
 const UserDashboard = () => {
   const { userId } = useParams()
@@ -15,6 +16,7 @@ const UserDashboard = () => {
         <div className="w-full h-[100vh] overflow-y-scroll">
             <Header/>
             <User />
+            <FollowUser />
             <UserInfo />
             <UserPost />
         </div>

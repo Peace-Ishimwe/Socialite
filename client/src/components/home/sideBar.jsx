@@ -4,7 +4,6 @@ import {
   AddIcon,
   InfoIcon,
   MessagesIcon,
-  MoreIcon,
   NotificationIcon,
   PrivacyIcon,
   PhoneIcon,
@@ -14,8 +13,6 @@ import { SideComp, AddPost } from "./sideBar/sideComp";
 import Switcher from "../theme/switcher";
 import { LogoImage } from "./homeAll/homeAll";
 import { UserProfile } from "./sideBar/sideComp";
-import { useCookies } from "react-cookie";
-import { useNavigate } from "react-router-dom";
 
 const  SideBar = (props) => {
 
@@ -30,22 +27,23 @@ const  SideBar = (props) => {
       </div>
       <div className="flex flex-col gap-6">
         <a href="/">
-          <SideComp component={<HomeIcon />} title={"Home"} true={props.isHome} />
+          <SideComp style="hover:bg-gray-200 dark:hover:bg-mainDark p-2" component={<HomeIcon />} title={"Home"} true={props.isHome} />
         </a>
-        <a href="/u/messages"><SideComp component={<MessagesIcon />} title={"Messages"} /></a>
-        <a href="/u/notifications"><SideComp component={<NotificationIcon />} title={"Notifications"} /></a>
+        <a href="/u/messages"><SideComp style="hover:bg-gray-200 dark:hover:bg-mainDark p-2" component={<MessagesIcon />} title={"Messages"} /></a>
+        <a href="/u/notifications"><SideComp style="hover:bg-gray-200 dark:hover:bg-mainDark p-2" component={<NotificationIcon />} title={"Notifications"} /></a>
         <a href="/about">
-          <SideComp component={<InfoIcon />} title={"About us" } true={props.isAbout} />
+          <SideComp style="hover:bg-gray-200 dark:hover:bg-mainDark p-2" component={<InfoIcon />} title={"About us" } true={props.isAbout} />
         </a>
         <a href="/contact">
-          <SideComp component={<PhoneIcon />} title={"Contact us"} true={props.isContact}  />
+          <SideComp style="hover:bg-gray-200 dark:hover:bg-mainDark p-2" component={<PhoneIcon />} title={"Contact us"} true={props.isContact}  />
         </a>
         <a href="/privacy-policy">
-          <SideComp component={<PrivacyIcon />} title={"Privacy"} true={props.isPrivacy}  />
+          <SideComp style="hover:bg-gray-200 dark:hover:bg-mainDark p-2" component={<PrivacyIcon />} title={"Privacy"} true={props.isPrivacy}  />
         </a>
-        <SideComp component={<Switcher />} title={"Theme"} />
+        <SideComp style="hover:bg-gray-200 dark:hover:bg-mainDark p-2" component={<Switcher />} title={"Theme"} />
       </div>
-      <AddPost component={<AddIcon />} title={"ADD POST"} />
+      
+      {props.addPost && <AddPost component={<AddIcon />} title={"ADD POST"} />}
       <UserProfile />
     </main>
   );
