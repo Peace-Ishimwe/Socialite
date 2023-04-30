@@ -18,11 +18,11 @@ const  SideBar = (props) => {
 
   return (
     <main
-      className={`sidebar-home ${props.display} flex-col gap-10 pl-5 pb-10 overflow-scroll  justify-between bg-white dark:bg-majorDark md:w-[15%] min-w-fit `}
+      className={`sidebar-home ${props.display} flex-col gap-10 pl-5 pb-10 overflow-scroll  justify-between bg-white dark:bg-majorDark md:w-[13%] min-w-fit `}
     >
       
       <div className="sticky top-0 bg-white dark:bg-majorDark pt-5 flex justify-between">
-        <LogoImage />
+        <img src="/Images/logo.1.png" alt="logo image" />
         {props.close && <SideComp component={<Close click={props.click} />} />}
       </div>
       <div className="flex flex-col gap-6">

@@ -3,7 +3,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { ToastContainer, toast } from "react-toastify";
-import LoginImage from "../assets/Images/logo.1.png";
 import Theme from "../components/theme/theme";
 import { Close } from "../assets/icons/icons";
 import Switcher from "../components/theme/switcher";
@@ -139,7 +138,7 @@ const Authentication = () => {
           <div className="flex flex-col items-center lg: lg:flex-row lg:space-x-10">
             <div className="lg:mb-12 flex-1 lg:text-left text-center">
               <img
-                src={LoginImage}
+                src="/Images/logo.1.png"
                 alt="socialite image"
                 className="lg:mx-0 lg:w-52 mx-auto w-40"
               />

@@ -1,5 +1,4 @@
 import React from "react";
-import ProfileImage from "../../../assets/Images/profile.jpeg";
 import protectRoute from "../../auth/protectedRoutes";
 import {
   getProfileImage,
@@ -13,7 +12,7 @@ const Profile = () => {
   const coverImageUrl = getCoverImage();
 
   return (
-    <div className="profile-user mt-5 bg-gray-100 dark:bg-subMajorDark w-[20rem] max-w-[20rem] rounded-2xl overflow-hidden pb-5">
+    <div className="profile-user mt-5 bg-gray-100 dark:bg-subMajorDark w-full rounded-2xl overflow-hidden pb-5">
       <div className="relative w-fit">
         {coverImageUrl && (
           <img
@@ -31,7 +30,7 @@ const Profile = () => {
         )}
       </div>
       <div className="ProfileName mt-16 flex flex-col items-center justify-center mb-4">
-        <span className="dark:text-gray-200 text-gray-700 text-xl font-semibold">
+        <span className="dark:text-gray-200 text-gray-700 text-xl font-semibold text-center">
           {firstName} {lastName}
         </span>
         <span className="dark:text-gray-200 text-gray-700 px-2 text-center">

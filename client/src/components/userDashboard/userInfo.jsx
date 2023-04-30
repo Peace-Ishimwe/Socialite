@@ -3,6 +3,7 @@ import protectRoute from "../auth/protectedRoutes";
 import { PencilIcon } from "../../assets/icons/icons";
 import axios from "axios";
 import { Button , Modal } from "@mui/material";
+import { Audio } from "react-loader-spinner";
  
 const UserInfo = () => {
   const [
@@ -15,6 +16,8 @@ const UserInfo = () => {
     gender,
     telephone,
   ] = protectRoute();
+
+  const [loader, setLoader] = useState(false)
 
   const generateSuccess = (success) =>
   toast.success(success, {
@@ -31,6 +34,8 @@ const UserInfo = () => {
   const updateUserInfo = async(e) => {
     e.preventDefault()
     try {
+      setLoader(true)
+      setUpdatedInfo(false)
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_PORT}/v1/api/u/user/info/update` , {
         firstNameUpdate , 
         lastNameUpdate , 
@@ -39,7 +44,12 @@ const UserInfo = () => {
       },{withCredentials: true})
       if(response){
         setUpdatedInfo(true)
+        setLoader(false)
         generateSuccess("Updated your info")
+        setFirstNameUpdate("")
+        setLastNameUpdate("")
+        setGenderUpdate("")
+        setTelephoneUpdate("")
       }
       
     } catch (err) {
@@ -134,7 +144,20 @@ const UserInfo = () => {
                 required
               />
             </div>
+            {loader == false && (
             <button type="submit" className="bg-blue-500 px-10 py-2 text-center text-white rounded-md mx-auto">Update</button>
+          )}
+          {loader == true && (
+            <button className="button bg-blue-500 self-center px-5 py-2 text-white rounded-md flex gap-1 font-semibold">
+              <Audio
+                height="24"
+                width="60"
+                radius="9"
+                color="white"
+                ariaLabel="loading"
+              />
+            </button>
+          )}
           </form>
           </Modal>   
       </div>
