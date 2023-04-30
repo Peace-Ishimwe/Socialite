@@ -24,6 +24,7 @@ const User = () => {
         console.error(err);
       }
     };
+    
     const getUserProfileCover = async () => {
       try {
         const response = await axios.post(
