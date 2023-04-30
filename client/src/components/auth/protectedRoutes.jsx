@@ -12,6 +12,7 @@ const protectRoute = () => {
   const [followings, setFollowings] = useState("");
   const [gender, setGender] = useState("");
   const [telephone, setTelephone] = useState("");
+  const [id , setId] = useState("");
 
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies([]);
@@ -38,6 +39,7 @@ const protectRoute = () => {
             setFollowings(data.followings)
             setGender(data.gender)
             setTelephone(data.telephone)
+            setId(data.id)
           }
           if (!data.status) {
             removeCookie("jwt");
@@ -51,7 +53,7 @@ const protectRoute = () => {
     verifyUser();
   }, []);
 
-  return [email, firstName, lastName, aboutUserIn , followers, followings , gender , telephone];
+  return [email, firstName, lastName, aboutUserIn , followers, followings , gender , telephone , id];
 };
 
 export default protectRoute;
