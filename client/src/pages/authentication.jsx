@@ -17,10 +17,14 @@ const Authentication = () => {
   // handling the errors
   const [cookies] = useCookies(["cookie-name"]);
   const navigate = useNavigate();
+
   useEffect(() => {
-    if (cookies.jwt) {
-      navigate("/");
+    const checkIfLoggedeIn = () =>{
+      if (cookies.jwt) {
+        navigate("/");
+      }
     }
+    checkIfLoggedeIn()
   }, [cookies, navigate]);
 
   const generateError = (error) =>
