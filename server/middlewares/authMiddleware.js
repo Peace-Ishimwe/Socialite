@@ -29,7 +29,8 @@ export const checkUser = async (req, res, next) => {
           followers: followers.length,
           followings: followings.length,
           gender,
-          telephone
+          telephone,
+          id: decodedToken.id
         });
       } else {
         res.json({ status: false });
