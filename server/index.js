@@ -9,35 +9,35 @@ import morgan from "morgan"
 app.use(morgan('tiny'))
 
 // implementation of the cross orgin 
-app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', "https://socialiteinc.vercel.app");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  
-  next();
-});
-app.use(
-  cors({
-    origin: "https://socialiteinc.vercel.app",
-    methods: ["GET", "POST" , "PUT" , "DELETE" , "PATCH"],
-    credentials: true,
-  })
-);
-
-// when using localhost
 // app.use(function(req, res, next) {
-//   res.header('Access-Control-Allow-Origin', "http://localhost:5000");
+//   res.header('Access-Control-Allow-Origin', "https://socialiteinc.vercel.app");
 //   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   
 //   next();
 // });
-
 // app.use(
 //   cors({
-//     origin: ["http://localhost:5000"],
+//     origin: "https://socialiteinc.vercel.app",
 //     methods: ["GET", "POST" , "PUT" , "DELETE" , "PATCH"],
 //     credentials: true,
 //   })
 // );
+
+// when using localhost
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', "http://localhost:5000");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  
+  next();
+});
+
+app.use(
+  cors({
+    origin: ["http://localhost:5000"],
+    methods: ["GET", "POST" , "PUT" , "DELETE" , "PATCH"],
+    credentials: true,
+  })
+);
 
 app.use(cookieParser())
 app.use(express.json({limit:"5mb"}));
@@ -49,10 +49,11 @@ import postRoutes from "./routes/postRoutes.js"
 import aboutRoutes from "./routes/aboutRoutes.js"
 import visitUserRoutes from "./routes/visitUserRoutes.js"
 import findUsersRoutes from "./routes/findUsersRoutes.js"
-import followUserRoutes from './routes/followRoutes.js';
+import followUserRoutes from './routes/followRoutes.js'
 import updateUserRoutes from "./routes/updateUserRoutes.js"
 import profileCoverRoutes from "./routes/profileCoverRoutes.js"
 import popularProfilesRoutes from "./routes/popularProfilesRoutes.js"
+import contactRoutes from "./routes/contactRoutes.js"
 app.use("/", authRoutes);
 app.use("/", postRoutes);
 app.use("/", aboutRoutes);
@@ -62,6 +63,7 @@ app.use("/" , followUserRoutes)
 app.use("/" , updateUserRoutes)
 app.use("/" , profileCoverRoutes)
 app.use("/" , popularProfilesRoutes)
+app.use("/" , contactRoutes)
 
 // ------------ the dotenv file ------------- 
 import dotenv from 'dotenv'
