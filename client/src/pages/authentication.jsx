@@ -7,11 +7,13 @@ import LoginImage from "../assets/Images/logo.1.png";
 import Theme from "../components/theme/theme";
 import { Close } from "../assets/icons/icons";
 import Switcher from "../components/theme/switcher";
-import { SideComp } from "../components/home/sideBar/sideComp";
+import { Audio } from "react-loader-spinner";
 
 const Authentication = () => {
   //  redirect options using useNavigate hook
-  const history  = useNavigate()
+  const history = useNavigate();
+  const [loaderLogin, setLoaderLogin] = useState(false);
+  const [loaderSignup, setLoaderSignup] = useState(false);
   // handling the errors
   const [cookies] = useCookies(["cookie-name"]);
   const navigate = useNavigate();
@@ -21,11 +23,10 @@ const Authentication = () => {
     }
   }, [cookies, navigate]);
 
-  const generateError= (error) =>
-  toast.error(error, {
-    position: "top-center",
-  });
-
+  const generateError = (error) =>
+    toast.error(error, {
+      position: "top-center",
+    });
 
   // Intergration with login to the server
   const [loginData, setLoginData] = useState({ email: "", password: "" });
@@ -41,25 +42,37 @@ const Authentication = () => {
   const handleSubmitLogin = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_PORT}/v1/api/login`,
-        {
-          ...loginData,
-        },
-        { withCredentials: true }
-      ).then(async (response) => {
-        const authToken = await response.data.token;
-        document.cookie = `jwt=${authToken}; path=/;`;
-        navigate("/");
-      })
+      setLoaderLogin(true);
+      const response = await axios
+        .post(
+          `${import.meta.env.VITE_BACKEND_PORT}/v1/api/login`,
+          {
+            ...loginData,
+          },
+          { withCredentials: true }
+        )
+        .then(async (response) => {
+          setLoaderLogin(false);
+          const authToken = await response.data.token;
+          document.cookie = `jwt=${authToken}; path=/;`;
+          navigate("/");
+        });
     } catch (error) {
-      generateError(error.response.data.error)
-      console.log(error.response.data.error)
+      setLoaderLogin(false);
+      generateError(error.response.data.error);
+      console.log(error.response.data.error);
     }
   };
 
   // Intergration with signup to the server
-  const [signupData, setSignupData] = useState({ firstName: "", lastName: "", email: "", password: "", gender: "", telephone: "" });
+  const [signupData, setSignupData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    gender: "",
+    telephone: "",
+  });
   const signupSubmitData = (event) => {
     setSignupData((prevSignupData) => {
       return {
@@ -72,42 +85,46 @@ const Authentication = () => {
   const handleSubmitSignup = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_PORT}/v1/api/register`,
-        {
-          ...signupData,
-        },
-        { withCredentials: true }
-      ).then(async (response) => {
-        if(response.data.status){
-          const authToken = await response.data.token;
-          document.cookie = `jwt=${authToken}; path=/;`
-          navigate("/");
-        }else if(response.data.errors){
-          generateError(response.errors.email)
-          console.log(response.data.errors)
-        }
-      })
+      setLoaderSignup(true);
+      const response = await axios
+        .post(
+          `${import.meta.env.VITE_BACKEND_PORT}/v1/api/register`,
+          {
+            ...signupData,
+          },
+          { withCredentials: true }
+        )
+        .then(async (response) => {
+          setLoaderSignup(false);
+          if (response.data.status) {
+            const authToken = await response.data.token;
+            document.cookie = `jwt=${authToken}; path=/;`;
+            navigate("/");
+          } else if (response.data.errors) {
+            generateError(response.errors.email);
+            console.log(response.data.errors);
+          }
+        });
     } catch (error) {
-      generateError(error.response.data.errors.email)
+      setLoaderSignup(false);
+      generateError(error.response.data.errors.email);
       console.log(error.response.data.errors.email);
     }
   };
 
-
   const [signupToggle, setSignupToggle] = useState(false);
-  const [opacity , setOpacity] = useState('');
+  const [opacity, setOpacity] = useState("");
   const showSignup = () => {
     setSignupToggle(true);
-    setOpacity('opacity-20')
+    setOpacity("opacity-20");
   };
   const hideSignup = () => {
     setSignupToggle(false);
-    setOpacity('')
+    setOpacity("");
   };
 
   // thme management in the authentication
-  Theme()
+  Theme();
 
   return (
     <div className="authentication relative dark:bg-mainDark dark:text-white">
@@ -128,7 +145,10 @@ const Authentication = () => {
               </p>
             </div>
             <div className="lg:mt-0 lg:w-96 md:w-1/2 sm:w-2/3 mt-10 w-full">
-              <form className="p-6 space-y-4 relative bg-white dark:bg-subMajorDark shadow-lg rounded-lg" onSubmit={handleSubmitLogin}>
+              <form
+                className="p-6 space-y-4 relative bg-white dark:bg-subMajorDark shadow-lg rounded-lg"
+                onSubmit={handleSubmitLogin}
+              >
                 <input
                   type="email"
                   name="email"
@@ -145,12 +165,28 @@ const Authentication = () => {
                   className="p-2 w-full outline-none border-2 rounded-md dark:text-gray-900"
                   required
                 />
-                <button
-                  type="submit"
-                  className="bg-blue-600 font-semibold p-3 rounded-md text-center text-white w-full"
-                >
-                  Log In
-                </button>
+                {loaderLogin == false && (
+                  <button
+                    type="submit"
+                    className="bg-blue-600 font-semibold p-3 rounded-md text-center text-white w-full"
+                  >
+                    Log In
+                  </button>
+                )}
+                {loaderLogin && (
+                  <button
+                    type="submit"
+                    className="bg-blue-600 font-semibold flex justify-center p-3 rounded-md text-center text-white w-full"
+                  >
+                    <Audio
+                      height="24"
+                      width="60"
+                      radius="9"
+                      color="white"
+                      ariaLabel="loading"
+                    />
+                  </button>
+                )}
                 <a href="#" className="text-blue-500 text-center block">
                   {" "}
                   Forgot Password?{" "}
@@ -234,13 +270,16 @@ const Authentication = () => {
 
               <div className="grid lg:grid-cols-2 gap-3">
                 <div>
-                  <label className="mb-0" htmlFor="gender"> Gender </label>
+                  <label className="mb-0" htmlFor="gender">
+                    {" "}
+                    Gender{" "}
+                  </label>
                   <select
                     onChange={signupSubmitData}
                     name="gender"
                     id="gender"
                     className="selectpicker  mt-2 p-[0.70rem] w-full outline-none border-2 rounded-md dark:text-gray-900"
-                    required 
+                    required
                   >
                     <option value="">--Select--</option>
                     <option value="male">Male</option>
@@ -265,17 +304,35 @@ const Authentication = () => {
                   Terms
                 </a>
                 ,<a href="/privacy-policy">Data Policy</a> and
-                <a href="/privacy-policy">Cookies Policy</a>. You may receive SMS
-                Notifications from us and can opt out any time.
+                <a href="/privacy-policy">Cookies Policy</a>. You may receive
+                SMS Notifications from us and can opt out any time.
               </p>
-              <button type="reset" className="dark:text-red-400 text-red-700">Clear form</button>
+              <button type="reset" className="dark:text-red-400 text-red-700">
+                Clear form
+              </button>
               <div className="flex">
-                <button
-                  type="submit"
-                  className="bg-blue-600 font-semibold mx-auto px-10 py-3 rounded-md text-center text-white"
-                >
-                  Get Started
-                </button>
+                {loaderSignup == false && (
+                  <button
+                    type="submit"
+                    className="bg-blue-600 font-semibold mx-auto px-10 py-3 rounded-md text-center text-white"
+                  >
+                    Get Started
+                  </button>
+                )}
+                {loaderSignup && (
+                  <button
+                    type="submit"
+                    className="bg-blue-600 font-semibold flex justify-center mx-auto px-10 py-3 rounded-md text-center text-white"
+                  >
+                    <Audio
+                      height="24"
+                      width="60"
+                      radius="9"
+                      color="white"
+                      ariaLabel="loading"
+                    />
+                  </button>
+                )}
               </div>
             </form>
           </div>

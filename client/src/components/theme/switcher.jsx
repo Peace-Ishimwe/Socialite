@@ -20,4 +20,4 @@ const Switcher = () => {
     );
 }
 
-export default Switcher
+export default Switcher;

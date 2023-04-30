@@ -15,4 +15,4 @@ const useDarkside = () => {
     return [colorTheme , setTheme]
 }
 
-export default useDarkside
+export default useDarkside;
