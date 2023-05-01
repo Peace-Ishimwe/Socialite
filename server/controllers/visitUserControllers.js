@@ -36,7 +36,7 @@ export const getUserPostsVisit = async (req , res) => {
               profileImageUrl = profilePost.post;
             } else {
               profileImageUrl =
-              "https://res.cloudinary.com/dlqau5qcx/image/upload/v1682847664/canva-boy-cartoon-gamer-animated-twitch-profile-photo-oEqs2yqaL8s_iqbtql.webp";
+              "https://res.cloudinary.com/dlqau5qcx/image/upload/v1682907755/canva-boy-cartoon-gamer-animated-twitch-profile-photo-oEqs2yqaL8s_xqt6cg.png";
             }
             for (const post of posts) {
               postUserVisit.push({
@@ -68,7 +68,7 @@ export const getUserProfileCover = async (req, res) => {
       const userId = req.params.id;
   
       const profileImage = await Posts.findOne({ userId: userId, profile: true });
-      const profileImageUrl = profileImage ? profileImage.post : "https://res.cloudinary.com/dlqau5qcx/image/upload/v1682847664/canva-boy-cartoon-gamer-animated-twitch-profile-photo-oEqs2yqaL8s_iqbtql.webp";
+      const profileImageUrl = profileImage ? profileImage.post : "https://res.cloudinary.com/dlqau5qcx/image/upload/v1682907755/canva-boy-cartoon-gamer-animated-twitch-profile-photo-oEqs2yqaL8s_xqt6cg.png";
   
       const coverImage = await Posts.findOne({ userId: userId, cover: true });
       const coverImageUrl = coverImage ? coverImage.post :"https://img.freepik.com/free-vector/blank-meadow-landscape-scene_1308-59927.jpg?w=2000";

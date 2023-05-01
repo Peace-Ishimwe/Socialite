@@ -14,7 +14,7 @@ export const profileImage = async (req, res) => {
       } else {
         res.status(200).json({
           urlProfileImage:
-            "https://res.cloudinary.com/dlqau5qcx/image/upload/v1682847664/canva-boy-cartoon-gamer-animated-twitch-profile-photo-oEqs2yqaL8s_iqbtql.webp",
+            "https://res.cloudinary.com/dlqau5qcx/image/upload/v1682907755/canva-boy-cartoon-gamer-animated-twitch-profile-photo-oEqs2yqaL8s_xqt6cg.png",
         });
       }
     }

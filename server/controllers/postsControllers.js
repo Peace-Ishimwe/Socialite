@@ -20,7 +20,7 @@ export const getPost = async (req, res) => {
           profileImageUrl = profilePost.post;
         } else {
           profileImageUrl =
-            "https://res.cloudinary.com/dlqau5qcx/image/upload/v1682847664/canva-boy-cartoon-gamer-animated-twitch-profile-photo-oEqs2yqaL8s_iqbtql.webp";
+            "https://res.cloudinary.com/dlqau5qcx/image/upload/v1682907755/canva-boy-cartoon-gamer-animated-twitch-profile-photo-oEqs2yqaL8s_xqt6cg.png";
         }
         for (const post of posts) {
           const userInfo = await User.findById(post.userId);
@@ -111,7 +111,7 @@ export const getAllPosts = async (req, res) => {
         profileImageUrl = profilePost.post;
       } else {
         profileImageUrl =
-          "https://res.cloudinary.com/dlqau5qcx/image/upload/v1682847664/canva-boy-cartoon-gamer-animated-twitch-profile-photo-oEqs2yqaL8s_iqbtql.webp";
+          "https://res.cloudinary.com/dlqau5qcx/image/upload/v1682907755/canva-boy-cartoon-gamer-animated-twitch-profile-photo-oEqs2yqaL8s_xqt6cg.png";
       }
       userPosts.push({
         post: post.post,
