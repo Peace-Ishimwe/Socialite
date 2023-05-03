@@ -241,6 +241,7 @@ export const commentPost = async (req, res) => {
 
       const userInfo = await User.findById(userId);
       const { firstName, lastName } = userInfo;
+      
 
       const post = await Posts.findById(id);
 
