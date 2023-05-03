@@ -101,7 +101,7 @@ const PostShare = (props) => {
   return (
     <form
       onSubmit={handleSubmitFile}
-      className="flex gap-5 bg-white dark:bg-subMajorDark p-3 sm:p-5 rounded-[1rem] min-w-fit w-11/12 sm:w-8/12 mx-auto mt-10 "
+      className="flex gap-5 bg-white dark:bg-subMajorDark p-3 sm:p-5 rounded-[1rem] min-w-fit w-11/12 sm:w-10/12 xl:w-8/12 mx-auto mt-10 "
     >
       {profileImageUrl && (
         <img

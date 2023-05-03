@@ -9,7 +9,7 @@ import PopularProfiles from "./rightPart/popularProfiles";
 const RightPart = (props) => {
   
   return (
-    <main className="right-home  bg-white dark:bg-majorDark w-fit p-5 h-[100vh] hidden lg:block lg:w-[30%] xl:w-[16%] xl:min-w-[16rem] xl:max-w-[20rem]">
+    <main className="right-home  bg-white dark:bg-majorDark w-fit p-5 h-[100vh] hidden lg:block lg:w-[30%] xl:w-[20%] xl:min-w-[16rem] xl:max-w-[20rem]">
       <HomeAll />
       <hr className=" border  border-[#cfcdcd] " />
       <Profile />

@@ -149,7 +149,7 @@ const Post = (props) => {
       {props.redirect === true && (
         <Link
           to={`/u/user/visit/${userId}`}
-          className="flex gap-2 items-center p-5"
+          className="flex gap-2 items-center p-3"
         >
           {props.profile && (
             <img
@@ -173,7 +173,7 @@ const Post = (props) => {
       )}
 
       {props.redirect === false && (
-        <div className="flex gap-2 items-center p-5">
+        <div className="flex gap-2 items-center p-3">
           <img
             className="rounded-full sm:w-[3.5rem] sm:h-[3.5rem] h-[2rem] w-[2rem] object-cover"
             src={props.profile}
@@ -193,7 +193,7 @@ const Post = (props) => {
         </div>
       )}
 
-      <div className="p-5">{props.title}</div>
+      <div className="p-2">{props.title}</div>
       <div className="flex dark:text-white  text-gray-700 justify-center items-center">
         {isLoading && (
           <div className="flex justify-center items-center flex-col gap-2d">
@@ -206,7 +206,7 @@ const Post = (props) => {
         ) : (
           <img
             src={props.src}
-            className="w-full mx-auto sm:h-fit max-h-[100vh] object-cover"
+            className="w-fit max-w-full mx-auto sm:h-fit max-h-[80vh] object-cover"
             onLoad={handleLoad}
             onError={handleError}
             style={{ display: isLoading || hasError ? "none" : "block" }}
