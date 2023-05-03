@@ -222,7 +222,7 @@ const Authentication = () => {
               onClick={hideSignup}
               className="p-3 bg-gray-100 rounded-full m-3 float-right hover:bg-red-300 transition-all duration-1000"
             >
-              <Close />
+              <Close style="dark:text-gray-700" />
             </div>
             <div className="border-b px-7 py-5">
               <div className="lg:text-2xl text-xl font-semibold mb-1">
