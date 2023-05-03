@@ -215,7 +215,7 @@ const Authentication = () => {
       {signupToggle && (
         <div
           id="register"
-          className="absolute lg:w-8/12 xl:w-6/12 min-[860px]:w-10/12 lg:top-36 top-0 min-[860px]:left-1/2 min-[860px]:transform min-[860px]:-translate-x-1/2 signup"
+          className="absolute lg:w-8/12 xl:w-6/12 min-[860px]:w-10/12 lg:top-12 top-0 min-[860px]:left-1/2 min-[860px]:transform min-[860px]:-translate-x-1/2 signup"
         >
           <div className="rounded-xl shadow-2xl p-4 lg:w-12/12 bg-white dark:bg-subMajorDark">
             <div
