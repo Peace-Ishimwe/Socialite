@@ -12,25 +12,25 @@ const Profile = () => {
   const coverImageUrl = getCoverImage();
 
   return (
-    <div className="profile-user mt-5 bg-gray-100 dark:bg-subMajorDark w-full rounded-2xl overflow-hidden pb-5">
+    <div className="profile-user mt-3 bg-gray-100 dark:bg-subMajorDark w-full rounded-2xl overflow-hidden pb-5">
       <div className="relative w-fit">
         {coverImageUrl && (
           <img
-            className="w-[20rem] h-[8rem] object-cover"
+            className="w-[20rem] h-[6rem] object-cover"
             src={coverImageUrl}
             alt="the cover image"
           />
         )}
         {profileImageUrl && (
           <img
-            className="object-cover w-28 h-28 rounded-full absolute top-16 left-1/2 transform -translate-x-1/2"
+            className="object-cover w-20 h-20 rounded-full absolute top-10 left-1/2 transform -translate-x-1/2"
             src={profileImageUrl}
             alt="the profile image"
           />
         )}
       </div>
-      <div className="ProfileName mt-16 flex flex-col items-center justify-center mb-4">
-        <span className="dark:text-gray-200 text-gray-700 text-xl font-semibold text-center">
+      <div className="ProfileName mt-6 flex flex-col items-center justify-center mb-4">
+        <span className="dark:text-gray-200 text-gray-700 text-md font-semibold text-center">
           {firstName} {lastName}
         </span>
         <span className="dark:text-gray-200 text-gray-700 px-2 text-center">
@@ -38,7 +38,7 @@ const Profile = () => {
         </span>
       </div>
       <hr className=" w-[85%] border  border-[#cfcdcd] mx-auto" />
-      <div className="followStatus flex mt-4 mb-4 items-center justify-evenly">
+      <div className="followStatus flex mt-2 mb-2 items-center justify-evenly">
         <div className="follow flex flex-col justify-center items-center">
           <span className="dark:text-gray-200 text-gray-700 font-bold text-xl">
             {followers}

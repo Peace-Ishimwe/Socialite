@@ -29,7 +29,7 @@ export const HomeAll = (props) => {
   };
   return (
     <div
-      className={`${props.display} flex md:gap-5 gap-2 items-center mb-6 justify-end`}
+      className={`${props.display} flex md:gap-5 gap-2 items-center mb-3 justify-end`}
     >
       <div className="relative">
         <Button onClick={handleOpen}>
