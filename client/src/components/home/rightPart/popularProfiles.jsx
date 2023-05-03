@@ -23,7 +23,7 @@ const PopularProfiles = () => {
       <div className="mb-2 text-lg dark:text-white font-semibold text-black sticky top-0 shadow-md p-2 bg-gray-200 dark:bg-subMajorDark">
         Popular profiles
       </div>
-      <div className="flex flex-col gap-3 pl-5">
+      <div className="flex flex-col gap-3 pl-5 pb-20">
         {profiles != null &&
           profiles.map((profile) => {
             return <Profiles key={profile._id} id={profile._id} firstName={profile.firstName} lastName={profile.lastName} profileImage={profile.profileImage} followersCount={profile.followersCount} />;

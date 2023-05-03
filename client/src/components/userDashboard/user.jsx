@@ -137,7 +137,7 @@ const User = () => {
               </div>
             </Button>
             <Modal open={openCover} onClose={handleCloseCover}>
-              <div className="w-full absolute z-30 top-[30%]">
+              <div className="w-full absolute z-30 top-[0%]">
                 <div className="flex">
                   <span className="absolute right-1/2 "></span>
                   <PostShare cover={true} />
@@ -158,7 +158,7 @@ const User = () => {
             </div>
           </Button>
           <Modal open={openProfile} onClose={handleCloseProfile}>
-            <div className="w-full absolute z-30 top-[30%]">
+            <div className="w-full absolute z-30 top-[0%]">
               <div className="flex">
                 <span className="absolute right-1/2 "></span>
                 <PostShare profile={true} />

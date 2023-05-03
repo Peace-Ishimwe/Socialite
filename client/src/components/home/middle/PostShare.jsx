@@ -101,7 +101,7 @@ const PostShare = (props) => {
   return (
     <form
       onSubmit={handleSubmitFile}
-      className="flex gap-5 bg-white dark:bg-subMajorDark p-3 sm:p-5 rounded-[1rem] min-w-fit w-11/12 sm:w-10/12 xl:w-8/12 mx-auto mt-10 "
+      className="flex gap-5 bg-white dark:bg-subMajorDark  p-3 sm:p-5 rounded-[1rem] min-w-fit w-11/12 sm:w-10/12 xl:w-8/12 mx-auto mt-10 "
     >
       {profileImageUrl && (
         <img
@@ -157,13 +157,13 @@ const PostShare = (props) => {
           </div>
         </div>
         {previewSource && (
-          <div className="previewImage w-full flex items-center justify-center flex-col relative">
+          <div className="previewImage w-fit  flex items-center justify-center flex-col relative">
             <CloseCirled
               position={"absolute top-2 right-2 text-red-500 w-9 h-9"}
               action={() => setPreviewSource("")}
             />
             <img
-              className=" max-h-[16rem] md:max-h-[24rem] w-[100%] object-cover rounded-[0.5rem]"
+              className="h-fit w-fit max-w-full max-h-[60vh] object-cover rounded-[0.5rem]"
               src={previewSource}
               alt=""
             />

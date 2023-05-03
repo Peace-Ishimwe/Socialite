@@ -238,11 +238,12 @@ const Authentication = () => {
               <div className="grid lg:grid-cols-2 gap-5">
                 <input
                   type="text"
-                  placeholder="Your Name"
+                  placeholder="First Name"
                   name="firstName"
                   onChange={signupSubmitData}
                   className="p-2 w-full outline-none border-2 rounded-md dark:text-gray-900"
                   required
+                  min={3}
                 />
                 <input
                   type="text"
@@ -251,6 +252,7 @@ const Authentication = () => {
                   onChange={signupSubmitData}
                   className="p-2 w-full outline-none border-2 rounded-md dark:text-gray-900"
                   required
+                  min={3}
                 />
               </div>
               <input
