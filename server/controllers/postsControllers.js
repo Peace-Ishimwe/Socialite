@@ -241,7 +241,13 @@ export const commentPost = async (req, res) => {
 
       const userInfo = await User.findById(userId);
       const { firstName, lastName } = userInfo;
-      
+      let commentProfile;
+      const profilePic = await Posts.findOne({ userId: userId , profile: true });
+      if(profilePic){
+        commentProfile = profilePic.post;
+      }else{
+        commentProfile = "https://res.cloudinary.com/dlqau5qcx/image/upload/v1682907755/canva-boy-cartoon-gamer-animated-twitch-profile-photo-oEqs2yqaL8s_xqt6cg.png";
+      }
 
       const post = await Posts.findById(id);
 
@@ -255,6 +261,7 @@ export const commentPost = async (req, res) => {
         firstName,
         lastName,
         commenterId: userId,
+        commentProfile,
         comments,
         formattedDate,
       });

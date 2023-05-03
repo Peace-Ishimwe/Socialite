@@ -328,7 +328,7 @@ const Post = (props) => {
               <div className="flex items-start">
                 <img
                   className="w-8 h-8 rounded-full mr-2"
-                  src="https://i.pravatar.cc/150?img=10"
+                  src={props}
                   alt="User avatar"
                 />
                 <div className="flex-1">
@@ -356,7 +356,7 @@ const Post = (props) => {
                     <Link to={`/u/user/visit/${comment.commenterId}`}>
                       <img
                         className="w-8 h-8 rounded-full mr-2"
-                        src="https://i.pravatar.cc/150?img=10"
+                        src={comment.commentProfile}
                         alt="User avatar"
                       />
                     </Link>
