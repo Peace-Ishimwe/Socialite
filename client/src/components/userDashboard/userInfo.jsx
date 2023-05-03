@@ -70,7 +70,7 @@ const UserInfo = () => {
   return (
     <div className="main-container mt-10">
       <div className=" w-11/12 md:w-10/12 2xl:w-8/12 mx-auto mt-10 mb-10 relative">
-        <div className={`flex text-gray-700 dark:text-gray-200 font-extrabold flex-col lg:flex-row justify-evenly  bg-white dark:bg-subMajorDark mx-auto p-5`}>
+        <div className={`flex text-gray-700 dark:text-gray-200  flex-col lg:flex-row justify-evenly  bg-white dark:bg-subMajorDark mx-auto p-5`}>
           <div className="flex flex-col gap-2">
             {" "}
             <div className="flex gap-3"><span>First Name: </span> {updatedInfo == false ? <span>{firstName}</span> : <span>{firstNameUpdate}</span> }</div>
