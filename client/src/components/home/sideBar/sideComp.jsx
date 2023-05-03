@@ -39,9 +39,9 @@ export const AddPost = (props) => {
   };
 
   return (
-    <main className="sidebar-home text-xs font-semibold flex  rounded-full bg-blue-500 w-fit px-2 py-1">
+    <main className="sidebar-home text-xs font-semibold flex  rounded-full bg-blue-500 w-fit">
       <Button onClick={handleOpen}>
-        <div className="flex w-fit items-center gap-2 p-1 cursor-pointer text-gray-200">
+        <div className="flex w-fit items-center gap-2 cursor-pointer text-gray-200">
           {props.component}
           <span>{props.title}</span>
         </div>
@@ -82,7 +82,7 @@ export const UserProfile = () => {
               />
             )}
           </div>
-          <span className="text-md font-bold text-gray-800 dark:text-gray-200 flex flex-wrap max-w-[8rem] ">
+          <span className="text-sm font-semibold text-gray-800 dark:text-gray-200 flex flex-wrap max-w-[8rem] ">
             {firstName} {lastName}
           </span>
         </div>
