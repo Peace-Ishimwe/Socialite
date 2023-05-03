@@ -72,18 +72,18 @@ const CardSuggested = (props) => {
           src={props.profile}
           alt="profile image"
         />
-        <div className="text-xl mt-3 mb-1 text-center dark:text-gray-200 text-gray-700 font-medium">
+        <div className="text-md mt-3 mb-1 text-center dark:text-gray-200 text-gray-700 font-medium">
           {props.firstName} {props.lastName}
         </div>
       </Link>
-      <div className="text-center mb-4 dark:text-white">
+      <div className="text-center text-sm mb-4 dark:text-white">
         {numberOfFollows} Followers
       </div>
       {follow === false && pending == false && (
         <button
           onClick={followUsers}
           type="submit"
-          className="hover:bg-blue-500 hover:text-white self-end justify-self-end transition-all duration-1000 mb-10 border-2 border-blue-500 text-blue-500 w-9/12 py-2 mx-auto rounded-3xl text-lg font-medium"
+          className="hover:bg-blue-500 hover:text-white self-end justify-self-end transition-all duration-1000 mb-8 border-2 border-blue-500 text-blue-500 w-9/12 py-1 mx-auto rounded-3xl text-lg font-medium"
         >
           Follow +
         </button>
@@ -92,14 +92,14 @@ const CardSuggested = (props) => {
         <button
           onClick={unFollowUsers}
           type="submit"
-          className="hover:bg-blue-500 hover:text-white self-end justify-self-end transition-all duration-1000 mb-10 border-2 border-blue-500 text-blue-500 w-9/12 py-2 mx-auto rounded-3xl text-lg font-medium"
+          className="hover:bg-blue-500 hover:text-white self-end justify-self-end transition-all duration-1000 mb-10 border-2 border-blue-500 text-blue-500 w-9/12 py-1 mx-auto rounded-3xl text-lg font-medium"
         >
           Following
         </button>
       )}
       { pending &&
         <button
-          className="bg-blue-500 text-white self-end justify-self-end transition-all duration-1000 mb-10 border-2 w-9/12 py-2 mx-auto rounded-3xl text-lg font-medium"
+          className="bg-blue-500 text-white self-end justify-self-end transition-all duration-1000 mb-10 border-2 w-9/12 py-1 mx-auto rounded-3xl text-lg font-medium"
         >
           pending
         </button>
