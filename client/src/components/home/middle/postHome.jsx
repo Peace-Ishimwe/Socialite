@@ -22,6 +22,14 @@ const PostHome = () => {
       }
     };
     getAllPosts();
+    
+    const getProfileImage = async () => {
+      try {
+        
+      } catch (error) {
+        console.log(error);
+      }
+    }
   }, []);
 
   return (
