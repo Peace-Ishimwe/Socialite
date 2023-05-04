@@ -4,6 +4,7 @@ import { PencilIcon } from "../../assets/icons/icons";
 import axios from "axios";
 import { Button , Modal } from "@mui/material";
 import { Audio } from "react-loader-spinner";
+import { ToastContainer, toast } from "react-toastify";
  
 const UserInfo = () => {
   const [
@@ -46,10 +47,7 @@ const UserInfo = () => {
         setUpdatedInfo(true)
         setLoader(false)
         generateSuccess("Updated your info")
-        setFirstNameUpdate("")
-        setLastNameUpdate("")
-        setGenderUpdate("")
-        setTelephoneUpdate("")
+        setOpen(false)
       }
       
     } catch (err) {
@@ -92,7 +90,7 @@ const UserInfo = () => {
         </div>
         </Button>
         <Modal open={open} onClose={handleClose}>
-          <form onSubmit={updateUserInfo} className="absolute shadow-xl updateInfo left-1/2 -translate-x-1/2 top-1/2 sm:w-10/12  w-11/12 flex flex-wrap gap-3 bg-white dark:bg-subMajorDark p-10 rounded-md">
+          <form onSubmit={updateUserInfo} className="absolute shadow-xl updateInfo left-1/2 -translate-x-1/2 top-[30%] sm:w-10/12  w-11/12 flex flex-wrap gap-3 bg-white dark:bg-subMajorDark p-10 rounded-md">
             <div className="w-full flex justify-evenly">
               <div className="text-xl font-medium text-gray-700 dark:text-gray-200">Update Your Info</div>
             </div>
@@ -176,6 +174,7 @@ const UserInfo = () => {
           <span className="dark:text-gray-200 text-gray-700">Followings</span>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
