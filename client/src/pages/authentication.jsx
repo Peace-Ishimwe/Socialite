@@ -130,7 +130,7 @@ const Authentication = () => {
   Theme();
 
   return (
-    <div className="authentication relative dark:bg-mainDark dark:text-white">
+    <div className="authentication relative dark:bg-mainDark dark:text-white h-[100vh] overflow-scroll">
       {/* The login page and the login form */}
       <ToastContainer />
       <div className={opacity}>
