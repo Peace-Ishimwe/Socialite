@@ -4,6 +4,7 @@ import {
   getProfileImage,
   getCoverImage,
 } from "../../profileCover/profileCover";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const [email, firstName, lastName, about, followers, followings] =
@@ -55,7 +56,7 @@ const Profile = () => {
       </div>
       <hr className=" w-[85%] border  border-[#cfcdcd] mx-auto" />
       <div className="text-center mt-4 text-blue-500 text-lg font-semibold">
-        <a href="/u/user">My Profile</a>
+        <Link to={"/u/user"}>My Profile</Link>
       </div>
     </div>
   );
