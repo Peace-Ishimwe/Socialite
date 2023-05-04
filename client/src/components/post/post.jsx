@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import data from "@emoji-mart/data";
 import protectRoute from "../auth/protectedRoutes";
 import { Audio } from "react-loader-spinner";
+import { getProfileImage } from "../profileCover/profileCover";
 
 const Post = (props) => {
   const [isLiked, setIsLiked] = useState(false);
@@ -66,20 +67,7 @@ const Post = (props) => {
     }
   };
 
-  const [profileComments , setProfileComments] = useState();
-  useEffect(()=>{
-    const getProfileImage = async () => {
-      try {
-        const response = await axios.post(`${import.meta.env.VITE_BACKEND_PORT}/v1/api/u/user/info/image/profile`)
-        if(response){
-          setProfileComments(response.data)
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    getProfileImage()
-  },[])
+  const profileImageUrl = getProfileImage();
 
   useEffect(() => {
     checkIfLiked();
@@ -343,7 +331,7 @@ const Post = (props) => {
               <div className="flex items-start">
                 <img
                   className="w-8 h-8 rounded-full mr-2"
-                  src={profileComments}
+                  src={profileImageUrl}
                   alt="User avatar"
                 />
                 <div className="flex-1">
