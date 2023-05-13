@@ -23,6 +23,7 @@ app.use(
   })
 );
 
+
 // when using localhost
 // app.use(function(req, res, next) {
 //   res.header('Access-Control-Allow-Origin', "http://localhost:5000");
